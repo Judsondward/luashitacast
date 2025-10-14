@@ -22,14 +22,14 @@ local night_time_eva_pants = ''
 local dusk_to_dawn_eva_pants = 'Koga Hakama +1'
 
 -- Leave as '' if you do not have the staff.
-local fire_staff = 'Vulcan\'s Staff'
-local earth_staff = 'Terra\'s Staff'
-local water_staff = 'Neptune\'s Staff'
-local wind_staff = 'Auster\'s Staff'
-local ice_staff = 'Aquilo\'s Staff'
-local thunder_staff = 'Jupiter\'s Staff'
-local light_staff = 'Apollo\'s Staff'
-local dark_staff = 'Pluto\'s Staff'
+local fire_staff = ''
+local earth_staff = ''
+local water_staff = ''
+local wind_staff = ''
+local ice_staff = ''
+local thunder_staff = ''
+local light_staff = ''
+local dark_staff = ''
 
 -- Set to true if you have the obi
 local karin_obi = true
@@ -42,7 +42,20 @@ local korin_obi = true
 local anrin_obi = true
 
 local sets = {
-    Idle = {},
+    Idle = {
+        Head    = "Lgn. Cap",          --[[Head    = "Dream Ribbon",          --[[]]
+        Neck    = "Dog Collar",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
+        Ear1    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
+        Ear2    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[]]
+        Body    = "Lgn. Harness",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
+        Hands   = "Lgn. Mittens",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
+        Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
+        Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
+        Back    = "Rabbit Mantle",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Waist   = "Leather Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
+        Legs    = "Brass Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
+        Feet    = "Lgn. Leggings",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+    },
     IdleALT = {},
     IdleDT = {},
     IdleALTDT = {},
@@ -86,7 +99,21 @@ local sets = {
     TP_Mjollnir_Haste = {},
     TP_HighAcc = {},
 
-    WS = {},
+    WS = {
+        --[[Ammo    = "Bomb Core",          --[[Ammo    = "Bomb Core",          --[[]]
+        --[[Head    = "Hecatomb Cap",       --[[Head    = "Hecatomb Cap",       --[[]]
+        Neck    = "Spike Necklace",		    --[[Neck    = "Soil Gorget",        --[[]]
+        --[[Ear1    = "Brutal Earring",     --[[Ear1    = "Brutal Earring",     --[[]]
+        --[[Ear2    = "Hollow Earring",     --[[Ear2    = "Hollow Earring",     --[[]]
+        --[[Body    = "Haubergeon +1",      --[[Body    = "Haubergeon +1",      --[[]]
+        --[[Hands   = "Hct. Mittens +1",    --[[Hands   = "Hct. Mittens +1",    --[[]]
+        Ring1   = "Courage Ring",		    --[[Ring1   = "Blitz Ring",         --[[]]	
+        Ring2   = "Courage Ring",		    --[[Ring2   = "Rajas Ring",         --[[]]
+        --[[Back    = "Forager's Mantle",   --[[Back    = "Forager's Mantle",   --[[]]
+        --[[Waist   = "Warwolf Belt",       --[[Waist   = "Warwolf Belt",       --[[]]
+        --[[Legs    = "Byakko's Haidate",   --[[Legs    = "Byakko's Haidate",   --[[]]
+        --[[Feet    = "Hct. Leggings +1",   --[[Feet    = "Hct. Leggings +1",   --[[]]
+    },
     WS_HighAcc = {},
 
     WS_BladeJin = {},

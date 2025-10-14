@@ -18,8 +18,21 @@ local warlocks_mantle = true -- Don't add 2% to fastCastValue to this as it is S
 local shadow_mantle = true
 
 local sets = {
-    Idle = { -- 1415
-        Main = 'Tutelary',
+    Idle = {
+        Head    = "Beetle Mask +1",          --[[Head    = "Dream Ribbon",          --[[]]
+        Neck    = "Tiger Stole",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
+        Ear1    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
+        Ear2    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[]]
+        Body    = "Beetle Harness +1",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
+        Hands   = "Lgn. Mittens",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
+        Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
+        Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
+        Back    = "Dhalmel Mantle +1",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
+        Legs    = "Republic Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
+        Feet    = "Beetle Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+    -- 1415
+       --[[ Main = 'Tutelary',
         Sub = 'Aegis',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -34,12 +47,12 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Dst. Subligar +1', Priority = 10 },
-        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },
+        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },]]
     },
     IdleALT = {
     },
     IdleDT = { -- 1415
-        Main = 'Tutelary',
+        --[[Main = 'Tutelary',
         Sub = 'Aegis',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -54,18 +67,18 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Dst. Subligar +1', Priority = 10 }, -- 3
-        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },
+        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },]]
     },
     IdleALTDT = {
     },
     Resting = {
-        Main = 'Pluto\'s Staff',
+        --[[Main = 'Pluto\'s Staff',
         Sub = 'remove',
         Ear1 = 'Relaxing Earring',
-        Ear2 = 'Magnetic Earring',
+        Ear2 = 'Magnetic Earring',]]
     },
     Town = {
-        Main = 'Octave Club',
+        --[[Main = 'Octave Club',
         Sub = 'Aegis',
         Range = 'Arco de Velocidad',
         Head = 'Bahamut\'s Mask',
@@ -79,14 +92,14 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Sonic Belt',
         Legs = 'Blood Cuisses',
-        Feet = 'Homam Gambieras',
+        Feet = 'Homam Gambieras',]]
     },
     Movement = {
-        Legs = 'Blood Cuisses',
+        --[[Legs = 'Blood Cuisses',]]
     },
 
     DT = { -- 1415
-        Main = 'Tutelary',
+        --[[Main = 'Tutelary',
         Sub = 'Aegis',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -101,17 +114,17 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Dst. Subligar +1', Priority = 10 }, -- 3
-        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },
+        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },]]
     },
     MDT = { -- Shell IV provides 23% MDT
-        Neck = 'Jeweled Collar +1',
+        --[[Neck = 'Jeweled Collar +1',
         Ear1 = 'Merman\'s Earring', -- 2
         Ear2 = { Name = 'Cassie Earring', Priority = 100 },
         Ring1 = 'Shadow Ring',
-        Ring2 = { Name = 'Sattva Ring', Priority = 100 }, -- 5
+        Ring2 = { Name = 'Sattva Ring', Priority = 100 }, -- 5]]
     },
     FireRes = { -- 137
-        Range = 'Rosenbogen',
+        --[[Range = 'Rosenbogen',
         Ammo = '',
         Head = 'Black Ribbon', -- 12
         Neck = 'Jeweled Collar +1', -- 10
@@ -124,10 +137,10 @@ local sets = {
         Back = 'Dino Mantle', -- 4
         Waist = 'Water Belt', -- 20
         Legs = 'Blood Cuisses', -- 21
-        Feet = 'Power Sandals', -- 7
+        Feet = 'Power Sandals', -- 7]]
     },
     IceRes = { -- 135
-        Range = 'Rosenbogen',
+        --[[Range = 'Rosenbogen',
         Ammo = '',
         Head = 'Black Ribbon', -- 12
         Neck = 'Jeweled Collar +1', -- 10
@@ -140,10 +153,10 @@ local sets = {
         Back = 'Ram Mantle +1', -- 6
         Waist = 'Fire Belt', -- 20
         Legs = 'Feral Trousers', -- 6
-        Feet = 'Blood Greaves', -- 21
+        Feet = 'Blood Greaves', -- 21]]
     },
     LightningRes = { -- 138
-        Main = 'Terra\'s Staff', -- 20
+        --[[Main = 'Terra\'s Staff', -- 20
         Sub = '',
         -- Sub = 'Nms. Shield +1', -- 15
         Range = 'Lightning Bow +1', -- 7
@@ -159,10 +172,10 @@ local sets = {
         Back = 'Gaia Mantle +1', -- 12
         Waist = 'Earth Belt', -- 20
         Legs = 'Blood Cuisses', -- 21
-        Feet = 'Dst. Leggings +1',
+        Feet = 'Dst. Leggings +1',]]
     },
     EarthRes = { -- 143
-        Range = 'Rosenbogen',
+        --[[Range = 'Rosenbogen',
         Ammo = '',
         Head = 'Black Ribbon', -- 12
         Neck = 'Jeweled Collar +1', -- 10
@@ -175,10 +188,10 @@ local sets = {
         Back = 'Gaia Mantle +1', -- 10
         Waist = 'Wind Belt', -- 20
         Legs = 'Beak Trousers +1', -- 7
-        Feet = 'Blood Greaves', -- 21
+        Feet = 'Blood Greaves', -- 21]]
     },
     WindRes = { -- 118
-        Range = 'Rosenbogen',
+        --[[Range = 'Rosenbogen',
         Ammo = '',
         Head = 'Black Ribbon', -- 12
         Neck = 'Jeweled Collar +1', -- 10
@@ -191,10 +204,10 @@ local sets = {
         Back = { Name = 'Valor Cape', Priority = 100 },
         Waist = 'Ice Belt', -- 20
         Legs = 'Coral Cuisses +1',
-        Feet = 'Blood Greaves', -- 21
+        Feet = 'Blood Greaves', -- 21]]
     },
     WaterRes = { -- 128
-        Range = 'Rosenbogen',
+        --[[Range = 'Rosenbogen',
         Ammo = '',
         Head = 'Black Ribbon', -- 12
         Neck = 'Jeweled Collar +1', -- 10
@@ -207,24 +220,24 @@ local sets = {
         Back = { Name = 'Valor Cape', Priority = 100 },
         Waist = 'Lightning Belt', -- 20
         Legs = 'Blood Cuisses', -- 21
-        Feet = 'Coral Greaves +1', -- 4
+        Feet = 'Coral Greaves +1', -- 4]]
     },
     Evasion = {
-        Head = 'Bahamut\'s Mask',
+        --[[Head = 'Bahamut\'s Mask',
         -- Hrotti
         -- Crimson Scale Mail
         Body = 'Dst. Harness +1',
         Legs = 'Bahamut\'s Hose',
         Ring1 = 'Shadow Ring',
-        Ring2 = { Name = 'Sattva Ring', Priority = 100 },
+        Ring2 = { Name = 'Sattva Ring', Priority = 100 },]]
     },
 
     Precast = {
-        Ear1 = 'Loquac. Earring',
-        Legs = { Name = 'Homam Cosciales', Priority = 120 },
+        --[[Ear1 = 'Loquac. Earring',
+        Legs = { Name = 'Homam Cosciales', Priority = 120 },]]
     },
     SIRD = { -- 1441
-        Main = 'Tutelary',
+        --[[Main = 'Tutelary',
         Sub = 'Aegis',
         Head = { Name = 'Koenig Schaller', Priority = 30 },
         Neck = 'Willpower Torque', -- 5
@@ -237,10 +250,10 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Silver Obi +1', -- 8
         Legs = { Name = 'Vlr. Breeches +1', Priority = 20 }, -- 10
-        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },
+        Feet = { Name = 'Glt. Leggings +1', Priority = 90 },]]
     },
     Haste = { -- 1416
-        Main = { Name = 'Capricorn Staff', Priority = -1 }, -- 5
+        --[[Main = { Name = 'Capricorn Staff', Priority = -1 }, -- 5
         Sub = 'remove',
         Head = { Name = 'Homam Zucchetto', Priority = -1 }, -- 3
         Neck = 'Willpower Torque',
@@ -253,15 +266,15 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Sonic Belt', -- 6
         Legs = 'Homam Cosciales', -- 3
-        Feet = 'Homam Gambieras', -- 3
+        Feet = 'Homam Gambieras', -- 3]]
     },
     Haste_Ichi = { -- Optional, provided here only if you wish to mix in SIRD or other stats over max haste
-        Main = 'Tutelary',
-        Sub = 'Aegis',
+        --[[Main = 'Tutelary',
+        Sub = 'Aegis',]]
     },
 
     Hate = { -- 1419
-        Main = 'Tutelary',
+        --[[Main = 'Tutelary',
         Sub = 'Koenig Shield',
         Head = 'Bahamut\'s Mask',
         Neck = 'Harmonia\'s Torque',
@@ -274,10 +287,10 @@ local sets = {
         Back = { Name = 'Valor Cape', Priority = 100 },
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Hydra Brayettes', Priority = -100 },
-        Feet = 'Vlr. Leggings +1',
+        Feet = 'Vlr. Leggings +1',]]
     },
     Hate_Flash = { -- Technically optional since Hate and Haste gear will be equipped by default
-        Main = { Name = 'Capricorn Staff', Priority = -1 },
+        --[[Main = { Name = 'Capricorn Staff', Priority = -1 },
         Sub = 'remove',
         Head = 'Homam Zucchetto',
         Neck = 'Harmonia\'s Torque',
@@ -290,10 +303,10 @@ local sets = {
         Back = { Name = 'Valor Cape', Priority = 100 },
         Waist = 'Sonic Belt',
         Legs = 'Homam Cosciales',
-        Feet = 'Homam Gambieras',
+        Feet = 'Homam Gambieras',]]
     },
     Cheat_C3HPDown = { -- 1207
-        Main = 'Durandal',
+        --[[Main = 'Durandal',
         Sub = 'Aegis',
         Range = 'Lightning Bow +1',
         Ammo = '',
@@ -308,10 +321,10 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Silver Obi +1', -- 8
         Legs = 'Vlr. Breeches +1', -- 10
-        Feet = 'Mountain Gaiters', -- 5
+        Feet = 'Mountain Gaiters', -- 5]]
     },
     Cheat_C3HPUp = { -- 1430 (223)
-        Main = 'Apollo\'s Staff',
+        --[[Main = 'Apollo\'s Staff',
         Sub = '',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -326,10 +339,10 @@ local sets = {
         Back = 'Valor Cape',
         Waist = 'Warwolf Belt',
         Legs = 'Vlr. Breeches +1',
-        Feet = 'Vlr. Leggings +1',
+        Feet = 'Vlr. Leggings +1',]]
     },
     Cheat_C4HPDown = { -- 1072
-        Main = 'Durandal',
+        --[[Main = 'Durandal',
         Sub = 'Aegis',
         Range = 'Lightning Bow +1',
         Ammo = '',
@@ -344,10 +357,10 @@ local sets = {
         Back = 'Shadow Mantle',
         Waist = 'Silver Obi +1', -- 8
         Legs = 'Hydra Brayettes',
-        Feet = 'Hydra Sollerets',
+        Feet = 'Hydra Sollerets',]]
     },
     Cheat_C4HPUp = { -- 1514 (441 +1)
-        Main = 'Apollo\'s Staff',
+        --[[Main = 'Apollo\'s Staff',
         Sub = '',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -362,7 +375,7 @@ local sets = {
         Back = 'Valor Cape',
         Waist = 'Warwolf Belt',
         Legs = 'Vlr. Breeches +1',
-        Feet = 'Vlr. Leggings +1',
+        Feet = 'Vlr. Leggings +1',]]
     },
 
     LockSet1 = {},
@@ -370,7 +383,7 @@ local sets = {
     LockSet3 = {},
 
     TP_LowAcc = {
-        Main = 'Joyeuse',
+        --[[Main = 'Joyeuse',
         Sub = 'Aegis',
         Range = 'Lightning Bow +1',
         Ammo = '',
@@ -385,14 +398,17 @@ local sets = {
         Back = 'Forager\'s Mantle',
         Waist = 'Sonic Belt',
         Legs = 'Homam Cosciales',
-        Feet = 'Homam Gambieras',
+        Feet = 'Homam Gambieras',]]
     },
     TP_Aftermath = {},
     TP_Mjollnir_Haste = {},
     TP_HighAcc = {},
 
     WS = {
-        Head = 'Optical Hat',
+        Neck    = "Spike Necklace",          --[[Neck    = ""]]
+        Ring1   = "Courage Ring",            --[[Ring2   = ""]]
+        Ring2   = "Courage Ring",            --[[Ring2   = ""]]
+        --[[Head = 'Optical Hat',
         Neck = 'Soil Gorget',
         Ear1 = 'Brutal Earring',
         Ear2 = 'Merman\'s Earring',
@@ -404,7 +420,7 @@ local sets = {
         Back = 'Forager\'s Mantle',
         Waist = 'Warwolf Belt',
         Legs = 'Vlr. Breeches +1',
-        Feet = 'Rutter Sabatons',
+        Feet = 'Rutter Sabatons',]]
     },
     WS_HighAcc = {},
 
@@ -412,14 +428,14 @@ local sets = {
 
     Cover = {
         -- Head = 'Gallant Coronet', -- This doesn't work on ASB anyway?...
-        Body = 'Vlr. Surcoat +1',
+        --[[Body = 'Vlr. Surcoat +1',]]
     },
     Cure = {
-        Main = 'Apollo\'s Staff',
-        Ear1 = 'Hospitaler Earring',
+        --[[Main = 'Apollo\'s Staff',
+        Ear1 = 'Hospitaler Earring',]]
     },
     Divine = {
-        Head = 'Homam Zucchetto',
+        --[[Head = 'Homam Zucchetto',
         Neck = 'Faith Torque',
         Ear1 = 'Novio Earring',
         Ear2 = 'Moldavite Earring',
@@ -430,10 +446,10 @@ local sets = {
         Back = 'Altruistic Cape',
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Homam Cosciales', Priority = 120 },
-        Feet = 'Vlr. Leggings +1',
+        Feet = 'Vlr. Leggings +1',]]
     },
     Rampart = { -- Rampart gives VIT x2 damage shield in era
-        Main = { Name = 'Durandal', Priority = -1 },
+        --[[Main = { Name = 'Durandal', Priority = -1 },
         Sub = 'Koenig Shield',
         Range = 'Rosenbogen',
         Ammo = '',
@@ -448,15 +464,15 @@ local sets = {
         Back = { Name = 'Valor Cape', Priority = 100 },
         Waist = 'Warwolf Belt',
         Legs = { Name = 'Adaman Cuisses', Priority = -1 },
-        Feet = { Name = 'Power Sandals', Priority = -1 },
+        Feet = { Name = 'Power Sandals', Priority = -1 },]]
     },
     ShieldBash = {
-        Sub = 'Aegis',
+        --[[Sub = 'Aegis',
         Ear1 = 'Knightly Earring',
-        Hands = 'Vlr. Gauntlets +1',
+        Hands = 'Vlr. Gauntlets +1',]]
     },
     Enhancing = {
-        Main = 'Kirin\'s Pole',
+        --[[Main = 'Kirin\'s Pole',
         Head = 'Homam Zucchetto', --maats
         Neck = 'Stone Gorget',
         Ear1 = 'Cmn. Earring',
@@ -468,14 +484,14 @@ local sets = {
         Back = 'Merciful Cape',
         Waist = 'Warwolf Belt',
         Legs = 'Glt. Breeches +1',
-        Feet = 'Vlr. Leggings +1',
+        Feet = 'Vlr. Leggings +1',]]
     },
 }
 profile.Sets = sets
 
 profile.SetMacroBook = function()
-    -- AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1')
-    -- AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 7')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1')
 end
 
 --[[

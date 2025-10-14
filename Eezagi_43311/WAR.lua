@@ -3,7 +3,20 @@ local profile = {}
 local fastCastValue = 0.00 -- 0% from gear
 
 local sets = {
-    Idle = {},
+    Idle = {
+        Head    = "Beetle Mask +1",          --[[Head    = "Dream Ribbon",          --[[]]
+        Neck    = "Tiger Stole",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
+        Ear1    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
+        Ear2    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[]]
+        Body    = "Beetle Harness +1",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
+        Hands   = "Lgn. Mittens",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
+        Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
+        Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
+        Back    = "Dhalmel Mantle +1",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
+        Legs    = "Republic Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
+        Feet    = "Beetle Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+	},
     IdleALT = {},
     Resting = {},
     Town = {},
@@ -36,7 +49,11 @@ local sets = {
     TP_HighAcc = {},
     TP_Aggressor = {},
 
-    WS = {},
+    WS = {
+        Neck    = "Spike Necklace",          --[[Neck    = ""]]
+        Ring1   = "Courage Ring",            --[[Ring2   = ""]]
+        Ring2   = "Courage Ring",            --[[Ring2   = ""]]
+    },
     WS_HighAcc = {},
 
     Warcry = {},
