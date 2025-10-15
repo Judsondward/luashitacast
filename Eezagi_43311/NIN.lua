@@ -43,7 +43,7 @@ local anrin_obi = true
 
 local sets = {
     Idle = {
-        Head    = "Lgn. Cap",          --[[Head    = "Dream Ribbon",          --[[]]
+        Head    = "Legionnaire's Cap",          --[[Head    = "Dream Ribbon",          --[[]]
         Neck    = "Dog Collar",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
         Ear1    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
         Ear2    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[]]
@@ -124,8 +124,8 @@ local sets = {
 profile.Sets = sets
 
 profile.SetMacroBook = function()
-    -- AshitaCore:GetChatManager():QueueCommand(1, '/macro book 1')
-    -- AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro book 14')
+    AshitaCore:GetChatManager():QueueCommand(1, '/macro set 1')
 end
 
 --[[
