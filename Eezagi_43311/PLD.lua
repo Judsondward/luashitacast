@@ -20,7 +20,7 @@ local shadow_mantle = true
 local sets = {
     Idle = {
         Head    = "Beetle Mask +1",          --[[Head    = "Dream Ribbon",          --[[]]
-        Neck    = "Tiger Stole",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
+        Neck    = "Tiger stole",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
         Ear1    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
         Ear2    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[]]
         Body    = "Beetle Harness +1",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
@@ -30,7 +30,7 @@ local sets = {
         Back    = "Dhalmel Mantle +1",       --[[Back    = "Boxer's Mantle",        --[[]]
         Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
         Legs    = "Republic Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
-        Feet    = "Beetle Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+        Feet    = "Btl. Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
     -- 1415
        --[[ Main = 'Tutelary',
         Sub = 'Aegis',
