@@ -43,18 +43,18 @@ local anrin_obi = true
 
 local sets = {
     Idle = {
-        Head    = "Legionnaire's Cap",          --[[Head    = "Dream Ribbon",          --[[]]
+        Head    = "Bone Mask +1",          --[[Head    = "Dream Ribbon",          --[[]]
         Neck    = "Dog Collar",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
-        Ear1    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
-        Ear2    = "Opal Earring",       --[[Ear1    = "Merman's Earring",      --[[]]
-        Body    = "Lgn. Harness",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
+        Ear1    = "Bone Earring +1",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
+        Ear2    = "Bone Earring +1",       --[[Ear1    = "Merman's Earring",      --[[]]
+        Body    = "Bone Harness +1",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
         Hands   = "Lgn. Mittens",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
         Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
         Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
         Back    = "Rabbit Mantle",       --[[Back    = "Boxer's Mantle",        --[[]]
         Waist   = "Leather Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
         Legs    = "Brass Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
-        Feet    = "Lgn. Leggings",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+        Feet    = "Bone Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
     },
     IdleALT = {},
     IdleDT = {},
