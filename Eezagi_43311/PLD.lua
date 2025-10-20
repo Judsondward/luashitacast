@@ -1,8 +1,8 @@
 local profile = {}
 
-local fastCastValue = 0.07 -- 7% from gear
+local fastCastValue = 0.00 -- 7% from gear
 
-local parade_gorget = true
+local parade_gorget = false
 
 local hercules_ring = false
 local hercules_ring_slot = 'Ring1'
@@ -11,26 +11,26 @@ local hercules_ring_slot = 'Ring1'
 local gallant_leggings = 'Glt. Leggings +1'
 local valor_leggings = 'Vlr. Leggings +1'
 
-local arco_de_velocidad = true
+local arco_de_velocidad = false
 
-local warlocks_mantle = true -- Don't add 2% to fastCastValue to this as it is SJ dependant
+local warlocks_mantle = false -- Don't add 2% to fastCastValue to this as it is SJ dependant
 
-local shadow_mantle = true
+local shadow_mantle = false
 
 local sets = {
     Idle = {
-        Head    = "Eisenschaller",          --[[Head    = "Dream Ribbon",          --[[]]
+        Head    = "Eisenschaller",           --[[Head    = "Dream Ribbon",          --[[]]
         Neck    = "Tiger stole",             --[[Neck    = "Jeweled Collar",        --[[Neck    = {"Orochi Nodowa","Orochi Nodowa +1"},--[[]]
         Ear1    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[Ear1    = "Brutal Earring",        --[[]]
         Ear2    = "Beetle Earring +1",       --[[Ear1    = "Merman's Earring",      --[[]]
-        Body    = "Beetle Harness +1",       --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
+        Body    = "Eisenbrust",              --[[Body    = {"Barone Corazza","Conte Corazza","Scorpion Breastplate","Scorpion Breastplate +1"},--[[]]
         Hands   = "Eisenhentzes",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
         Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
         Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
-        Back    = "Dhalmel Mantle +1",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Back    = "Mercen. Mantle",       --[[Back    = "Boxer's Mantle",        --[[]]
         Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
-        Legs    = "Eisendiechlings",       --[[Legs    = "Dst. Subligar +1",      --[[]]
-        Feet    = "Eisenschuhs",      --[[Feet    = "Dst. Leggings +1",      --[[]]
+        Legs    = "Eisendiechlings",         --[[Legs    = "Dst. Subligar +1",      --[[]]
+        Feet    = "Eisenschuhs",             --[[Feet    = "Dst. Leggings +1",      --[[]]
     -- 1415
        --[[ Main = 'Tutelary',
         Sub = 'Aegis',
