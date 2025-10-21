@@ -27,7 +27,7 @@ local sets = {
         Hands   = "Eisenhentzes",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
         Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
         Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
-        Back    = "Mercen. Mantle",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Back    = "Mercen. Mantle",          --[[Back    = "Boxer's Mantle",        --[[]]
         Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
         Legs    = "Eisendiechlings",         --[[Legs    = "Dst. Subligar +1",      --[[]]
         Feet    = "Eisenschuhs",             --[[Feet    = "Dst. Leggings +1",      --[[]]
@@ -253,6 +253,7 @@ local sets = {
         Feet = { Name = 'Glt. Leggings +1', Priority = 90 },]]
     },
     Haste = { -- 1416
+        Waist   = "Heko Obi +1"
         --[[Main = { Name = 'Capricorn Staff', Priority = -1 }, -- 5
         Sub = 'remove',
         Head = { Name = 'Homam Zucchetto', Priority = -1 }, -- 3
@@ -431,11 +432,14 @@ local sets = {
         --[[Body = 'Vlr. Surcoat +1',]]
     },
     Cure = {
-        Head    = "Horror Head"
+        Head    = "Horror Head",
+        Neck    = "Justice Badge",
+        Waist   = "Heko Obi +1"
         --[[Main = 'Apollo\'s Staff',
         Ear1 = 'Hospitaler Earring',]]
     },
     Divine = {
+        Waist   = "Heko Obi +1"
         --[[Head = 'Homam Zucchetto',
         Neck = 'Faith Torque',
         Ear1 = 'Novio Earring',
@@ -473,6 +477,7 @@ local sets = {
         Hands = 'Vlr. Gauntlets +1',]]
     },
     Enhancing = {
+        Waist   = "Heko Obi +1"
         --[[Main = 'Kirin\'s Pole',
         Head = 'Homam Zucchetto', --maats
         Neck = 'Stone Gorget',
@@ -601,6 +606,7 @@ profile.HandlePrecast = function()
     local action = gData.GetAction()
     local me = AshitaCore:GetMemoryManager():GetParty():GetMemberName(0)
 
+    --[[
     local cheatDelay = 0
     if (player.SubJob == "RDM" and warlocks_mantle) then
         cheatDelay = gcmelee.DoPrecast(fastCastValue + 0.02)
@@ -626,6 +632,7 @@ profile.HandlePrecast = function()
     else
         delayCheat:once(cheatDelay)
     end
+    --[[]]
 end
 
 profile.HandleMidcast = function()
