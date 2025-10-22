@@ -410,8 +410,10 @@ local sets = {
 
     WS = {
         Neck    = "Spike Necklace",          --[[Neck    = ""]]
+        Hands   =  "Lgn. Mittens",
         Ring1   = "Courage Ring",            --[[Ring2   = ""]]
         Ring2   = "Courage Ring",            --[[Ring2   = ""]]
+        Legs    = "Republic Subligar",
         --[[Head = 'Optical Hat',
         Neck = 'Soil Gorget',
         Ear1 = 'Brutal Earring',
@@ -437,7 +439,8 @@ local sets = {
     Cure = {
         Head    = "Horror Head",
         Neck    = "Justice Badge",
-        Waist   = "Heko Obi +1"
+        Waist   = "Heko Obi +1",
+        Back    = "Mercen. Mantle"          --[[Back    = "Boxer's Mantle",        --[[]]
         --[[Main = 'Apollo\'s Staff',
         Ear1 = 'Hospitaler Earring',]]
     },

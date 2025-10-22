@@ -51,8 +51,8 @@ local sets = {
         Hands   = "Lgn. Mittens",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
         Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
         Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
-        Back    = "Rabbit Mantle",       --[[Back    = "Boxer's Mantle",        --[[]]
-        Waist   = "Leather Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
+        Back    = "Dhalmel Mantle +1",       --[[Back    = "Boxer's Mantle",        --[[]]
+        Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
         Legs    = "Brass Subligar",       --[[Legs    = "Dst. Subligar +1",      --[[]]
         Feet    = "Bone Leggings +1",      --[[Feet    = "Dst. Leggings +1",      --[[]]
     },
