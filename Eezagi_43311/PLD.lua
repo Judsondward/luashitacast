@@ -27,7 +27,8 @@ local sets = {
         Hands   = "Eisenhentzes",            --[[Hands   = "Dst. Mittens +1",       --[[Hands   = "Heavy Gauntlets",       --[[]]
         Ring1   = "Bastokan Ring",           --[[Ring1   = "Merman's Ring",         --[[Ring1   = "Defending Ring",        --[[Yeah, Right.]]
         Ring2   = "Courage Ring",            --[[Ring2   = "Merman's Ring",         --[[Ring2   = "Hercules' Ring",        --[[]]
-        Back    = "Mercen. Mantle",          --[[Back    = "Boxer's Mantle",        --[[]]
+        back    = "Dhalmel Mantle +1",
+        --Back    = "Mercen. Mantle",          --[[Back    = "Boxer's Mantle",        --[[]]
         Waist   = "Brave Belt",              --[[Waist   = "Warwolf Belt",          --[[]]
         Legs    = "Eisendiechlings",         --[[Legs    = "Dst. Subligar +1",      --[[]]
         Feet    = "Eisenschuhs",             --[[Feet    = "Dst. Leggings +1",      --[[]]
@@ -237,6 +238,7 @@ local sets = {
         Legs = { Name = 'Homam Cosciales', Priority = 120 },]]
     },
     SIRD = { -- 1441
+        Waist   = "Heko Obi +1"
         --[[Main = 'Tutelary',
         Sub = 'Aegis',
         Head = { Name = 'Koenig Schaller', Priority = 30 },
@@ -275,6 +277,7 @@ local sets = {
     },
 
     Hate = { -- 1419
+        Back    = "Mercen. Mantle",          --[[Back    = "Boxer's Mantle",        --[[]]
         --[[Main = 'Tutelary',
         Sub = 'Koenig Shield',
         Head = 'Bahamut\'s Mask',
