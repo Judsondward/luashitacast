@@ -23,6 +23,20 @@ local sets = {
         Legs    = 'Eisendiechlings',
         Feet    = 'Eisenschuhs'
     },
+    Idle_WP_Sword  = {
+        Main    = 'Centurion\'s Sword',
+        Sub     = 'Kite shield'
+    },
+    Idle_WP_CLub   = {
+        Main    = 'Decurion\'s Hammer',
+        Sub     = 'Kite shield'
+    },
+    Idle_WP_Staff   = {
+        Main    = 'Earth Staff'
+    },
+    --[[Idle_WP_Spear     = {
+        Main    = 'Earth Staff'
+    },--[[]]
 
     Rest_Base       = {},
 
@@ -47,8 +61,19 @@ local sets = {
         Waist = 'Heko Obi +1'
     },
     
+    -- Astral Rings are 60k/ea. For -50 Total
+    -- Bomb Ring is 50k for +15
+    -- Mythril Ring +1  is 10k for +5
+    -- Shield Earring is 2k for +10 (-10 MP)
+    -- Bloodbead Amulet is 23k for +15
+
+    -- 90 HP
+    HP_Down_C2      = {},
+    HP_Up_C2        = {},
+    -- 190 HP
     HP_Down_C3      = {},
     HP_Up_C3        = {},
+    -- 390 HP
     HP_Down_C4      = {},
     HP_Up_C4        = {},
 
@@ -99,7 +124,10 @@ local Settings = {
     TP_Mode = 1,
     DT_Mode = 1,
     OV_Mode = 1,
-    CC_Mode = false
+    Idle_WP = 2,
+    CC_Mode = false,
+    ML_Mode = true,
+    LockAll = false
 };
 
 local JATable = T{
@@ -115,6 +143,13 @@ local TPModeTable = {
     [1] = 'Low',
     [2] = 'Mid',
     [3] = 'High'
+};
+
+local IdleWPTable = {
+    [1] = 'Sword',
+    [2] = 'Club',
+    [3] = 'Staff'
+    --[3] = 'Spear'
 };
 
 local DTModeTable = {
@@ -147,6 +182,29 @@ local WSTable = T{
     ['Moonlight'] = 'ClubSkill'
 };
 
+local EleStaffTable = {
+    ['Earth']   = 'Earth Staff',
+    ['Wind']    = 'Wind Staff',
+    ['Water']   = 'Water Staff',
+    ['Fire']    = 'Fire Staff',
+    ['Ice']     = 'Ice Staff',
+    ['Thunder'] = 'Thunder Staff',
+    ['Light']   = 'Light Staff',
+    ['Dark']    = 'Dark Staff'
+};
+
+local EleObiTable = {
+    ['Earth']   = 'Dorin Obi',
+    ['Wind']    = 'Furin Obi',
+    ['Water']   = 'Suirin Obi',
+    ['Fire']    = 'Karin Obi',
+    ['Ice']     = 'Hyorin Obi',
+    ['Thunder'] = 'Rairin Obi',
+    ['Light']   = 'Korin Obi',
+    ['Dark']    = 'Anrin Obi'
+};
+
+
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
 
@@ -154,28 +212,47 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
     AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 7');
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F5 /lac fwd OV_Off');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F6 /lac fwd OV_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F10 /lac fwd DT_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind ^c /lac fwd CC_Mode');
 end
 
 profile.OnUnload = function()
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F5');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F6');
+
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F10');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind ^c');
 end
 
 profile.HandleCommand = function(args)
-    if (args[1] == 'CC_Mode') then
+    if(args[1] == 'CC_Mode') then
         Settings.CC_Mode = not Settings.CC_Mode;
         if(Settings.CC_Mode) then
-            gFunc.Message("Cure Cheat Mode is ON")
+            gFunc.Message("Cure Cheat Mode is ON");
         else
-            gFunc.Message("Cure Cheat Mode is OFF")
+            gFunc.Message("Cure Cheat Mode is OFF");
+        end
+    elseif(args[1] == 'LockAll') then
+        Settings.LockAll = not Settings.LockAll;
+        if(Settings.LockAll) then
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac disable');
+        else
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        end
+    elseif(args[1] == 'ML_Mode') then
+        Settings.ML_Mode = not Settings.ML_Mode;
+        if(Settings.ML_Mode) then
+            gFunc.Message("Melee Mode is ON");
+        else
+            gFunc.Message("Melee Mode is OFF");
         end
     elseif (args[1] == 'TP_Mode') then
         Settings.TP_Mode = Settings.TP_Mode +1;
@@ -183,9 +260,15 @@ profile.HandleCommand = function(args)
             Settings.TP_Mode = 1;
         end
         gFunc.Message('TP_Mode: ' .. TPModeTable[Settings.TP_Mode] .. ' Accuracy');
+    elseif (args[1] == 'Idle_WP') then
+        Settings.Idle_WP = Settings.Idle_WP +1;
+        if (Settings.Idle_WP > #IdleWPTable) then
+            Settings.Idle_WP = 1;
+        end
+        gFunc.Message('Idle Weapon: ' .. IdleWPTable[Settings.Idle_WP]);
     elseif (args[1] == 'DT_Mode') then
         Settings.DT_Mode = Settings.DT_Mode +1;
-        if (Settings.DT_Mode > #TPModeTable) then
+        if (Settings.DT_Mode > #DTModeTable) then
             Settings.DT_Mode = 1;
         end
         gFunc.Message('DT_Mode: ' .. DTModeTable[Settings.DT_Mode]);
@@ -216,8 +299,14 @@ profile.HandleDefault = function()
         gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
+        if (not Settings.ML_Mode) then
+            gFunc.Equip('main', "Dark Staff");
+        end
     else
         gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
+        if (not Settings.ML_Mode) then
+            gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
+        end
     end
 end
 
@@ -248,6 +337,7 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
+    local envVar = gData.GetEnvironment();
     local action = gData.GetAction();
     if(action.Skill == 'Healing Magic') then
         if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
@@ -258,6 +348,9 @@ profile.HandleMidcast = function()
             end
         else
             gFunc.EquipSet(sets.Heal_Base);
+            if(not ML_Mode) then
+                gFunc.Equip('main', EleStaffTable[action.Element]);
+            end
         end
     elseif(action.Skill == 'Divine Magic') then
         if(action.Name == 'Flash') then
@@ -276,6 +369,11 @@ profile.HandleMidcast = function()
         gFunc.Message('Friday Finally Arrived, fix your shit');
     else
         gFunc.EquipSet(sets.Haste_Base);
+    end
+    if(envVar.DayElement == action.Element) or (env.WeatherElement == action.Element) then
+        -- equip an obi
+        gFunc.EquipSet('waist', EleObiTable[action.Element]);
+        -- Checked after conditionals to enforce
     end
 end
 

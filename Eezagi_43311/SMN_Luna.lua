@@ -1,37 +1,226 @@
 local profile = {};
+
 local sets = {
-    Idle_Base ={
-        Main    = '',
-        Sub     = '',
-        Ranged  = '',
-        Ammo    = '',
-        Head    = '',
-        Neck    = '',
-        Ear1    = '',
-        Ear2    = '',
-        Body    = '',
-        Hands   = '',
-        Ring1   = '',
-        Ring2   = '',
-        Back    = '',
-        Waist   = '',
-        Legs    = '',
-        Feet    = ''
+
+    FriendlessHo ={
+        Main    = 'Earth Staff', --Terra's Staff
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Summoner\'s Horn', --Summoner's Horn +1
+        Neck    = 'Evasion Torque',
+        Ear1    = 'Loquac. Earring',
+        Ear2    = 'Magnetic Earring',
+        Body    = 'Yinyang Robe',
+        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+        Feet    = 'Rostrum Pumps' --Herald's Gaiters
     },
 
-    Resting = {},
+    Idle_Base ={
+        --Main    = 'Bahamut\'s Staff', 
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Summoner\'s Horn', --Summoner's Horn +1
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Magnetic Earring', --Summoning Earring
+        Body    = 'Yinyang Robe', --Penance Robe  --Summoner's Doublet (day dependant)
+        Hands   = 'Summoner\'s Brcr.', --Nashira Gages
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+        Feet    = 'Evk. Pigaches +1'
+    },
 
-    BP_Base = {},
-    PreCast = {},
-    MidCast = {},
+    BP_RP ={
+        --Main    = '',
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Magnetic Earring', --Summoning Earring
+        Body    = 'Yinyang Robe', --Summoner's Doublet
+        Hands   = 'Summoner\'s Brcr.', --Nashira Gages
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+        Feet    = 'Smn. Pigaches +1'
+    },
 
-    Healing = {},
-    Enhancing = {},
+    BP_Base ={
+        --Main    = '',
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Evoker\'s Horn', --Buffalo helm
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Magnetic Earring', --Summoning Earring
+        Body    = 'Yinyang Robe', --Shepherd's Doublet
+        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+        Feet    = 'Nashira crackows'
+    },
 
-    TP_Base = {},
-    WS_Base = {}
+    BP_W ={
+        --Main    = '',
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Magnetic Earring', --Summoning Earring
+        Body    = 'Yinyang Robe',
+        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Austere Slops', --Penance Slops
+        Feet    = 'Nashira crackows'
+    },
 
+    Healing ={
+        Main    = 'Light Staff', --Apollo's Staff
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Errant hat', --Mahatma hat
+        Neck    = 'Promise Badge',
+        Ear1    = 'Loquac. Earring',
+        Ear2    = 'Magnetic Earring',
+        Body    = 'Errant Hpl.', --Mahatma Hpl.
+        Hands   = 'Devotee\'s mitts',
+        Ring1   = 'Sapphire Ring',
+        Ring2   = 'Tamas Ring',
+        Back    = 'Rainbow Cape',
+        Waist   = 'Mrc.Cpt. Belt',
+        Legs    = 'Errant Slops', --Mahatma Slops
+        Feet    = 'Errant Pigaches' --Mahatma Pigaches
+    },
+
+    Enhancing ={
+        Main    = 'Water Staff', --Apollo's Staff
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Errant hat', --Mahatma hat
+        Neck    = 'Enhancing Torque',
+        Ear1    = 'Loquac. Earring',
+        Ear2    = 'Magnetic Earring',
+        Body    = 'Errant Hpl.', --Mahatma Hpl.
+        Hands   = 'Devotee\'s mitts',
+        Ring1   = 'Sapphire Ring',
+        Ring2   = 'Tamas Ring',
+        Back    = 'Merciful Cape',
+        Waist   = 'Mrc.Cpt. Belt',
+        Legs    = 'Errant Slops', --Mahatma Slops
+        Feet    = 'Errant Pigaches' --Mahatma Pigaches
+    },
+
+    Resting ={
+        Main    = 'Dark Staff', --Pluto's staff
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Summoner\'s Horn', --Summoner's Horn +1
+        Neck    = 'Checkered Scarf',
+        Ear1    = 'Relaxing Earring',
+        Ear2    = 'Magnetic Earring',
+        Body    = 'Errant Hpl.', --Mahatma Hpl.
+        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt',
+        Legs    = 'Baron\'s Slops',
+        Feet    = 'Rostrum Pumps'
+    },
+
+    TP_Base ={
+        --Main    = '',
+        --Sub     = '',
+        --Ranged  = '',
+        --Ammo    = '',
+        Head    = 'Crow Beret', 
+        Neck    = 'Agile Gorget', --Temp. Torque
+        --Ear1    = '',
+        --Ear2    = '',
+        --Body    = '',
+       -- Hands   = '',
+        --Ring1   = '',
+        --Ring2   = '',
+        --Back    = '',
+        Waist   = 'Mithran Stone',
+        Legs    = 'Crow Hose',
+        --Feet    = ''
+    },
+
+	WS_Base ={
+        --Main    = '',
+        --Sub     = '',
+        --Ranged  = '',
+        --Ammo    = '',
+        Head    = 'Pineal hat', 
+        Neck    = 'Agile gorget', --Temp. Torque
+        --Ear1    = '',
+        --Ear2    = '',
+        Body    = 'Crow Jupon',
+        Hands   = 'Battle Bracers +1',
+        --Ring1   = '',
+        --Ring2   = '',
+        --Back    = '',
+        Waist   = 'Mithran Stone',
+        Legs    = 'Crow Hose',
+        --Feet    = ''
+    },
+
+    PreCast ={
+        --Main    = '',
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Nashira\'s Turban',
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Loquac. Earring',
+        Body    = 'Nashira Manteel',
+        Hands   = 'Summoner\'s Brcr.', --Nashira Gages
+        Ring1   = 'Tamas Ring', 
+        Ring2   = 'Evoker\'s Ring', 
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt', --Swift belt
+        Legs    = 'Nashira Seraweels',
+        Feet    = 'Rostrum Pumps'
+    },
+
+    MidCast ={
+        --Main    = '',
+        --Sub     = '',
+        Ammo    = 'Hedgehog Bomb',
+        Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+        Neck    = 'Smn. Torque',
+        Ear1    = 'Beastly Earring',
+        Ear2    = 'Magnetic Earring', --Summoning Earring
+        Body    = 'Yinyang Robe',
+        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+        Ring1   = 'Tamas Ring',
+        Ring2   = 'Evoker\'s Ring',
+        Back    = 'Astute Cape',
+        Waist   = 'Hierarch Belt', --Druid's Rope
+        Legs    = 'Austere Slops', --Penance Slops
+        Feet    = 'Nashira Crackows'
+    },
 };
+
 profile.Sets = sets;
 
 sets.Idle_Light     = gFunc.Combine(sets.Idle_Base, {});
@@ -49,8 +238,8 @@ sets.BP_W           = gFunc.Combine(sets.BP_Base, {});
 --profile.Packer = {};
 
 local Settings = {
-    petElement = 'Light';
-}
+    LockAll = false
+};
 
 local EleStaffTable = {
     --[[    
@@ -276,15 +465,25 @@ local PetElementTable = {
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 12');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
+    --AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
+	AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd LockAll');
 end
 
 profile.OnUnload = function()
+AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
 end
 
 profile.HandleCommand = function(args)
+	if(args[1] == 'LockAll') then
+        Settings.LockAll = not Settings.LockAll;
+        if(Settings.LockAll) then
+            AshitaCore:GetChatManager():QueueCommand(2, '/lac disable');
+        else
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        end
+	end
 end
 
 profile.HandleDefault = function()
@@ -320,7 +519,7 @@ profile.HandleAbility = function()
     local petAction = gData.GetPetAction();
 
     if(petAction ~= nil) and BPTable:contains(petAction.Name) then
-        gFunc.EquipSet('BP_' .. BPTable[petAction.Name]);
+        gFunc.EquipSet(BPTable[petAction.Name]);
     end
 end
 
@@ -351,7 +550,7 @@ profile.HandleWeaponskill = function()
         -- I've made a set for it.
         gFunc.EquipSet(WSTable[action.Name]);
     else
-        -- I didn't. Equip STR
+        -- I didn't. 
         gFunc.EquipSet(sets.WS_Base);
     end
 end
