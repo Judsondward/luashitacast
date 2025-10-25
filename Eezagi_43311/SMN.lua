@@ -320,7 +320,7 @@ profile.HandleAbility = function()
     local petAction = gData.GetPetAction();
 
     if(petAction ~= nil) and BPTable:contains(petAction.Name) then
-        gFunc.EquipSet('BP_' .. BPTable[petAction.Name]);
+        gFunc.EquipSet(BPTable[petAction.Name]);
     end
 end
 

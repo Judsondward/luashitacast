@@ -1,3 +1,16 @@
+--[[
+    Pets that need their own special sets. 
+
+    sets.Idle_Carbuncle = gFunc.Combine(Idle_Base, {});
+
+    local SpecialIdleTable = T{ Carbuncle, etc.}
+
+    if SpecialIdleTable:ontains(pet.Name) then
+
+    else
+        the shit that's arleady there
+]]
+
 local profile = {};
 
 local sets = {
@@ -38,7 +51,7 @@ local sets = {
         Feet    = 'Evk. Pigaches +1'
     },
 
-    BP_RP ={
+    RPhys ={
         --Main    = '',
         --Sub     = '',
         Ammo    = 'Hedgehog Bomb',
@@ -74,7 +87,7 @@ local sets = {
         Feet    = 'Nashira crackows'
     },
 
-    BP_W ={
+    Ward ={
         --Main    = '',
         --Sub     = '',
         Ammo    = 'Hedgehog Bomb',
@@ -223,6 +236,7 @@ local sets = {
 
 profile.Sets = sets;
 
+sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Light     = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Earth     = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Wind      = gFunc.Combine(sets.Idle_Base, {});
@@ -231,15 +245,113 @@ sets.Idle_Fire      = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Ice       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Thunder   = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Dark      = gFunc.Combine(sets.Idle_Base, {});
-sets.BP_RP          = gFunc.Combine(sets.BP_Base, {});
-sets.BP_RM          = gFunc.Combine(sets.BP_Base, {});
-sets.BP_W           = gFunc.Combine(sets.BP_Base, {});
+sets.BP_RPhys       = gFunc.Combine(sets.BP_Base, {});
+sets.BP_RMag        = gFunc.Combine(sets.BP_Base, {});
+sets.BP_Ward        = gFunc.Combine(sets.BP_Base, {});
 
 --profile.Packer = {};
 
 local Settings = {
     LockAll = false
 };
+
+profile.OnLoad = function()
+    gSettings.AllowAddSet = false;
+
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
+    --AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
+	AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd LockAll');
+end
+
+profile.OnUnload = function()
+AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
+end
+
+profile.HandleCommand = function(args)
+	if(args[1] == 'LockAll') then
+        Settings.LockAll = not Settings.LockAll;
+        if(Settings.LockAll) then
+            AshitaCore:GetChatManager():QueueCommand(2, '/lac disable');
+        else
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        end
+	end
+end
+
+profile.HandleDefault = function()
+    local pet = gData.GetPet();
+    local player = gData.GetPlayer();
+    local envVar = gData.GetEnvironment();
+
+    if(player.Status == 'Engaged') then
+        gFunc.EquipSet(sets.TP_Base);
+    elseif(player.Status == 'Resting') then
+        gFunc.EquipSet(sets.Resting);
+    else
+        -- Idle SMN BS Goes here
+        if(pet ~= nil) then
+            if SpecialIdleTable:contains(pet.Name) then
+                gFunc.EquipSet('Idle_' .. pet.Name); 
+            else    
+                gFunc.EquipSet('Idle_' .. PetElementTable[pet.Name]); 
+            end
+            gFunc.Equip('main', EleStaffTable[PetElementTable[pet.Name]])
+            if (envVar.DayElement == PetElementTable[pet.Name]) then
+                -- gFunc.Equip('slot', 'Item Name');
+            end
+            if (envVar.WeatherElement == PetElementTable[pet.Name]) then
+                -- gFunc.Equip('slot', 'Item Name');
+            end
+        else
+            gFunc.EquipSet(sets.FriendlessHo);
+        end
+    end
+end
+
+profile.HandleAbility = function()
+    local petAction = gData.GetPetAction();
+
+    if(petAction ~= nil) and BPTable:contains(petAction.Name) then
+        gFunc.EquipSet('BP_' .. BPTable[petAction.Name]);
+    end
+end
+
+profile.HandleItem = function()
+end
+
+profile.HandlePrecast = function()
+    local action = gData.GetAction();
+    if (action.ActionType == 'Spell') then
+        gFunc.EquipSet(sets.PreCast);
+    end
+end
+
+profile.HandleMidcast = function()
+    local action = gData.GetAction();
+    if (action.Skill == 'Enhancing Magic') then
+        gFunc.EquipSet(sets.Enhancing);
+    elseif (action.Skill == 'Healing Magic') then
+        gFunc.EquipSet(sets.Healing);
+    elseif (action.Skill == 'Summoning') then
+        gFunc.EquipSet(sets.MidCast);
+    end
+end
+
+profile.HandleWeaponskill = function()
+    local action = gData.GetAction();
+    if(WSTable:contains(action.Name)) then
+        -- I've made a set for it.
+        gFunc.EquipSet(WSTable[action.Name]);
+    else
+        -- I didn't. 
+        gFunc.EquipSet(sets.WS_Base);
+    end
+end
+
+local SpecialIdleTable = T{
+    'Carbuncle'
+}
 
 local EleStaffTable = {
     --[[    
@@ -280,161 +392,161 @@ local WSTable = T{
 
 local BPTable = T{
 --Carbuncle M Rage
-    ['Searing Light'] = 'BP_RM',
-    ['Meteorite'] = 'BP_RM',
-	['Holy Mist'] = 'BP_RM',
+    ['Searing Light'] = 'RMag',
+    ['Meteorite'] = 'RMag',
+	['Holy Mist'] = 'RMag',
 --Carbuncle P Rage
-    ['Poison Nails'] = 'BP_RP',
+    ['Poison Nails'] = 'RPhys',
 --Carbuncle Ward
-	['Healing Ruby'] = 'BP_W',
-    ['Shining Ruby'] = 'BP_W',
-	['Glittering Ruby'] = 'BP_W',
-    ['Healing Ruby II'] = 'BP_W',
-	['Soothing Ruby'] = 'BP_W',
-    ['Pacifying Ruby'] = 'BP_W',
+	['Healing Ruby'] = 'Ward',
+    ['Shining Ruby'] = 'Ward',
+	['Glittering Ruby'] = 'Ward',
+    ['Healing Ruby II'] = 'Ward',
+	['Soothing Ruby'] = 'Ward',
+    ['Pacifying Ruby'] = 'Ward',
 --Fenrir M Rage
-	['Howling Moon'] = 'BP_RM',
-    ['Lunar Bay'] = 'BP_RM',
+	['Howling Moon'] = 'RMag',
+    ['Lunar Bay'] = 'RMag',
 --Fenrir P Rage
-	['Moonlit Charge'] = 'BP_RP',
-    ['Crescent Fang'] = 'BP_RP',
-	['Eclipse Bite'] = 'BP_RP',
-    ['Impact'] = 'BP_RP',
+	['Moonlit Charge'] = 'RPhys',
+    ['Crescent Fang'] = 'RPhys',
+	['Eclipse Bite'] = 'RPhys',
+    ['Impact'] = 'RPhys',
 --Fenrir Ward
-	['Lunar Cry'] = 'BP_W',
-    ['Lunar Roar'] = 'BP_W',
-	['Ecliptic Growl'] = 'BP_W',
-    ['Ecliptic Howl'] = 'BP_W',
-	['Heavenward Howl'] = 'BP_W',
+	['Lunar Cry'] = 'Ward',
+    ['Lunar Roar'] = 'Ward',
+	['Ecliptic Growl'] = 'Ward',
+    ['Ecliptic Howl'] = 'Ward',
+	['HeavenWard Howl'] = 'Ward',
 --Ifrit M Rage
-    ['Inferno'] = 'BP_RM',
-	['Fire II'] = 'BP_RM',
-    ['Fire IV'] = 'BP_RM',
-	['Meteor Strike'] = 'BP_RM',
-    ['Conflag Strike'] = 'BP_RM',
+    ['Inferno'] = 'RMag',
+	['Fire II'] = 'RMag',
+    ['Fire IV'] = 'RMag',
+	['Meteor Strike'] = 'RMag',
+    ['Conflag Strike'] = 'RMag',
 --Ifrit P Rage 
-	['Punch'] = 'BP_RP',
-    ['Burning Strike'] = 'BP_RP',
-	['Double Punch'] = 'BP_RP',
-    ['Flaming Crush'] = 'BP_RP',
+	['Punch'] = 'RPhys',
+    ['Burning Strike'] = 'RPhys',
+	['Double Punch'] = 'RPhys',
+    ['Flaming Crush'] = 'RPhys',
 --Ifrit Ward
-	['Crimson Howl'] = 'BP_W',
-    ['Inferno Howl'] = 'BP_W',
+	['Crimson Howl'] = 'Ward',
+    ['Inferno Howl'] = 'Ward',
 --Titan M Rage
-	['Earthen Fury'] = 'BP_RM',
-    ['Stone II'] = 'BP_RM',
-	['Stone IV'] = 'BP_RM',
-    ['Geocrush'] = 'BP_RM',
+	['Earthen Fury'] = 'RMag',
+    ['Stone II'] = 'RMag',
+	['Stone IV'] = 'RMag',
+    ['Geocrush'] = 'RMag',
 --Titan P Rage
-	['Rock Throw'] = 'BP_RP',
-    ['Rock Buster'] = 'BP_RP',
-	['Megalith Throw'] = 'BP_RP',
-    ['Mountain Buster'] = 'BP_RP',
-	['Crag Throw'] = 'BP_RP',
+	['Rock Throw'] = 'RPhys',
+    ['Rock Buster'] = 'RPhys',
+	['Megalith Throw'] = 'RPhys',
+    ['Mountain Buster'] = 'RPhys',
+	['Crag Throw'] = 'RPhys',
 --Titan Ward
-    ['Earthen Ward'] = 'BP_W',
-	['Earthen Armor'] = 'BP_W',
+    ['Earthen Ward'] = 'Ward',
+	['Earthen Armor'] = 'Ward',
 --Leviathan M Rage
-    ['Tidal Wave'] = 'BP_RM',
-	['Water II'] = 'BP_RM',
-    ['Water IV'] = 'BP_RM',
-	['Grand Fall'] = 'BP_RM',
+    ['Tidal Wave'] = 'RMag',
+	['Water II'] = 'RMag',
+    ['Water IV'] = 'RMag',
+	['Grand Fall'] = 'RMag',
 --Leviathan P Rage
-    ['Barracuda Dive'] = 'BP_RP',
-	['Tail Whip'] = 'BP_RP',
-	['Spinning Dive'] = 'BP_RP',
+    ['Barracuda Dive'] = 'RPhys',
+	['Tail Whip'] = 'RPhys',
+	['Spinning Dive'] = 'RPhys',
 --Leviathan Ward
-    ['Slowga'] = 'BP_W',
-	['Spring Water'] = 'BP_W',
-    ['Tidal Roar'] = 'BP_W',
-	['Soothing Current'] = 'BP_W',
+    ['Slowga'] = 'Ward',
+	['Spring Water'] = 'Ward',
+    ['Tidal Roar'] = 'Ward',
+	['Soothing Current'] = 'Ward',
 --Garuda M Rage
-    ['Aerial Blast'] = 'BP_RM',
-    ['Aero II'] = 'BP_RM',
-	['Aero IV'] = 'BP_RM',
-    ['Wind Blade'] = 'BP_RM',
+    ['Aerial Blast'] = 'RMag',
+    ['Aero II'] = 'RMag',
+	['Aero IV'] = 'RMag',
+    ['Wind Blade'] = 'RMag',
 --Garuda P Rage
-	['Claw'] = 'BP_RP',
-    ['Predator Claws'] = 'BP_RP',
+	['Claw'] = 'RPhys',
+    ['Predator Claws'] = 'RPhys',
 --Garuda Ward
-	['Aerial Armor'] = 'BP_W',
-    ['Whispering Wind'] = 'BP_W',
-	['Hastega'] = 'BP_W',
-	['Fleet Wind'] = 'BP_W',
-    ['Hastega II'] = 'BP_W',
+	['Aerial Armor'] = 'Ward',
+    ['Whispering Wind'] = 'Ward',
+	['Hastega'] = 'Ward',
+	['Fleet Wind'] = 'Ward',
+    ['Hastega II'] = 'Ward',
 --Shiva M Rage
-	['Diamond Dust'] = 'BP_RM',
-    ['Blizzard II'] = 'BP_RM',
-	['Blizzard IV'] = 'BP_RM',
-    ['Heavenly Strike'] = 'BP_RM',
+	['Diamond Dust'] = 'RMag',
+    ['Blizzard II'] = 'RMag',
+	['Blizzard IV'] = 'RMag',
+    ['Heavenly Strike'] = 'RMag',
 --Shiva P Rage
-    ['Axe Kick'] = 'BP_RP',
-	['Double Slap'] = 'BP_RP',
-    ['Rush'] = 'BP_RP',
+    ['Axe Kick'] = 'RPhys',
+	['Double Slap'] = 'RPhys',
+    ['Rush'] = 'RPhys',
 --Shiva Ward
-	['Frost Armor'] = 'BP_W',
-    ['Sleepga'] = 'BP_W',
-	['Diamond Storm'] = 'BP_W',
-    ['Crystal Blessing'] = 'BP_W',
+	['Frost Armor'] = 'Ward',
+    ['Sleepga'] = 'Ward',
+	['Diamond Storm'] = 'Ward',
+    ['Crystal Blessing'] = 'Ward',
 --Ramuh M Rage
-	['Judgment Bolt'] = 'BP_RM',
-	['Thunder II'] = 'BP_RM',
-    ['Thunderspark'] = 'BP_RM',
-	['Thunder IV'] = 'BP_RM',
-    ['Thunderstorm'] = 'BP_RM',
+	['Judgment Bolt'] = 'RMag',
+	['Thunder II'] = 'RMag',
+    ['Thunderspark'] = 'RMag',
+	['Thunder IV'] = 'RMag',
+    ['Thunderstorm'] = 'RMag',
 --Ramuh P Rage
-	['Shock Strike'] = 'BP_RP',
-    ['Chaotic Strike'] = 'BP_RP',
-    ['Volt Strike'] = 'BP_RP',
+	['Shock Strike'] = 'RPhys',
+    ['Chaotic Strike'] = 'RPhys',
+    ['Volt Strike'] = 'RPhys',
 --Ramuh Ward
-	['Rolling Thunder'] = 'BP_W',
-    ['Lightning Armor'] = 'BP_W',
-	['Shock Squall'] = 'BP_W',
+	['Rolling Thunder'] = 'Ward',
+    ['Lightning Armor'] = 'Ward',
+	['Shock Squall'] = 'Ward',
 --Diabolos M Rage
-    ['Ruinous Omen'] = 'BP_RM',
-	['Nether Blast'] = 'BP_RM',
-    ['Night Terror'] = 'BP_RM',
+    ['Ruinous Omen'] = 'RMag',
+	['Nether Blast'] = 'RMag',
+    ['Night Terror'] = 'RMag',
 --Diabolos P Rage
-	['Camisado'] = 'BP_RP',
-	['Blindside'] = 'BP_RP',
+	['Camisado'] = 'RPhys',
+	['Blindside'] = 'RPhys',
 --Diabolos Ward: Somn. is not a mistake.
-    ['Somnolence'] = 'BP_RM',
-	['Nightmare'] = 'BP_W',
-    ['Ultimate Terror'] = 'BP_W',
-	['Noctoshield'] = 'BP_W',
-    ['Dream Shroud'] = 'BP_W',
-    ['Pavor Nocturnus'] = 'BP_W',
+    ['Somnolence'] = 'RMag',
+	['Nightmare'] = 'Ward',
+    ['Ultimate Terror'] = 'Ward',
+	['Noctoshield'] = 'Ward',
+    ['Dream Shroud'] = 'Ward',
+    ['Pavor Nocturnus'] = 'Ward',
 --Cait Sith M Rage
-	['Level ? Holy'] = 'BP_RM',
+	['Level ? Holy'] = 'RMag',
 --Cait Sith P Rage
-    ['Regal Scratch'] = 'BP_RP',
+    ['Regal Scratch'] = 'RPhys',
 --Cait Sith Ward
-	['Altana\'s Favor'] = 'BP_W',
-    ['Raise II'] = 'BP_W',
-	['Mewing Lullaby'] = 'BP_W',
-    ['Reraise II'] = 'BP_W',
-	['Eerie Eye'] = 'BP_W',
+	['Altana\'s Favor'] = 'Ward',
+    ['Raise II'] = 'Ward',
+	['Mewing Lullaby'] = 'Ward',
+    ['Reraise II'] = 'Ward',
+	['Eerie Eye'] = 'Ward',
 --Siren M Rage
-	['Clarsach Call'] = 'BP_RM',
-    ['Sonic Buffet'] = 'BP_RM',
-	['Tornado II'] = 'BP_RM',
+	['Clarsach Call'] = 'RMag',
+    ['Sonic Buffet'] = 'RMag',
+	['Tornado II'] = 'RMag',
 --Siren P Rage
-    ['Welt'] = 'BP_RP',
-	['Roundhouse'] = 'BP_RP',
-    ['Hysteric Assault'] = 'BP_RP',
+    ['Welt'] = 'RPhys',
+	['Roundhouse'] = 'RPhys',
+    ['Hysteric Assault'] = 'RPhys',
 --Siren Ward
-    ['Lunatic Voice'] = 'BP_W',
-	['Katabatic Blades'] = 'BP_W',
-    ['Chinook'] = 'BP_W',
-	['Bitter Elegy'] = 'BP_W',
-    ['Wind\'s Blessing'] = 'BP_W',
+    ['Lunatic Voice'] = 'Ward',
+	['Katabatic Blades'] = 'Ward',
+    ['Chinook'] = 'Ward',
+	['Bitter Elegy'] = 'Ward',
+    ['Wind\'s Blessing'] = 'Ward',
 --Odin M Rage
-	['Zantetsuken'] = 'BP_RM',
+	['Zantetsuken'] = 'RMag',
 --Alexander Ward
-    ['Perfect Defense'] = 'BP_W',
+    ['Perfect Defense'] = 'Ward',
 --Atomos Type Null
-	['Deconstruction'] = 'BP_RM',
-	['Chronoshift'] = 'BP_RM'
+	['Deconstruction'] = 'RMag',
+	['Chronoshift'] = 'RMag'
 };
 
 local PetElementTable = {
@@ -461,98 +573,5 @@ local PetElementTable = {
 	['Atomos']  	= 'Dark',
 	['Alexander']   = 'Light'
 };
-
-profile.OnLoad = function()
-    gSettings.AllowAddSet = false;
-
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    --AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
-	AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd LockAll');
-end
-
-profile.OnUnload = function()
-AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
-end
-
-profile.HandleCommand = function(args)
-	if(args[1] == 'LockAll') then
-        Settings.LockAll = not Settings.LockAll;
-        if(Settings.LockAll) then
-            AshitaCore:GetChatManager():QueueCommand(2, '/lac disable');
-        else
-            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
-        end
-	end
-end
-
-profile.HandleDefault = function()
-    local pet = gData.GetPet();
-    local player = gData.GetPlayer();
-    local envVar = gData.GetEnvironment();
-
-    if(player.Status == 'Engaged') then
-        gFunc.EquipSet(sets.TP_Base);
-    elseif(player.Status == 'Resting') then
-        gFunc.EquipSet(sets.Resting);
-    else
-        -- Idle SMN BS Goes here
-        if(pet ~= nil) then
-            gFunc.EquipSet('Idle_' .. PetElementTable[pet.Name]); 
-            -- Add Logic for Day/Weather Gear. 1 for day and 1 for weather.
-            -- if day then equip blahblah
-            -- if weather then equip blablah
-            gFunc.Equip('main', EleStaffTable[PetElementTable[pet.Name]])
-            if (envVar.DayElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
-            end
-            if (envVar.WeatherElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
-            end
-        else
-            gFunc.EquipSet(sets.FriendlessHo);
-        end
-    end
-end
-
-profile.HandleAbility = function()
-    local petAction = gData.GetPetAction();
-
-    if(petAction ~= nil) and BPTable:contains(petAction.Name) then
-        gFunc.EquipSet(BPTable[petAction.Name]);
-    end
-end
-
-profile.HandleItem = function()
-end
-
-profile.HandlePrecast = function()
-    local action = gData.GetAction();
-    if (action.ActionType == 'Spell') then
-        gFunc.EquipSet(sets.PreCast);
-    end
-end
-
-profile.HandleMidcast = function()
-    local action = gData.GetAction();
-    if (action.Skill == 'Enhancing Magic') then
-        gFunc.EquipSet(sets.Enhancing);
-    elseif (action.Skill == 'Healing Magic') then
-        gFunc.EquipSet(sets.Healing);
-    elseif (action.Skill == 'Summoning') then
-        gFunc.EquipSet(sets.MidCast);
-    end
-end
-
-profile.HandleWeaponskill = function()
-    local action = gData.GetAction();
-    if(WSTable:contains(action.Name)) then
-        -- I've made a set for it.
-        gFunc.EquipSet(WSTable[action.Name]);
-    else
-        -- I didn't. 
-        gFunc.EquipSet(sets.WS_Base);
-    end
-end
 
 return profile;

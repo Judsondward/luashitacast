@@ -2,9 +2,7 @@
     ToDo:
         Populate Gear
 
-        Day/Weather Logic to support Obis
-        Casting Mode Toggle
-        Fix Set combines. Looks like 
+        Move Staff and Day/Weather Logic to gcinclude.
 ]]
 local profile = {};
 local sets = {
@@ -34,9 +32,6 @@ local sets = {
     Idle_WP_Staff   = {
         Main    = 'Earth Staff'
     },
-    --[[Idle_WP_Spear     = {
-        Main    = 'Earth Staff'
-    },--[[]]
 
     Rest_Base       = {},
 
@@ -86,6 +81,7 @@ local sets = {
     },
 };
 profile.Sets = sets;
+gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 -- Combine Block
 sets.Idle_Off        = gFunc.Combine(sets.Idle_Base, {});
@@ -149,7 +145,6 @@ local IdleWPTable = {
     [1] = 'Sword',
     [2] = 'Club',
     [3] = 'Staff'
-    --[3] = 'Spear'
 };
 
 local DTModeTable = {
@@ -207,6 +202,7 @@ local EleObiTable = {
 
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
+    gcinclude.Initialize();
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 7');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
@@ -214,6 +210,7 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
@@ -222,9 +219,11 @@ profile.OnLoad = function()
 end
 
 profile.OnUnload = function()
+    gcinclude.Unload();
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind !l');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
