@@ -51,24 +51,6 @@ local sets = {
         Feet    = 'Evk. Pigaches +1'
     },
 
-    RPhys ={
-        --Main    = '',
-        --Sub     = '',
-        Ammo    = 'Hedgehog Bomb',
-        Head    = 'Evoker\'s Horn', --Evoker's Horn +1
-        Neck    = 'Smn. Torque',
-        Ear1    = 'Beastly Earring',
-        Ear2    = 'Magnetic Earring', --Summoning Earring
-        Body    = 'Yinyang Robe', --Summoner's Doublet
-        Hands   = 'Summoner\'s Brcr.', --Nashira Gages
-        Ring1   = 'Tamas Ring',
-        Ring2   = 'Evoker\'s Ring',
-        Back    = 'Astute Cape',
-        Waist   = 'Hierarch Belt',
-        Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
-        Feet    = 'Smn. Pigaches +1'
-    },
-
     BP_Base ={
         --Main    = '',
         --Sub     = '',
@@ -84,24 +66,6 @@ local sets = {
         Back    = 'Astute Cape',
         Waist   = 'Hierarch Belt',
         Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
-        Feet    = 'Nashira crackows'
-    },
-
-    Ward ={
-        --Main    = '',
-        --Sub     = '',
-        Ammo    = 'Hedgehog Bomb',
-        Head    = 'Evoker\'s Horn', --Evoker's Horn +1
-        Neck    = 'Smn. Torque',
-        Ear1    = 'Beastly Earring',
-        Ear2    = 'Magnetic Earring', --Summoning Earring
-        Body    = 'Yinyang Robe',
-        Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
-        Ring1   = 'Tamas Ring',
-        Ring2   = 'Evoker\'s Ring',
-        Back    = 'Astute Cape',
-        Waist   = 'Hierarch Belt',
-        Legs    = 'Austere Slops', --Penance Slops
         Feet    = 'Nashira crackows'
     },
 
@@ -245,9 +209,16 @@ sets.Idle_Fire      = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Ice       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Thunder   = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Dark      = gFunc.Combine(sets.Idle_Base, {});
-sets.BP_RPhys       = gFunc.Combine(sets.BP_Base, {});
+sets.BP_RPhys       = gFunc.Combine(sets.BP_Base, {
+    Feet    = 'Smn. Pigaches +1'
+});
 sets.BP_RMag        = gFunc.Combine(sets.BP_Base, {});
-sets.BP_Ward        = gFunc.Combine(sets.BP_Base, {});
+sets.BP_Ward        = gFunc.Combine(sets.BP_Base, {
+    Legs    = 'Austere Slops' --Penance Slops
+});
+sets.BP_SRuby        = gFunc.Combine(sets.BP_Base, {
+    Hands   = 'Carbuncle\'s Cuffs'
+});
 
 --profile.Packer = {};
 
@@ -255,8 +226,11 @@ local Settings = {
     LockAll = false
 };
 
+gcinclude = gFunc.LoadFile('common/gcinclude.lua');
+	
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
+    gcinclude.Initialize();
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
@@ -265,7 +239,8 @@ profile.OnLoad = function()
 end
 
 profile.OnUnload = function()
-AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
+    gcinclude.Unload();
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
 end
 
 profile.HandleCommand = function(args)
@@ -291,7 +266,7 @@ profile.HandleDefault = function()
     else
         -- Idle SMN BS Goes here
         if(pet ~= nil) then
-            if SpecialIdleTable:contains(pet.Name) then
+            if (SpecialIdleTable:contains(pet.Name)) then
                 gFunc.EquipSet('Idle_' .. pet.Name); 
             else    
                 gFunc.EquipSet('Idle_' .. PetElementTable[pet.Name]); 
@@ -350,8 +325,8 @@ profile.HandleWeaponskill = function()
 end
 
 local SpecialIdleTable = T{
-    'Carbuncle'
-}
+    ['Carbuncle'] = 'Carbuncle'
+};
 
 local EleStaffTable = {
     --[[    
@@ -399,7 +374,7 @@ local BPTable = T{
     ['Poison Nails'] = 'RPhys',
 --Carbuncle Ward
 	['Healing Ruby'] = 'Ward',
-    ['Shining Ruby'] = 'Ward',
+    ['Shining Ruby'] = 'SRuby',
 	['Glittering Ruby'] = 'Ward',
     ['Healing Ruby II'] = 'Ward',
 	['Soothing Ruby'] = 'Ward',

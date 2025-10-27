@@ -1,15 +1,20 @@
 -- Modified from https://github.com/yzyii/luashitacast/
 
-gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua')
+--[[
+    ToDo:
+    Elemental Gorget Table/Logic
+]]
+
+--gcdisplay = gFunc.LoadFile('common\\gcdisplay.lua')
 
 local gcinclude = {};
 
 function gcinclude.Unload()
-    gcdisplay.Unload();
+    --gcdisplay.Unload();
 end
 
 function gcinclude.Initialize()
-    gcdisplay.Load();
+    --gcdisplay.Load();
 end
 
 -- [[ Elemental Staff Logic ]]

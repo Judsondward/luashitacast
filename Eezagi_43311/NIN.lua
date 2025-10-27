@@ -8,18 +8,18 @@ local profile = {};
 local sets = {
 
     Idle_Base        = {
-        Head    = 'Eisenschaller',
+        Head    = 'Beetle Mask +1',
         Neck    = 'Tiger Stole',
-        Ear1    = 'Beetle Earring +1',
-        Ear2    = 'Beetle Earring +1',
-        Body    = 'Eisenbrust',
-        Hands   = 'Eisenhentzes',
+        Ear1    = 'Bone Earring +1',
+        Ear2    = 'Bone Earring +1',
+        Body    = 'Beetle Harness +1',
+        Hands   = 'Lgn. Mittens',
         Ring1   = 'Bastokan Ring',
         Ring2   = 'Courage Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
-        Legs    = 'Eisendiechlings',
-        Feet    = 'Eisenschuhs'
+        Legs    = 'Republic Subligar',
+        Feet    = 'Btl. Leggings +1'
     },
     Idle_WP_Sword  = {
         Main    = 'Centurion\'s Sword',
@@ -32,31 +32,32 @@ local sets = {
     Idle_WP_Staff   = {
         Main    = 'Earth Staff'
     },
-
+    Idle_WP_GAxe   = {
+        Main    = 'Neckchopper'
+    },
     Rest_Base       = {},
 
     Haste_Base      = {},
 
     TP_Priority     = {
-        Head    = {'Eisenschaller', 'Beetle Mask +1'},
-        Neck    = {'Tiger Stole'},
-        Ear1    = {'Beetle Earring +1'},
-        Ear2    = {'Beetle Earring +1'},
-        Body    = {'Eisenbrust', 'Beetle Harness +1'},
+        Head    = {'Eisenschaller', 'Beetle Mask +1', 'Bone Mask +1'},
+        Neck    = {'Tiger Stole', 'Dog Collar'},
+        Ear1    = {'Beetle Earring +1', 'Bone Earring +1'},
+        Ear2    = {'Beetle Earring +1', 'Bone Earring +1'},
+        Body    = {'Eisenbrust', 'Beetle Harness +1', 'Bone Harness +1'},
         Hands   = {'Eisenhentzes', 'Lgn. Mittens'},
         Ring1   = {'Bastokan Ring'},
         Ring2   = {'Courage Ring'},
         Back    = {'Dhalmel Mantle +1'},
-        Waist   = {'Brave Belt'},
-        Legs    = {'Eisendiechlings', 'Republic Subligar'},
-        Feet    = {'Eisenschuhs', 'Beetle Leggings +1'}
+        Waist   = {'Brave Belt', 'Leather Belt'},
+        Legs    = {'Eisendiechlings', 'Republic Subligar', 'Lgn. Subligar'},
+        Feet    = {'Eisenschuhs', 'Beetle Leggings +1', 'Bone Leggings +1'}
     },
     Hate_Base       = {
         Head    = 'Horror Head',
         Back    = 'Mercen. Mantle'
     },
 
-    OV_Shield       = {},
     OV_RBase        = {},
 
     WS_Base         = {
@@ -69,30 +70,6 @@ local sets = {
     PCast_Base      = {},
     SIRD_Base       = {
         Waist = 'Heko Obi +1'
-    },
-    
-    -- Astral Rings are 60k/ea. For -50 Total
-    -- Bomb Ring is 50k for +15
-    -- Mythril Ring +1  is 10k for +5
-    -- Shield Earring is 2k for +10 (-10 MP)
-    -- Bloodbead Amulet is 23k for +15
-
-    -- 90 HP
-    HP_Down_C2      = {},
-    HP_Up_C2        = {},
-    -- 190 HP
-    HP_Down_C3      = {},
-    HP_Up_C3        = {},
-    -- 390 HP
-    HP_Down_C4      = {},
-    HP_Up_C4        = {},
-
-    Div_Base        = {
-        Neck = 'Justice Badge'
-    },
-    Enh_Base        = {},
-    Heal_Base       = {
-        Neck = 'Justice Badge'
     },
 };
 profile.Sets = sets;
@@ -112,7 +89,10 @@ sets.OV_RLight       = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RThunder     = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RDark        = gFunc.Combine(sets.OV_RBase, {});
 
-sets.TP_Low_Off      = gFunc.Combine(sets.Idle_Base, {});
+sets.TP_Low_Off      = gFunc.Combine(sets.Idle_Base, {
+    Hands = 'Lgn. Mittens',
+    Legs = 'Republic Subligar'
+});
 sets.TP_Low_PDT      = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Low_MDT      = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Mid_Off      = gFunc.Combine(sets.TP_Low_Off, {});
@@ -125,8 +105,6 @@ sets.TP_High_MDT     = gFunc.Combine(sets.TP_High_Off, {});
 sets.WS_SavageBlade  = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill    = gFunc.Combine(sets.WS_Base, {});
 
-sets.Div_Nuke        = gFunc.Combine(sets.Div_Base, {});
-sets.Div_Flash       = gFunc.Combine(sets.Haste_Base, {});
 sets.Nin_Utsu        = gFunc.Combine(sets.SIRD_Base, {});
 
 --profile.Packer = {};
@@ -135,19 +113,18 @@ local Settings = {
     TP_Mode = 1,
     DT_Mode = 1,
     OV_Mode = 1,
-    Idle_WP = 2,
+    Idle_WP = 4,
     CC_Mode = false,
     ML_Mode = true,
     LockAll = false
 };
 
 local JATable = T{
-    ['Holy Circle'] = 'HolyCircle',
-    ['Shield Bash'] = 'Shield Bash',
-    ['Sentinel'] = 'Sentinel',
-    ['Cover'] = 'Cover',
-    ['Chivalry'] = 'Chivalry',
-    ['Rampart'] = 'Rampart'
+    ['Provoke'] = 'Provoke',
+    ['Berserk'] = 'Berserk',
+    ['Defender'] = 'Defender',
+    ['Warcry'] = 'Warcry',
+    ['Aggressor'] = 'Aggressor'
 };
 
 local TPModeTable = {
@@ -159,7 +136,8 @@ local TPModeTable = {
 local IdleWPTable = {
     [1] = 'Sword',
     [2] = 'Club',
-    [3] = 'Staff'
+    [3] = 'Staff',
+    [4] = 'GAxe'
 };
 
 local DTModeTable = {
@@ -170,20 +148,14 @@ local DTModeTable = {
 
 local OVModeTable = {
     [1]  = 'Off',
-    [2]  = 'Shield',
-    [3]  = 'RFire',
-    [4]  = 'RIce',
-    [5]  = 'RThunder',
-    [6]  = 'RLight',
-    [7]  = 'RDark',
-    [8]  = 'REarth',
-    [9]  = 'RWind',
-    [10] = 'RWater'
-};
-
-local cureCheatTable = T{
-    ['Cure III'] = 'C3',
-    ['Cure IV']  = 'C4'
+    [2]  = 'RFire',
+    [3]  = 'RIce',
+    [4]  = 'RThunder',
+    [5]  = 'RLight',
+    [6]  = 'RDark',
+    [7]  = 'REarth',
+    [8]  = 'RWind',
+    [9] = 'RWater'
 };
 
 local WSTable = T{
@@ -192,36 +164,13 @@ local WSTable = T{
     ['Moonlight'] = 'ClubSkill'
 };
 
-local EleStaffTable = {
-    ['Earth']   = 'Earth Staff',
-    ['Wind']    = 'Wind Staff',
-    ['Water']   = 'Water Staff',
-    ['Fire']    = 'Fire Staff',
-    ['Ice']     = 'Ice Staff',
-    ['Thunder'] = 'Thunder Staff',
-    ['Light']   = 'Light Staff',
-    ['Dark']    = 'Dark Staff'
-};
-
-local EleObiTable = {
-    ['Earth']   = 'Dorin Obi',
-    ['Wind']    = 'Furin Obi',
-    ['Water']   = 'Suirin Obi',
-    ['Fire']    = 'Karin Obi',
-    ['Ice']     = 'Hyorin Obi',
-    ['Thunder'] = 'Rairin Obi',
-    ['Light']   = 'Korin Obi',
-    ['Dark']    = 'Anrin Obi'
-};
-
-
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 14');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 14');
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
@@ -311,16 +260,16 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
-        if (player.MainJobSync < player.MainJobLevel) then
+        if (player.MainJobSync <= player.MainJobLevel) then
             gFunc.EquipSet(sets.TP_Priority);
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
         end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
-        if (not Settings.ML_Mode) then
-            gFunc.Equip('main', "Dark Staff");
-        end
+        --if (not Settings.ML_Mode) then
+        --    gFunc.Equip('main', "Dark Staff");
+        --end
     else
         gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
         if (not Settings.ML_Mode) then
@@ -334,8 +283,8 @@ profile.HandleAbility = function()
 
     if(JATable:contains(action.Name)) then
         gFunc.EquipSet('JA_' .. JATable[action.Name]);
-    else
-        gFunc.EquipSet(sets.Hate_Base);
+    --else
+    --    gFunc.EquipSet(sets.Hate_Base);
     end
 end
 
@@ -344,13 +293,7 @@ end
 
 profile.HandlePrecast = function()
     local action = gData.GetAction();
-    if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-        if(cureCheatTable:contains(action.Name)) then
-            gFunc.EquipSet('HP_Down_' .. cureCheatTable[action.Name]);
-        else
-            gFunc.EquipSet(sets.PCast_Base);
-        end
-    else
+    if(action.Skill == 'Ninjutsu') then
         gFunc.EquipSet(sets.PCast_Base);
     end
 end
@@ -358,41 +301,12 @@ end
 profile.HandleMidcast = function()
     local envVar = gData.GetEnvironment();
     local action = gData.GetAction();
-    if(action.Skill == 'Healing Magic') then
-        if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-            if(cureCheatTable:contains(action.Name)) then
-                gFunc.EquipSet('HP_Up' .. cureCheatTable[action.Name]);
-            else
-                gFunc.EquipSet(sets.Heal_Base);
-            end
-        else
-            gFunc.EquipSet(sets.Heal_Base);
-            if(not ML_Mode) then
-                gFunc.Equip('main', EleStaffTable[action.Element]);
-            end
-        end
-    elseif(action.Skill == 'Divine Magic') then
-        if(action.Name == 'Flash') then
-            gFunc.EquipSet(sets.Div_Flash);
-        elseif string.match(action.Name, 'Banish') or string.match(acton.Name, 'Holy') then
-            gFunc.EquipSet(sets.Div_Nuke);
-        else
-            -- Enlight
-            gFunc.EquipSet(sets.Div_Base);
-        end
-    elseif(action.Skill == 'Enhancing Magic') then
-        gFunc.EquipSet(sets.Enh_Base);
-    elseif(action.Skill == 'Ninjutsu') then
+    if(action.Skill == 'Ninjutsu') then
         gFunc.EquipSet(sets.Nin_Base);
     elseif(action.Skill == 'Blue Magic') then
         gFunc.Message('Friday Finally Arrived, fix your shit');
     else
         gFunc.EquipSet(sets.Haste_Base);
-    end
-    if(envVar.DayElement == action.Element) or (envVar.WeatherElement == action.Element) then
-        -- equip an obi
-        gFunc.EquipSet('waist', EleObiTable[action.Element]);
-        -- Checked after conditionals to enforce
     end
 end
 
