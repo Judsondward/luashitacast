@@ -61,73 +61,84 @@ local sets = {
 
     WS_Base         = {
         Neck    = 'Spike Necklace',
-        Hands   = 'Lgn. Mittens',
+        Hands   = 'Custom M Gloves',
         Ring1   = 'Courage Ring',
         Legs    = 'Republic Subligar'
     },
 
     PCast_Base      = {},
     SIRD_Base       = {
-        Waist = 'Heko Obi +1'
+        Waist   = 'Heko Obi +1'
     },
-    
-    -- Astral Rings are 60k/ea. For -50 Total
-    -- Bomb Ring is 50k for +15
-    -- Mythril Ring +1  is 10k for +5
-    -- Shield Earring is 2k for +10 (-10 MP)
-    -- Bloodbead Amulet is 23k for +15
-
-    -- 90 HP
-    HP_Down_C2      = {},
-    HP_Up_C2        = {},
-    -- 190 HP
-    HP_Down_C3      = {},
-    HP_Up_C3        = {},
-    -- 390 HP
-    HP_Down_C4      = {},
-    HP_Up_C4        = {},
 
     Div_Base        = {
-        Neck = 'Justice Badge'
+        Neck    = 'Justice Badge'
     },
     Enh_Base        = {},
     Heal_Base       = {
-        Neck = 'Justice Badge'
+        Neck    = 'Justice Badge'
     },
 };
 profile.Sets = sets;
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
 
 -- Combine Block
-sets.Idle_Off        = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_PDT        = gFunc.Combine(sets.Idle_Base, {Body='Hume Tunic'});
-sets.Idle_MDT        = gFunc.Combine(sets.Idle_Base, {Legs='Hume Slacks'});
+sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
 
-sets.OV_REarth       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RWind        = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RWater       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RFire        = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RIce         = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RLight       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RThunder     = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RDark        = gFunc.Combine(sets.OV_RBase, {});
+-- 90 HP Delta
+sets.HP_Down_C2     = gFunc.Combine(sets.PCast_Base, {
+    --[[Head    = 'Empress Hairpin',    --[[ -15 HP ]]
+    -- Astral Rings are 60k/ea. For -50 Total
+});
+sets.HP_Up_C2       = gFunc.Combine(sets.SIRD_Base, {
+    --Total = ~73. Can't Use Custom Tunic until 33
+    Head    = 'Horror Head',        --[[ +1 Enmity, No HP]]
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+    Body    = 'Custom Tunic',       --[[ +32 HP ]]
+    Hands   = 'Custom M Gloves',    --[[ +12 HP ]]  --[[ Gigas Bracelets could give another 3 for cheap, but -inv ]]
+    --Ring1   = Mythril Ring = 4, Mythril Ring +1 = 5, Bomb Ring = 15
+    --Ring2   =
+    Back    = 'Mercenary Mantle',   --[[ +1 Enmity, No HP]]
+    --Waist   =
+    --Legs    = N/A
+    Feet    = 'Custom M Boots'      --[[ +4 HP ]]
+});
+-- 190 HP Delta
+sets.HP_Down_C3     = gFunc.Combine(sets.HP_Down_C2, {});
+sets.HP_Up_C3       = gFunc.Combine(sets.HP_Up_C2, {});
+-- 390 HP Delta
+sets.HP_Down_C4     = gFunc.Combine(sets.HP_Down_C3, {});
+sets.HP_Up_C4       = gFunc.Combine(sets.HP_Up_C3, {});
 
-sets.TP_Low_Off      = gFunc.Combine(sets.Idle_Base, {});
-sets.TP_Low_PDT      = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Low_MDT      = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_Off      = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_PDT      = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_Mid_MDT      = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_Off     = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_PDT     = gFunc.Combine(sets.TP_High_Off, {});
-sets.TP_High_MDT     = gFunc.Combine(sets.TP_High_Off, {});
+sets.OV_REarth      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RWind       = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RWater      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RFire       = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RIce        = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RLight      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RThunder    = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RDark       = gFunc.Combine(sets.OV_RBase, {});
 
-sets.WS_SavageBlade  = gFunc.Combine(sets.WS_Base, {});
-sets.WS_ClubSkill    = gFunc.Combine(sets.WS_Base, {});
+sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {});
+sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_High_PDT    = gFunc.Combine(sets.TP_High_Off, {});
+sets.TP_High_MDT    = gFunc.Combine(sets.TP_High_Off, {});
 
-sets.Div_Nuke        = gFunc.Combine(sets.Div_Base, {});
-sets.Div_Flash       = gFunc.Combine(sets.Haste_Base, {});
-sets.Nin_Utsu        = gFunc.Combine(sets.SIRD_Base, {});
+sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
+sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
+
+sets.Div_Nuke       = gFunc.Combine(sets.Div_Base, {});
+sets.Div_Flash      = gFunc.Combine(sets.Haste_Base, {});
+sets.Nin_Utsu       = gFunc.Combine(sets.SIRD_Base, {});
 
 --profile.Packer = {};
 
@@ -182,6 +193,7 @@ local OVModeTable = {
 };
 
 local cureCheatTable = T{
+    ['Cure II']  = 'C2',
     ['Cure III'] = 'C3',
     ['Cure IV']  = 'C4'
 };
@@ -235,6 +247,7 @@ end
 
 profile.OnUnload = function()
     gcinclude.Unload();
+    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyle off');
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
@@ -360,11 +373,7 @@ profile.HandleMidcast = function()
     local action = gData.GetAction();
     if(action.Skill == 'Healing Magic') then
         if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-            if(cureCheatTable:contains(action.Name)) then
-                gFunc.EquipSet('HP_Up' .. cureCheatTable[action.Name]);
-            else
-                gFunc.EquipSet(sets.Heal_Base);
-            end
+            gFunc.EquipSet('HP_Up_' .. cureCheatTable[action.Name]);
         else
             gFunc.EquipSet(sets.Heal_Base);
             if(not ML_Mode) then
@@ -391,7 +400,7 @@ profile.HandleMidcast = function()
     end
     if(envVar.DayElement == action.Element) or (envVar.WeatherElement == action.Element) then
         -- equip an obi
-        gFunc.EquipSet('waist', EleObiTable[action.Element]);
+        gFunc.Equip('Waist', EleObiTable[action.Element]);
         -- Checked after conditionals to enforce
     end
 end

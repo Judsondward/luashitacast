@@ -62,7 +62,7 @@ local sets = {
 
     WS_Base         = {
         Neck    = 'Spike Necklace',
-        Hands   = 'Lgn. Mittens',
+        Hands   = 'Custom M Gloves',
         Ring1   = 'Courage Ring',
         Legs    = 'Republic Subligar'
     },
@@ -184,6 +184,7 @@ end
 
 profile.OnUnload = function()
     gcinclude.Unload();
+    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyle off');
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');

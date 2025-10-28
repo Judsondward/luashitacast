@@ -51,6 +51,24 @@ local sets = {
         Feet    = 'Evk. Pigaches +1'
     },
 
+ --   RPhys ={
+        --Main    = '',
+        --Sub     = '',
+ --       Ammo    = 'Hedgehog Bomb',
+ --       Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+ --       Neck    = 'Smn. Torque',
+ --       Ear1    = 'Beastly Earring',
+ --       Ear2    = 'Magnetic Earring', --Summoning Earring
+ --       Body    = 'Yinyang Robe', --Summoner's Doublet
+ --       Hands   = 'Summoner\'s Brcr.', --Nashira Gages
+ --       Ring1   = 'Tamas Ring',
+ --       Ring2   = 'Evoker\'s Ring',
+ --       Back    = 'Astute Cape',
+ --       Waist   = 'Hierarch Belt',
+ --       Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+ --       Feet    = 'Smn. Pigaches +1'
+ --   },
+
     BP_Base ={
         --Main    = '',
         --Sub     = '',
@@ -68,6 +86,24 @@ local sets = {
         Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
         Feet    = 'Nashira crackows'
     },
+
+ --   Ward ={
+        --Main    = '',
+        --Sub     = '',
+ --       Ammo    = 'Hedgehog Bomb',
+ --       Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+ --       Neck    = 'Smn. Torque',
+ --       Ear1    = 'Beastly Earring',
+ --       Ear2    = 'Magnetic Earring', --Summoning Earring
+ --       Body    = 'Yinyang Robe',
+ --       Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+ --       Ring1   = 'Tamas Ring',
+ --       Ring2   = 'Evoker\'s Ring',
+ --       Back    = 'Astute Cape',
+ --       Waist   = 'Hierarch Belt',
+ --       Legs    = 'Austere Slops', --Penance Slops
+ --       Feet    = 'Nashira crackows'
+ --   },
 
     Healing ={
         Main    = 'Light Staff', --Apollo's Staff
@@ -200,7 +236,9 @@ local sets = {
 
 profile.Sets = sets;
 
-sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {
+    Hands = 'Carbuncle Mitts'
+});
 sets.Idle_Light     = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Earth     = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_Wind      = gFunc.Combine(sets.Idle_Base, {});
@@ -219,7 +257,6 @@ sets.BP_Ward        = gFunc.Combine(sets.BP_Base, {
 sets.BP_SRuby        = gFunc.Combine(sets.BP_Base, {
     Hands   = 'Carbuncle\'s Cuffs'
 });
-
 --profile.Packer = {};
 
 local Settings = {
@@ -251,13 +288,6 @@ profile.HandleCommand = function(args)
         else
             AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
         end
-    elseif(args[1] == 'Salvage') then
-        Settings.Salvage_Mode = not Settings.Salvage_Mode;
-        if(Settings.Salvage_Mode) then
-            gFunc.Message("Salvage Mode is ON");
-        else
-            gFunc.Message("Salvage Mode is OFF");
-        end
 	end
 end
 
@@ -273,13 +303,17 @@ profile.HandleDefault = function()
     else
         -- Idle SMN BS Goes here
         if(pet ~= nil) then 
-            gFunc.EquipSet('Idle_' .. PetElementTable[pet.Name]); 
-            gFunc.Equip('main', EleStaffTable[PetElementTable[pet.Name]])
-            if (envVar.DayElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
+            if (IdleException.contains(Settings.petName)) then
+                gFunc.EquipSet('Idle_' .. Settings.petName);     
+            else
+                gFunc.EquipSet('Idle_' .. PetEleTable[Settings.petName]); 
             end
-            if (envVar.WeatherElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
+            gFunc.Equip('main', EleStaffTable[PetEleTable[Settings.petName]])
+            if (envVar.DayElement == PetEleTable[Settings.petName]) then
+                gFunc.Equip('Body', 'Summoner\'s Dblt.');
+            end
+            if (envVar.WeatherElement == PetEleTable[Settings.petName]) then
+                gFunc.Equip('Head', 'Summoner\'s Horn');
             end
         else
             gFunc.EquipSet(sets.FriendlessHo);
@@ -288,10 +322,10 @@ profile.HandleDefault = function()
 end
 
 profile.HandleAbility = function()
-    local petAction = gData.GetPetAction();
+    local action = gData.GetAction();
 
-    if(petAction ~= nil) and BPTable:contains(petAction.Name) then
-        gFunc.EquipSet('BP_' .. BPTable[petAction.Name]);
+    if(action ~= nil) and BPTable:contains(action.Name) then
+        gFunc.EquipSet('BP_' .. BPTable[action.Name]);
     end
 end
 
@@ -313,6 +347,7 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Healing);
     elseif (action.Skill == 'Summoning') then
         gFunc.EquipSet(sets.MidCast);
+        Settings.petName = action.Name;
     end
 end
 
@@ -326,6 +361,14 @@ profile.HandleWeaponskill = function()
         gFunc.EquipSet(sets.WS_Base);
     end
 end
+
+local Settings = T{
+    petName = 'Bahamut',   -- You wish
+};
+
+local IdleException = T{
+    'Carbuncle'
+};
 
 local EleStaffTable = {
     --[[    
@@ -523,8 +566,8 @@ local BPTable = T{
 	['Chronoshift'] = 'RMag'
 };
 
-local PetElementTable = {
-    ['Carbuncle']   = 'Carbuncle',
+local PetEleTable = T{
+    ['Carbuncle']   = 'Light',
     ['Titan']       = 'Earth',
     ['Garuda']      = 'Wind',
     ['Leviathan']   = 'Water',

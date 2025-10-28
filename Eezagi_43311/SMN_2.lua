@@ -51,6 +51,24 @@ local sets = {
         Feet    = 'Evk. Pigaches +1'
     },
 
+ --   RPhys ={
+        --Main    = '',
+        --Sub     = '',
+ --       Ammo    = 'Hedgehog Bomb',
+ --       Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+ --       Neck    = 'Smn. Torque',
+ --       Ear1    = 'Beastly Earring',
+ --       Ear2    = 'Magnetic Earring', --Summoning Earring
+ --       Body    = 'Yinyang Robe', --Summoner's Doublet
+ --       Hands   = 'Summoner\'s Brcr.', --Nashira Gages
+ --       Ring1   = 'Tamas Ring',
+ --       Ring2   = 'Evoker\'s Ring',
+ --       Back    = 'Astute Cape',
+ --       Waist   = 'Hierarch Belt',
+ --       Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
+ --       Feet    = 'Smn. Pigaches +1'
+ --   },
+
     BP_Base ={
         --Main    = '',
         --Sub     = '',
@@ -68,6 +86,24 @@ local sets = {
         Legs    = 'Evoker\'s Spats', --Evoker's Spats +1
         Feet    = 'Nashira crackows'
     },
+
+ --   Ward ={
+        --Main    = '',
+        --Sub     = '',
+ --       Ammo    = 'Hedgehog Bomb',
+ --       Head    = 'Evoker\'s Horn', --Evoker's Horn +1
+ --       Neck    = 'Smn. Torque',
+ --       Ear1    = 'Beastly Earring',
+ --       Ear2    = 'Magnetic Earring', --Summoning Earring
+ --       Body    = 'Yinyang Robe',
+ --       Hands   = 'Summoner\'s Brcr.', --Summoner's Brcr. +1
+ --       Ring1   = 'Tamas Ring',
+ --       Ring2   = 'Evoker\'s Ring',
+ --       Back    = 'Astute Cape',
+ --       Waist   = 'Hierarch Belt',
+ --       Legs    = 'Austere Slops', --Penance Slops
+ --       Feet    = 'Nashira crackows'
+ --   },
 
     Healing ={
         Main    = 'Light Staff', --Apollo's Staff
@@ -200,15 +236,8 @@ local sets = {
 
 profile.Sets = sets;
 
-sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Light     = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Earth     = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Wind      = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Water     = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Fire      = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Ice       = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Thunder   = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_Dark      = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {Hands = 'Carbuncle Mitts'});
+sets.Idle_Garuda     = gFunc.Combine(sets.Idle_Base, {});
 sets.BP_RPhys       = gFunc.Combine(sets.BP_Base, {
     Feet    = 'Smn. Pigaches +1'
 });
@@ -219,11 +248,233 @@ sets.BP_Ward        = gFunc.Combine(sets.BP_Base, {
 sets.BP_SRuby        = gFunc.Combine(sets.BP_Base, {
     Hands   = 'Carbuncle\'s Cuffs'
 });
-
 --profile.Packer = {};
 
 local Settings = {
-    LockAll = false
+    LockAll = false,
+    petName = 'Bahamut',   -- You wish
+    petEleVar = 'Light'
+};
+
+local EleStaffTable = {
+    --[[
+    To Update. Change only the right side of the equal's sign.
+    a \ character needs to go before any apostraphe.
+
+    i.e.: ['Ice'] = 'Aquilo\'s Staff',
+    ]]
+    ['Earth']   = 'Earth Staff',
+    ['Wind']    = 'Wind Staff',
+    ['Water']   = 'Water Staff',
+    ['Fire']    = 'Fire Staff',
+    ['Ice']     = 'Ice Staff',
+    ['Thunder'] = 'Thunder Staff',
+    ['Light']   = 'Light Staff',
+    ['Dark']    = 'Dark Staff'
+};
+
+local WSTable = T{
+    ['Heavy Swing'] = 'WS_Base',
+    ['Rock Crusher'] = 'WS_Base',
+    ['Earth Crusher'] = 'WS_Base',
+    ['Starburst'] = 'WS_Base',
+    ['Sunburst'] = 'WS_Base',
+    ['Shell Crusher'] = 'WS_Base',
+    ['Full Swing'] = 'WS_Base',
+    ['Spirit Taker'] = 'WS_Base',
+    ['Retribution'] = 'WS_Base',
+    ['Cataclysm'] = 'WS_Base',
+    ['Shattersoul'] = 'WS_Base',
+    ['Gate of Tartarus'] = 'WS_Base',
+    ['Myrkr'] = 'WS_Base',
+    ['Vidohunir'] = 'WS_Base',
+    ['Garland of Bliss'] = 'WS_Base',
+    ['Omniscience'] = 'WS_Base',
+    ['Tartarus Torpor'] = 'WS_Base'
+};
+
+local BPTable = T{
+    --Carbuncle M Rage
+    ['Searing Light'] = 'RMag',
+    ['Meteorite'] = 'RMag',
+    ['Holy Mist'] = 'RMag',
+    --Carbuncle P Rage
+    ['Poison Nails'] = 'RPhys',
+    --Carbuncle Ward
+    ['Healing Ruby'] = 'Ward',
+    ['Shining Ruby'] = 'SRuby',
+    ['Glittering Ruby'] = 'Ward',
+    ['Healing Ruby II'] = 'Ward',
+    ['Soothing Ruby'] = 'Ward',
+    ['Pacifying Ruby'] = 'Ward',
+    --Fenrir M Rage
+    ['Howling Moon'] = 'RMag',
+    ['Lunar Bay'] = 'RMag',
+    --Fenrir P Rage
+    ['Moonlit Charge'] = 'RPhys',
+    ['Crescent Fang'] = 'RPhys',
+    ['Eclipse Bite'] = 'RPhys',
+    ['Impact'] = 'RPhys',
+    --Fenrir Ward
+    ['Lunar Cry'] = 'Ward',
+    ['Lunar Roar'] = 'Ward',
+    ['Ecliptic Growl'] = 'Ward',
+    ['Ecliptic Howl'] = 'Ward',
+    ['HeavenWard Howl'] = 'Ward',
+    --Ifrit M Rage
+    ['Inferno'] = 'RMag',
+    ['Fire II'] = 'RMag',
+    ['Fire IV'] = 'RMag',
+    ['Meteor Strike'] = 'RMag',
+    ['Conflag Strike'] = 'RMag',
+    --Ifrit P Rage
+    ['Punch'] = 'RPhys',
+    ['Burning Strike'] = 'RPhys',
+    ['Double Punch'] = 'RPhys',
+    ['Flaming Crush'] = 'RPhys',
+    --Ifrit Ward
+    ['Crimson Howl'] = 'Ward',
+    ['Inferno Howl'] = 'Ward',
+    --Titan M Rage
+    ['Earthen Fury'] = 'RMag',
+    ['Stone II'] = 'RMag',
+    ['Stone IV'] = 'RMag',
+    ['Geocrush'] = 'RMag',
+    --Titan P Rage
+    ['Rock Throw'] = 'RPhys',
+    ['Rock Buster'] = 'RPhys',
+    ['Megalith Throw'] = 'RPhys',
+    ['Mountain Buster'] = 'RPhys',
+    ['Crag Throw'] = 'RPhys',
+    --Titan Ward
+    ['Earthen Ward'] = 'Ward',
+    ['Earthen Armor'] = 'Ward',
+    --Leviathan M Rage
+    ['Tidal Wave'] = 'RMag',
+    ['Water II'] = 'RMag',
+    ['Water IV'] = 'RMag',
+    ['Grand Fall'] = 'RMag',
+    --Leviathan P Rage
+    ['Barracuda Dive'] = 'RPhys',
+    ['Tail Whip'] = 'RPhys',
+    ['Spinning Dive'] = 'RPhys',
+    --Leviathan Ward
+    ['Slowga'] = 'Ward',
+    ['Spring Water'] = 'Ward',
+    ['Tidal Roar'] = 'Ward',
+    ['Soothing Current'] = 'Ward',
+    --Garuda M Rage
+    ['Aerial Blast'] = 'RMag',
+    ['Aero II'] = 'RMag',
+    ['Aero IV'] = 'RMag',
+    ['Wind Blade'] = 'RMag',
+    --Garuda P Rage
+    ['Claw'] = 'RPhys',
+    ['Predator Claws'] = 'RPhys',
+    --Garuda Ward
+    ['Aerial Armor'] = 'Ward',
+    ['Whispering Wind'] = 'Ward',
+    ['Hastega'] = 'Ward',
+    ['Fleet Wind'] = 'Ward',
+    ['Hastega II'] = 'Ward',
+    --Shiva M Rage
+    ['Diamond Dust'] = 'RMag',
+    ['Blizzard II'] = 'RMag',
+    ['Blizzard IV'] = 'RMag',
+    ['Heavenly Strike'] = 'RMag',
+    --Shiva P Rage
+    ['Axe Kick'] = 'RPhys',
+    ['Double Slap'] = 'RPhys',
+    ['Rush'] = 'RPhys',
+    --Shiva Ward
+    ['Frost Armor'] = 'Ward',
+    ['Sleepga'] = 'Ward',
+    ['Diamond Storm'] = 'Ward',
+    ['Crystal Blessing'] = 'Ward',
+    --Ramuh M Rage
+    ['Judgment Bolt'] = 'RMag',
+    ['Thunder II'] = 'RMag',
+    ['Thunderspark'] = 'RMag',
+    ['Thunder IV'] = 'RMag',
+    ['Thunderstorm'] = 'RMag',
+    --Ramuh P Rage
+    ['Shock Strike'] = 'RPhys',
+    ['Chaotic Strike'] = 'RPhys',
+    ['Volt Strike'] = 'RPhys',
+    --Ramuh Ward
+    ['Rolling Thunder'] = 'Ward',
+    ['Lightning Armor'] = 'Ward',
+    ['Shock Squall'] = 'Ward',
+    --Diabolos M Rage
+    ['Ruinous Omen'] = 'RMag',
+    ['Nether Blast'] = 'RMag',
+    ['Night Terror'] = 'RMag',
+    --Diabolos P Rage
+    ['Camisado'] = 'RPhys',
+    ['Blindside'] = 'RPhys',
+    --Diabolos Ward: Somn. is not a mistake.
+    ['Somnolence'] = 'RMag',
+    ['Nightmare'] = 'Ward',
+    ['Ultimate Terror'] = 'Ward',
+    ['Noctoshield'] = 'Ward',
+    ['Dream Shroud'] = 'Ward',
+    ['Pavor Nocturnus'] = 'Ward',
+    --Cait Sith M Rage
+    ['Level ? Holy'] = 'RMag',
+    --Cait Sith P Rage
+    ['Regal Scratch'] = 'RPhys',
+    --Cait Sith Ward
+    ['Altana\'s Favor'] = 'Ward',
+    ['Raise II'] = 'Ward',
+    ['Mewing Lullaby'] = 'Ward',
+    ['Reraise II'] = 'Ward',
+    ['Eerie Eye'] = 'Ward',
+    --Siren M Rage
+    ['Clarsach Call'] = 'RMag',
+    ['Sonic Buffet'] = 'RMag',
+    ['Tornado II'] = 'RMag',
+    --Siren P Rage
+    ['Welt'] = 'RPhys',
+    ['Roundhouse'] = 'RPhys',
+    ['Hysteric Assault'] = 'RPhys',
+    --Siren Ward
+    ['Lunatic Voice'] = 'Ward',
+    ['Katabatic Blades'] = 'Ward',
+    ['Chinook'] = 'Ward',
+    ['Bitter Elegy'] = 'Ward',
+    ['Wind\'s Blessing'] = 'Ward',
+    --Odin M Rage
+    ['Zantetsuken'] = 'RMag',
+    --Alexander Ward
+    ['Perfect Defense'] = 'Ward',
+    --Atomos Type Null
+    ['Deconstruction'] = 'RMag',
+    ['Chronoshift'] = 'RMag'
+};
+
+local PetEleTable = T{
+    ['Carbuncle']   = 'Light',
+    ['Titan']       = 'Earth',
+    ['Garuda']      = 'Wind',
+    ['Leviathan']   = 'Water',
+    ['Ifrit']       = 'Fire',
+    ['Shiva']       = 'Ice',
+    ['Ramuh']       = 'Thunder',
+    ['Fenrir']      = 'Dark',
+    ['Diabolos']    = 'Dark',
+    ['LightSpirit'] = 'Light',
+    ['EarthSpirit'] = 'Earth',
+    ['WindSpirit']  = 'Wind',
+    ['WaterSpirit'] = 'Water',
+    ['FireSpirit']  = 'Fire',
+    ['IceSpirit']   = 'Ice',
+    ['ThunderSpirit'] = 'Thunder',
+    ['DarkSpirit']  = 'Dark',
+    ['Cait Sith']   = 'Light',
+    ['Siren']      	= 'Wind',
+    ['Odin']  		= 'Dark',
+    ['Atomos']  	= 'Dark',
+    ['Alexander']   = 'Light'
 };
 
 gcinclude = gFunc.LoadFile('common/gcinclude.lua');
@@ -251,13 +502,6 @@ profile.HandleCommand = function(args)
         else
             AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
         end
-    elseif(args[1] == 'Salvage') then
-        Settings.Salvage_Mode = not Settings.Salvage_Mode;
-        if(Settings.Salvage_Mode) then
-            gFunc.Message("Salvage Mode is ON");
-        else
-            gFunc.Message("Salvage Mode is OFF");
-        end
 	end
 end
 
@@ -273,13 +517,18 @@ profile.HandleDefault = function()
     else
         -- Idle SMN BS Goes here
         if(pet ~= nil) then 
-            gFunc.EquipSet('Idle_' .. PetElementTable[pet.Name]); 
-            gFunc.Equip('main', EleStaffTable[PetElementTable[pet.Name]])
-            if (envVar.DayElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
+            --Just use an Or when Luna asks about this later.
+            if (Settings.petName == 'Carbuncle') then
+                gFunc.EquipSet('Idle_' .. Settings.petName);     
+            else
+                gFunc.EquipSet(sets.Idle_Base); 
             end
-            if (envVar.WeatherElement == PetElementTable[pet.Name]) then
-                -- gFunc.Equip('slot', 'Item Name');
+            gFunc.Equip('main', EleStaffTable[Settings.petEleVar]);
+            if (envVar.DayElement == PetEleVar) then
+                gFunc.Equip('Body', 'Summoner\'s Dblt.');
+            end
+            if (envVar.WeatherElement == PetEleVar) then
+                gFunc.Equip('Head', 'Summoner\'s Horn');
             end
         else
             gFunc.EquipSet(sets.FriendlessHo);
@@ -288,10 +537,10 @@ profile.HandleDefault = function()
 end
 
 profile.HandleAbility = function()
-    local petAction = gData.GetPetAction();
+    local action = gData.GetAction();
 
-    if(petAction ~= nil) and BPTable:contains(petAction.Name) then
-        gFunc.EquipSet('BP_' .. BPTable[petAction.Name]);
+    if(action ~= nil) and BPTable:contains(action.Name) then
+        gFunc.EquipSet('BP_' .. BPTable[action.Name]);
     end
 end
 
@@ -313,6 +562,8 @@ profile.HandleMidcast = function()
         gFunc.EquipSet(sets.Healing);
     elseif (action.Skill == 'Summoning') then
         gFunc.EquipSet(sets.MidCast);
+        Settings.petName = action.Name;
+        Settings.petEleVar = PetEleTable[Settings.petName];
     end
 end
 
@@ -326,226 +577,5 @@ profile.HandleWeaponskill = function()
         gFunc.EquipSet(sets.WS_Base);
     end
 end
-
-local EleStaffTable = {
-    --[[    
-    To Update. Change only the right side of the equal's sign.
-    a \ character needs to go before any apostraphe.
-
-    i.e.: ['Ice'] = 'Aquilo\'s Staff',  
-    ]]
-    ['Earth']   = 'Earth Staff',
-    ['Wind']    = 'Wind Staff',
-    ['Water']   = 'Water Staff',
-    ['Fire']    = 'Fire Staff',
-    ['Ice']     = 'Ice Staff',
-    ['Thunder'] = 'Thunder Staff',
-    ['Light']   = 'Light Staff',
-    ['Dark']    = 'Dark Staff'
-};
-
-local WSTable = T{
-    ['Heavy Swing'] = 'WS_Base',
-    ['Rock Crusher'] = 'WS_Base',
-	['Earth Crusher'] = 'WS_Base',
-    ['Starburst'] = 'WS_Base',
-	['Sunburst'] = 'WS_Base',
-    ['Shell Crusher'] = 'WS_Base',
-	['Full Swing'] = 'WS_Base',
-	['Spirit Taker'] = 'WS_Base',
-	['Retribution'] = 'WS_Base',
-	['Cataclysm'] = 'WS_Base',
-	['Shattersoul'] = 'WS_Base',
-    ['Gate of Tartarus'] = 'WS_Base',
-	['Myrkr'] = 'WS_Base',
-	['Vidohunir'] = 'WS_Base',
-	['Garland of Bliss'] = 'WS_Base',
-	['Omniscience'] = 'WS_Base',
-	['Tartarus Torpor'] = 'WS_Base'
-};
-
-local BPTable = T{
---Carbuncle M Rage
-    ['Searing Light'] = 'RMag',
-    ['Meteorite'] = 'RMag',
-	['Holy Mist'] = 'RMag',
---Carbuncle P Rage
-    ['Poison Nails'] = 'RPhys',
---Carbuncle Ward
-	['Healing Ruby'] = 'Ward',
-    ['Shining Ruby'] = 'SRuby',
-	['Glittering Ruby'] = 'Ward',
-    ['Healing Ruby II'] = 'Ward',
-	['Soothing Ruby'] = 'Ward',
-    ['Pacifying Ruby'] = 'Ward',
---Fenrir M Rage
-	['Howling Moon'] = 'RMag',
-    ['Lunar Bay'] = 'RMag',
---Fenrir P Rage
-	['Moonlit Charge'] = 'RPhys',
-    ['Crescent Fang'] = 'RPhys',
-	['Eclipse Bite'] = 'RPhys',
-    ['Impact'] = 'RPhys',
---Fenrir Ward
-	['Lunar Cry'] = 'Ward',
-    ['Lunar Roar'] = 'Ward',
-	['Ecliptic Growl'] = 'Ward',
-    ['Ecliptic Howl'] = 'Ward',
-	['HeavenWard Howl'] = 'Ward',
---Ifrit M Rage
-    ['Inferno'] = 'RMag',
-	['Fire II'] = 'RMag',
-    ['Fire IV'] = 'RMag',
-	['Meteor Strike'] = 'RMag',
-    ['Conflag Strike'] = 'RMag',
---Ifrit P Rage 
-	['Punch'] = 'RPhys',
-    ['Burning Strike'] = 'RPhys',
-	['Double Punch'] = 'RPhys',
-    ['Flaming Crush'] = 'RPhys',
---Ifrit Ward
-	['Crimson Howl'] = 'Ward',
-    ['Inferno Howl'] = 'Ward',
---Titan M Rage
-	['Earthen Fury'] = 'RMag',
-    ['Stone II'] = 'RMag',
-	['Stone IV'] = 'RMag',
-    ['Geocrush'] = 'RMag',
---Titan P Rage
-	['Rock Throw'] = 'RPhys',
-    ['Rock Buster'] = 'RPhys',
-	['Megalith Throw'] = 'RPhys',
-    ['Mountain Buster'] = 'RPhys',
-	['Crag Throw'] = 'RPhys',
---Titan Ward
-    ['Earthen Ward'] = 'Ward',
-	['Earthen Armor'] = 'Ward',
---Leviathan M Rage
-    ['Tidal Wave'] = 'RMag',
-	['Water II'] = 'RMag',
-    ['Water IV'] = 'RMag',
-	['Grand Fall'] = 'RMag',
---Leviathan P Rage
-    ['Barracuda Dive'] = 'RPhys',
-	['Tail Whip'] = 'RPhys',
-	['Spinning Dive'] = 'RPhys',
---Leviathan Ward
-    ['Slowga'] = 'Ward',
-	['Spring Water'] = 'Ward',
-    ['Tidal Roar'] = 'Ward',
-	['Soothing Current'] = 'Ward',
---Garuda M Rage
-    ['Aerial Blast'] = 'RMag',
-    ['Aero II'] = 'RMag',
-	['Aero IV'] = 'RMag',
-    ['Wind Blade'] = 'RMag',
---Garuda P Rage
-	['Claw'] = 'RPhys',
-    ['Predator Claws'] = 'RPhys',
---Garuda Ward
-	['Aerial Armor'] = 'Ward',
-    ['Whispering Wind'] = 'Ward',
-	['Hastega'] = 'Ward',
-	['Fleet Wind'] = 'Ward',
-    ['Hastega II'] = 'Ward',
---Shiva M Rage
-	['Diamond Dust'] = 'RMag',
-    ['Blizzard II'] = 'RMag',
-	['Blizzard IV'] = 'RMag',
-    ['Heavenly Strike'] = 'RMag',
---Shiva P Rage
-    ['Axe Kick'] = 'RPhys',
-	['Double Slap'] = 'RPhys',
-    ['Rush'] = 'RPhys',
---Shiva Ward
-	['Frost Armor'] = 'Ward',
-    ['Sleepga'] = 'Ward',
-	['Diamond Storm'] = 'Ward',
-    ['Crystal Blessing'] = 'Ward',
---Ramuh M Rage
-	['Judgment Bolt'] = 'RMag',
-	['Thunder II'] = 'RMag',
-    ['Thunderspark'] = 'RMag',
-	['Thunder IV'] = 'RMag',
-    ['Thunderstorm'] = 'RMag',
---Ramuh P Rage
-	['Shock Strike'] = 'RPhys',
-    ['Chaotic Strike'] = 'RPhys',
-    ['Volt Strike'] = 'RPhys',
---Ramuh Ward
-	['Rolling Thunder'] = 'Ward',
-    ['Lightning Armor'] = 'Ward',
-	['Shock Squall'] = 'Ward',
---Diabolos M Rage
-    ['Ruinous Omen'] = 'RMag',
-	['Nether Blast'] = 'RMag',
-    ['Night Terror'] = 'RMag',
---Diabolos P Rage
-	['Camisado'] = 'RPhys',
-	['Blindside'] = 'RPhys',
---Diabolos Ward: Somn. is not a mistake.
-    ['Somnolence'] = 'RMag',
-	['Nightmare'] = 'Ward',
-    ['Ultimate Terror'] = 'Ward',
-	['Noctoshield'] = 'Ward',
-    ['Dream Shroud'] = 'Ward',
-    ['Pavor Nocturnus'] = 'Ward',
---Cait Sith M Rage
-	['Level ? Holy'] = 'RMag',
---Cait Sith P Rage
-    ['Regal Scratch'] = 'RPhys',
---Cait Sith Ward
-	['Altana\'s Favor'] = 'Ward',
-    ['Raise II'] = 'Ward',
-	['Mewing Lullaby'] = 'Ward',
-    ['Reraise II'] = 'Ward',
-	['Eerie Eye'] = 'Ward',
---Siren M Rage
-	['Clarsach Call'] = 'RMag',
-    ['Sonic Buffet'] = 'RMag',
-	['Tornado II'] = 'RMag',
---Siren P Rage
-    ['Welt'] = 'RPhys',
-	['Roundhouse'] = 'RPhys',
-    ['Hysteric Assault'] = 'RPhys',
---Siren Ward
-    ['Lunatic Voice'] = 'Ward',
-	['Katabatic Blades'] = 'Ward',
-    ['Chinook'] = 'Ward',
-	['Bitter Elegy'] = 'Ward',
-    ['Wind\'s Blessing'] = 'Ward',
---Odin M Rage
-	['Zantetsuken'] = 'RMag',
---Alexander Ward
-    ['Perfect Defense'] = 'Ward',
---Atomos Type Null
-	['Deconstruction'] = 'RMag',
-	['Chronoshift'] = 'RMag'
-};
-
-local PetElementTable = {
-    ['Carbuncle']   = 'Carbuncle',
-    ['Titan']       = 'Earth',
-    ['Garuda']      = 'Wind',
-    ['Leviathan']   = 'Water',
-    ['Ifrit']       = 'Fire',
-    ['Shiva']       = 'Ice',
-    ['Ramuh']       = 'Thunder',
-    ['Fenrir']      = 'Dark',
-    ['Diabolos']    = 'Dark',
-	['LightSpirit'] = 'Light',
-    ['EarthSpirit'] = 'Earth',
-    ['WindSpirit']  = 'Wind',
-    ['WaterSpirit'] = 'Water',
-    ['FireSpirit']  = 'Fire',
-    ['IceSpirit']   = 'Ice',
-    ['ThunderSpirit'] = 'Thunder',
-    ['DarkSpirit']  = 'Dark',
-	['Cait Sith']   = 'Light',
-	['Siren']      	= 'Wind',
-	['Odin']  		= 'Dark',
-	['Atomos']  	= 'Dark',
-	['Alexander']   = 'Light'
-};
 
 return profile;
