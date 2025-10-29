@@ -170,30 +170,30 @@ profile.OnLoad = function()
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 1');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 1');
+    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F10 /lac fwd DT_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind ^c /lac fwd CC_Mode');
+    AshitaCore:GetChatManager():QueueCommand(2, '/alias /wep /lac fwd Idle_WP');
+    AshitaCore:GetChatManager():QueueCommand(2, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind !l /lac fwd LockAll');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind F7 /lac fwd OV_Off');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind F8 /lac fwd OV_Mode');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind F9 /lac fwd TP_Mode');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind F10 /lac fwd DT_Mode');
+    AshitaCore:GetChatManager():QueueCommand(2, '/bind ^c /lac fwd CC_Mode');
 end
 
 profile.OnUnload = function()
     gcinclude.Unload();
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyle off');
+    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle off');
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind !l');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F10');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind ^c');
+    AshitaCore:GetChatManager():QueueCommand(2, '/alias delete /wep');
+    AshitaCore:GetChatManager():QueueCommand(2, '/alias delete /mage');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind !l');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F7');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F8');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F9');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F10');
+    AshitaCore:GetChatManager():QueueCommand(2, '/unbind ^c');
 end
 
 profile.HandleCommand = function(args)
