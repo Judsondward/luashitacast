@@ -524,7 +524,7 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.Idle_Base); 
             end
             gFunc.Equip('main', EleStaffTable[Settings.petEleVar]);
-            if (envVar.DayElement == PetEleVar) then
+            if (envVar.DayElement == PetEleVar) and (Settings.petName ~= 'Carubuncle') then
                 gFunc.Equip('Body', 'Summoner\'s Dblt.');
             end
             if (envVar.WeatherElement == PetEleVar) then
