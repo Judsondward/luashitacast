@@ -96,7 +96,7 @@ sets.HP_Up_C2       = gFunc.Combine(sets.SIRD_Base, {
     --Total = ~73. Can't Use Custom Tunic until 33
     Head    = 'Horror Head',        --[[ +1 Enmity, No HP]]
     Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
-    Ear1    = 'Shield Earring',     --[[ +10 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
     Ear2    = 'Shield Earring',     --[[ +10 HP ]]
     Body    = 'Custom Tunic',       --[[ +32 HP ]]
     Hands   = 'Custom M Gloves',    --[[ +12 HP ]]  --[[ Gigas Bracelets could give another 3 for cheap, but -inv ]]
@@ -340,6 +340,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     end
+    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
 end
 
 profile.HandleAbility = function()

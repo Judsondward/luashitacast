@@ -332,15 +332,16 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 12');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    --AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 12');
 	AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd LockAll');
 end
 
 profile.OnUnload = function()
     gcinclude.Unload();
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyle off');
 end
 
 profile.HandleCommand = function(args)
@@ -379,7 +380,7 @@ profile.HandleDefault = function()
                 gFunc.EquipSet(sets.Idle_Base); 
             end
             gFunc.Equip('main', EleStaffTable[PetEleTable[Settings.petName]])
-            if (envVar.DayElement == PetEleTable[Settings.PetName]) then
+            if (envVar.DayElement == PetEleVar) then
                 gFunc.Equip('Body', 'Summoner\'s Dblt.');
             end
             if (envVar.WeatherElement == PetEleTable[Settings.petName]) then
@@ -392,7 +393,6 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.FriendlessHo);
         end
     end
-    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
 end
 
 profile.HandleAbility = function()
@@ -405,7 +405,7 @@ profile.HandleAbility = function()
             gFunc.EquipSet(sets.BP_Ward);
         end
     elseif(action.Type == 'Blood Pact: Rage') then
-        gFunc.EquipSet(sets.BP_RPhys);
+        gFunc.EquipSet(sets.BP_Rage);
     end
 end
 

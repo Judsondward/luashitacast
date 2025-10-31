@@ -277,6 +277,7 @@ profile.HandleDefault = function()
             gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     end
+    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
 end
 
 profile.HandleAbility = function()

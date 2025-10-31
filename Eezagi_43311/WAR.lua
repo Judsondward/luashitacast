@@ -37,6 +37,13 @@ local sets = {
     },
     Rest_Base       = {},
 
+    Fish            = {
+        Body = 'Fsh. Tunica',
+        Hands = 'Fsh. Gloves',
+        Legs = 'Fisherman\'s Hose',
+        Feet = 'Fisherman\'s Boots'
+    },
+
     Haste_Base      = {},
 
     TP_Priority     = {
@@ -73,12 +80,15 @@ local sets = {
     },
 };
 profile.Sets = sets;
-gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
+gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
 -- Combine Block
 sets.Idle_Off        = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_PDT        = gFunc.Combine(sets.Idle_Base, {Body='Hume Tunic'});
-sets.Idle_MDT        = gFunc.Combine(sets.Idle_Base, {Legs='Hume Slacks'});
+sets.Idle_PDT        = gFunc.Combine(sets.Idle_Base, {
+        Hands   = 'Eisenhentzes',
+        Legs    = 'Eisendiechlings',
+});
+sets.Idle_MDT        = gFunc.Combine(sets.Idle_Base, {});
 
 sets.OV_REarth       = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RWind        = gFunc.Combine(sets.OV_RBase, {});
@@ -93,7 +103,10 @@ sets.TP_Low_Off      = gFunc.Combine(sets.Idle_Base, {
     Hands = 'Lgn. Mittens',
     Legs = 'Republic Subligar'
 });
-sets.TP_Low_PDT      = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Low_PDT      = gFunc.Combine(sets.TP_Low_Off, {
+        Hands   = 'Eisenhentzes',
+        Legs    = 'Eisendiechlings',
+});
 sets.TP_Low_MDT      = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Mid_Off      = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Mid_PDT      = gFunc.Combine(sets.TP_Mid_Off, {});
@@ -116,7 +129,8 @@ local Settings = {
     Idle_WP = 4,
     CC_Mode = false,
     ML_Mode = true,
-    LockAll = false
+    LockAll = false,
+    Fish = false
 };
 
 local JATable = T{
@@ -168,48 +182,50 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 1');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyleset 1');
 
-    AshitaCore:GetChatManager():QueueCommand(2, '/alias /wep /lac fwd Idle_WP');
-    AshitaCore:GetChatManager():QueueCommand(2, '/alias /mage /lac fwd ML_Mode');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind !l /lac fwd LockAll');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind F7 /lac fwd OV_Off');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind F8 /lac fwd OV_Mode');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind F9 /lac fwd TP_Mode');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind F10 /lac fwd DT_Mode');
-    AshitaCore:GetChatManager():QueueCommand(2, '/bind ^c /lac fwd CC_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /fshmode /lac fwd Fish');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F10 /lac fwd DT_Mode');
+
+    AshitaCore:GetChatManager():QueueCommand(100, '/macro book 1');
+    AshitaCore:GetChatManager():QueueCommand(100, '/macro set 1');
+    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 1');
 end
 
 profile.OnUnload = function()
     gcinclude.Unload();
-    AshitaCore:GetChatManager():QueueCommand(1, '/lockstyle off');
 
-    AshitaCore:GetChatManager():QueueCommand(2, '/alias delete /wep');
-    AshitaCore:GetChatManager():QueueCommand(2, '/alias delete /mage');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind !l');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F7');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F8');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F9');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind F10');
-    AshitaCore:GetChatManager():QueueCommand(2, '/unbind ^c');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /fshmode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind !l');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F10');
+
+    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyle off');
 end
 
 profile.HandleCommand = function(args)
-    if(args[1] == 'CC_Mode') then
-        Settings.CC_Mode = not Settings.CC_Mode;
-        if(Settings.CC_Mode) then
-            gFunc.Message("Cure Cheat Mode is ON");
-        else
-            gFunc.Message("Cure Cheat Mode is OFF");
-        end
-    elseif(args[1] == 'LockAll') then
+    if(args[1] == 'LockAll') then
         Settings.LockAll = not Settings.LockAll;
         if(Settings.LockAll) then
             AshitaCore:GetChatManager():QueueCommand(-1, '/lac disable');
         else
             AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        end
+    elseif(args[1] == 'Fish') then
+        Settings.Fish = not Settings.Fish;
+        if(Settings.Fish) then
+            gFunc.Message("Fishing");
+        else
+            gFunc.Message("Not Fishing");
         end
     elseif(args[1] == 'ML_Mode') then
         Settings.ML_Mode = not Settings.ML_Mode;
@@ -239,7 +255,6 @@ profile.HandleCommand = function(args)
     elseif (args[1] == 'OV_Mode') then
         Settings.OV_Mode = Settings.OV_Mode +1;
         if (Settings.OV_Mode > 1) and (Settings.OV_Mode <= #OVModeTable) then
-            --AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
             gFunc.ForceEquipSet('OV_' .. OVModeTable[Settings.OV_Mode]);
             AshitaCore:GetChatManager():QueueCommand(2, '/lac disable');
             gFunc.Message('Gear Locked! Override Mode: ' .. OVModeTable[Settings.OV_Mode]);
@@ -260,7 +275,9 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
-    if (player.Status == 'Engaged') then
+    if (Settings.Fish) then
+        gFunc.EquipSet(sets.Fish);
+    elseif (player.Status == 'Engaged') then
         if (player.MainJobSync < player.MainJobLevel) then
             gFunc.EquipSet(sets.TP_Priority);
         else
@@ -268,15 +285,13 @@ profile.HandleDefault = function()
         end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
-        --if (not Settings.ML_Mode) then
-        --    gFunc.Equip('main', "Dark Staff");
-        --end
     else
         gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
         if (not Settings.ML_Mode) then
             gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     end
+    gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
 end
 
 profile.HandleAbility = function()
@@ -284,8 +299,6 @@ profile.HandleAbility = function()
 
     if(JATable:contains(action.Name)) then
         gFunc.EquipSet('JA_' .. JATable[action.Name]);
-    --else
-    --    gFunc.EquipSet(sets.Hate_Base);
     end
 end
 
