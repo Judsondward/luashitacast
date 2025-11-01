@@ -109,11 +109,10 @@ local WeakElementTable = {
     ['Dark'] = 'Light'
 }
 
-function gcinclude
-    .EquipObi(action)
+function gcinclude.EquipObi(action)
     if (ObiCheck(action)) then
-        local obi = EleObiTable[action.Element]
-        local obiOwned = EleObiOwnedTable[action.Element]
+        local obi = NukeObiTable[action.Element]
+        local obiOwned = NukeObiOwnedTable[action.Element]
         if (obiOwned) then
             gFunc.Equip('Waist', obi)
         end
@@ -131,7 +130,6 @@ function ObiCheck(action)
 
     return environment.DayElement == element and environment.WeatherElement ~= weakElement
 end
-
 --[[ Auto Lock Equipment Logic ]]
 
 local LockableEquipment = {

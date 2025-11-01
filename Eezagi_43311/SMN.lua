@@ -1,15 +1,3 @@
---[[
-    Pets that need their own special sets. 
-
-    sets.Idle_Carbuncle = gFunc.Combine(Idle_Base, {});
-
-    local SpecialIdleTable = T{ Carbuncle, etc.}
-
-    if SpecialIdleTable:ontains(pet.Name) then
-
-    else
-        the shit that's arleady there
-]]
 
 local profile = {};
 
@@ -239,7 +227,7 @@ profile.Sets = sets;
 sets.Idle_Carbuncle = gFunc.Combine(sets.Idle_Base, {
     Hands = 'Carbuncle Mitts'
 });
---sets.Idle_Gardua     = gFunc.Combine(sets.Idle_Base, {Head = 'Karura Hachigane'});
+--sets.Idle_Garuda     = gFunc.Combine(sets.Idle_Base, {Head = 'Karura Hachigane'});
 sets.BP_RPhys       = gFunc.Combine(sets.BP_Base, {
     Feet    = 'Smn. Pigaches +1'
 });
@@ -301,31 +289,6 @@ local WSTable = T{
     ['Tartarus Torpor'] = 'WS_Base'
 };
 
-local PetEleTable = T{
-    ['Carbuncle']   = 'Light',
-    ['Titan']       = 'Earth',
-    ['Garuda']      = 'Wind',
-    ['Leviathan']   = 'Water',
-    ['Ifrit']       = 'Fire',
-    ['Shiva']       = 'Ice',
-    ['Ramuh']       = 'Thunder',
-    ['Fenrir']      = 'Dark',
-    ['Diabolos']    = 'Dark',
-    ['LightSpirit'] = 'Light',
-    ['EarthSpirit'] = 'Earth',
-    ['WindSpirit']  = 'Wind',
-    ['WaterSpirit'] = 'Water',
-    ['FireSpirit']  = 'Fire',
-    ['IceSpirit']   = 'Ice',
-    ['ThunderSpirit'] = 'Thunder',
-    ['DarkSpirit']  = 'Dark',
-    ['Cait Sith']   = 'Light',
-    ['Siren']      	= 'Wind',
-    ['Odin']  		= 'Dark',
-    ['Atomos']  	= 'Dark',
-    ['Alexander']   = 'Light'
-};
-
 gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 	
 profile.OnLoad = function()
@@ -378,11 +341,13 @@ profile.HandleDefault = function()
             else
                 gFunc.EquipSet(sets.Idle_Base); 
             end
-            gFunc.Equip('main', EleStaffTable[PetEleTable[Settings.petName]])
-            if (envVar.DayElement == PetEleTable[Settings.PetName]) then
+            gFunc.Equip('main', EleStaffTable[Settings.petEleVar])
+            if (Settings.petName == 'Carbuncle') then
+                --Do Nothing
+            elseif (envVar.DayElement == Settings.petEleVar) then
                 gFunc.Equip('Body', 'Summoner\'s Dblt.');
             end
-            if (envVar.WeatherElement == PetEleTable[Settings.petName]) then
+            if (envVar.WeatherElement == Settings.petEleVar) then
                 gFunc.Equip('Head', 'Summoner\'s Horn');
             end
             if (Settings.SalvageMode) then
@@ -421,14 +386,18 @@ end
 
 profile.HandleMidcast = function()
     local action = gData.GetAction();
+    local pet = gData.GetPet();
+
     if (action.Skill == 'Enhancing Magic') then
         gFunc.EquipSet(sets.Enhancing);
     elseif (action.Skill == 'Healing Magic') then
         gFunc.EquipSet(sets.Healing);
     elseif (action.Skill == 'Summoning') then
         gFunc.EquipSet(sets.MidCast);
-        Settings.petName = action.Name;
-        Settings.petEleVar = PetEleTable[Settings.petName];
+        if (pet == nil) then
+            Settings.petName = '' + action.Name;
+            Settings.petEleVar = '' + action.Element;
+        end
     end
 end
 
