@@ -47,22 +47,21 @@ local sets = {
     Haste_Base      = {},
 
     TP_Priority     = {
-        Head    = {'Eisenschaller', 'Beetle Mask +1'},
-        Neck    = {'Tiger Stole'},
-        Ear1    = {'Beetle Earring +1'},
-        Ear2    = {'Beetle Earring +1'},
-        Body    = {'Eisenbrust', 'Beetle Harness +1'},
+        Head    = {'Eisenschaller', 'Beetle Mask +1', 'Bone Mask +1'},
+        Neck    = {'Tiger Stole', 'Dog Collar'},
+        Ear1    = {'Beetle Earring +1', 'Bone Earring +1'},
+        Ear2    = {'Beetle Earring +1', 'Bone Earring +1'},
+        Body    = {'Eisenbrust', 'Beetle Harness +1', 'Bone Harness +1'},
         Hands   = {'Eisenhentzes', 'Lgn. Mittens'},
         Ring1   = {'Bastokan Ring'},
         Ring2   = {'Courage Ring'},
         Back    = {'Dhalmel Mantle +1'},
-        Waist   = {'Brave Belt'},
-        Legs    = {'Eisendiechlings', 'Republic Subligar'},
-        Feet    = {'Eisenschuhs', 'Beetle Leggings +1'}
+        Waist   = {'Brave Belt', 'Leather Belt'},
+        Legs    = {'Eisendiechlings', 'Republic Subligar', 'Lgn. Subligar'},
+        Feet    = {'Eisenschuhs', 'Beetle Leggings +1', 'Bone Leggings +1'}
     },
     Hate_Base       = {
         Head    = 'Horror Head',
-        Back    = 'Mercen. Mantle'
     },
 
     OV_RBase        = {},
@@ -130,7 +129,8 @@ local Settings = {
     CC_Mode = false,
     ML_Mode = true,
     LockAll = false,
-    Fish = false
+    Fish = false,
+    Sync_Mode = false
 };
 
 local JATable = T{
@@ -186,6 +186,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /fshmode /lac fwd Fish');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /sync /lac fwd Sync_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
@@ -203,6 +204,7 @@ profile.OnUnload = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /fshmode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /sync');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind !l');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
@@ -226,6 +228,13 @@ profile.HandleCommand = function(args)
             gFunc.Message("Fishing");
         else
             gFunc.Message("Not Fishing");
+        end
+    elseif(args[1] == 'Sync_Mode') then
+        Settings.Sync_Mode = not Settings.Sync_Mode;
+        if(Settings.Sync_Mode) then
+            gFunc.Message("Sync Mode is ON");
+        else
+            gFunc.Message("Sync Mode is OFF");
         end
     elseif(args[1] == 'ML_Mode') then
         Settings.ML_Mode = not Settings.ML_Mode;
@@ -278,7 +287,7 @@ profile.HandleDefault = function()
     if (Settings.Fish) then
         gFunc.EquipSet(sets.Fish);
     elseif (player.Status == 'Engaged') then
-        if (player.MainJobSync < player.MainJobLevel) then
+        if (Sync_Mode) then
             gFunc.EquipSet(sets.TP_Priority);
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
