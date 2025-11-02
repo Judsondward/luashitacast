@@ -53,7 +53,7 @@ gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 --profile.Packer = {};
 
 local Settings = {
-    ML_Mode = true
+    ML_Mode = false
 };
 
 local WSTable = {};
