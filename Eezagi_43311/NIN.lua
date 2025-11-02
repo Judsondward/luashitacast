@@ -73,7 +73,7 @@ local sets = {
     },
 };
 profile.Sets = sets;
-gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
+gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
 -- Combine Block
 sets.Idle_Off        = gFunc.Combine(sets.Idle_Base, {});
