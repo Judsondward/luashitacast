@@ -82,42 +82,48 @@ profile.Sets = sets;
 gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
 -- Combine Block
-sets.Idle_Off        = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_PDT        = gFunc.Combine(sets.Idle_Base, {
+sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {
         Hands   = 'Eisenhentzes',
         Legs    = 'Eisendiechlings',
 });
-sets.Idle_MDT        = gFunc.Combine(sets.Idle_Base, {});
+sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
 
-sets.OV_REarth       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RWind        = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RWater       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RFire        = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RIce         = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RLight       = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RThunder     = gFunc.Combine(sets.OV_RBase, {});
-sets.OV_RDark        = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_REarth      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RWind       = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RWater      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RFire       = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RIce        = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RLight      = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RThunder    = gFunc.Combine(sets.OV_RBase, {});
+sets.OV_RDark       = gFunc.Combine(sets.OV_RBase, {});
 
-sets.TP_Low_Off      = gFunc.Combine(sets.Idle_Base, {
+sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {
     Hands = 'Lgn. Mittens',
     Legs = 'Republic Subligar'
 });
-sets.TP_Low_PDT      = gFunc.Combine(sets.TP_Low_Off, {
+sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
         Hands   = 'Eisenhentzes',
         Legs    = 'Eisendiechlings',
 });
-sets.TP_Low_MDT      = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_Off      = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_PDT      = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_Mid_MDT      = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_Off     = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_PDT     = gFunc.Combine(sets.TP_High_Off, {});
-sets.TP_High_MDT     = gFunc.Combine(sets.TP_High_Off, {});
+sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_High_PDT    = gFunc.Combine(sets.TP_High_Off, {});
+sets.TP_High_MDT    = gFunc.Combine(sets.TP_High_Off, {});
 
-sets.WS_SavageBlade  = gFunc.Combine(sets.WS_Base, {});
-sets.WS_ClubSkill    = gFunc.Combine(sets.WS_Base, {});
+sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
+sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
 
-sets.Nin_Utsu        = gFunc.Combine(sets.SIRD_Base, {});
+sets.Nin_Utsu       = gFunc.Combine(sets.SIRD_Base, {});
+
+sets.JA_Provoke     = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Berserk     = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Defender    = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Warcry      = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Aggressor   = gFunc.Combine(sets.Hate_Base, {});
 
 --profile.Packer = {};
 
