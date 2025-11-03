@@ -62,12 +62,12 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 4');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
     AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd ML_Mode');
 
-    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 4');
+    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 5');
 end
 
 profile.OnUnload = function()

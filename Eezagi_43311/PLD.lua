@@ -349,13 +349,6 @@ profile.HandleDefault = function()
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
         end
-    elseif(args[1] == 'Sync_Mode') then
-        Settings.Sync_Mode = not Settings.Sync_Mode;
-        if(Settings.Sync_Mode) then
-            gFunc.Message("Sync Mode is ON");
-        else
-            gFunc.Message("Sync Mode is OFF");
-        end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
         if (not Settings.ML_Mode) then
