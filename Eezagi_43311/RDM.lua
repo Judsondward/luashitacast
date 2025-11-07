@@ -18,9 +18,14 @@ local sets = {
     PCast_Base = {},
     Haste_Base = {},
 
-    WS_Base = {},
-
-    TP_Priority = {},
+    WS_Base = {
+        Ring1 = {'Courage Ring'},
+        Ring2 = {'Courage Ring'}
+    },
+    TP_Base = {
+        Ring1 = 'Bastokan Ring',
+        Ring2 = 'Courage Ring'
+    },
 
     Heal_Base = {},
     Elem_Base = {},
@@ -47,6 +52,11 @@ sets.Enha_INT = gFunc.Combine(sets.Enha_Base, {
     Ring2 = 'Eremite\'s Ring',
 });
 
+sets.wS_BBlade = gFunc.Combine(sets.WS_Base,{
+    Ring1 = 'Eremite\'s Ring',
+    Ring2 = 'Eremite\'s Ring',
+});
+
 profile.Sets = sets;
 gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
@@ -56,7 +66,10 @@ local Settings = {
     ML_Mode = false
 };
 
-local WSTable = {};
+local WSTable = {
+    ['Ukko\'s Fury'] = 'UFury',
+    ['Burning Blade'] = 'BBlade'
+};
 
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
@@ -93,7 +106,7 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
     if(player.Status == 'Engaged') then
-        gFunc.EquipSet(sets.TP_Priority);
+        gFunc.EquipSet(sets.TP_Base);
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
         if (ML_Mode) then
@@ -166,9 +179,11 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    if WSTable.Contains(action.Name) then
-        gFunc.EquipSet('WS_' + WSTable[action.Name]);
+    if(WSTable[action.Name] ~= nil) then
+        -- I've made a set for it.
+        gFunc.EquipSet('WS_' .. WSTable[action.Name]);
     else
+        -- I didn't. Equip STR
         gFunc.EquipSet(sets.WS_Base);
     end
 end

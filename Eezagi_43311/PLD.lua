@@ -434,7 +434,7 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    if(WSTable:contains(action.Name)) then
+    if(WSTable[action.Name] ~= nil) then
         -- I've made a set for it.
         gFunc.EquipSet('WS_' .. WSTable[action.Name]);
     else

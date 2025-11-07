@@ -111,8 +111,8 @@ local WeakElementTable = {
 
 function gcinclude.EquipObi(action)
     if (ObiCheck(action)) then
-        local obi = NukeObiTable[action.Element]
-        local obiOwned = NukeObiOwnedTable[action.Element]
+        local obi = EleObiTable[action.Element]
+        local obiOwned = EleObiOwnedTable[action.Element]
         if (obiOwned) then
             gFunc.Equip('Waist', obi)
         end

@@ -1,11 +1,11 @@
 local profile = {};
 local sets = {
     Idle_Base = {
-        --Head    = '',
+        --Head    = 'Horror Head II',
         Neck    = 'Justice Badge',
         Ear1    = 'Onyx Earring',
         Ear2    = 'Onyx Earring',
-        Body    = 'Ryl.Ftm. Tunic',
+        Body    = 'Ryl.Ftm. Tunic', -- Some Other Body that isn't a hoodie.
         Hands   = 'Mitts',
         Ring1   = 'Saintly Ring',
         Ring2   = 'Saintly Ring',
@@ -62,12 +62,12 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 4');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 3');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
     AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd ML_Mode');
 
-    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 4');
+    AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 3');
 end
 
 profile.OnUnload = function()
