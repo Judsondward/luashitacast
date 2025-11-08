@@ -35,19 +35,19 @@ local sets = {
     Hate_Base       = {},
 
     TP_Base         = {},
-    TP_Priority     = {  --  Using for Idle and TP until Level 30+
-        Head    = {'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
-        Neck    = {'Tiger Stole', 'Dog Collar'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
-        Body    = {'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
-        Hands   = {'Lgn. Mittens'},
-        Ring1   = {'Bastokan Ring'},
-        Ring2   = {'Courage Ring'},
-        Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
-        Waist   = {'Brave Belt', 'Leather Belt'},
-        Legs    = {'Republic Subligar', 'Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
+    TP_Priority     = {
+        Head    = {},
+        Neck    = {},
+        Ear1    = {},
+        Ear2    = {},
+        Body    = {},
+        Hands   = {},
+        Ring1   = {},
+        Ring2   = {},
+        Back    = {},
+        Waist   = {},
+        Legs    = {},
+        Feet    = {}
     },
 
     OV_Shield       = {},
@@ -62,19 +62,15 @@ local sets = {
     -- Basic Magic Sets.
     PCast_Base      = {},
 
-    Div_Base        = {},
-    Enh_Base        = {},
-    Heal_Base       = {},
-
-    Ele_Base        = {},
-    Enfe_Base       = {},
-    Dark_Base       = {},
-
-    Blu_Base        = {},
-
-    Nin_Base        = {},
-
-    Song_Base       = {}
+    Heal_Base = {},
+    Elem_Base = {},
+    Enha_Base = {},
+    Enfe_Base = {},
+    Divi_Base = {},
+    Dark_Base = {},
+    Blue_Base = {},
+    Ninj_Base = {},
+    Song_Base = {}
 };
 
 profile.Sets = sets;
@@ -108,8 +104,8 @@ sets.Enfe_INT       = gFunc.Combine(sets.Enfe_Base, {});
 sets.Enha_MND       = gFunc.Combine(sets.Enha_Base, {});
 sets.Enha_INT       = gFunc.Combine(sets.Enha_Base, {});
 
-sets.Div_Nuke       = gFunc.Combine(sets.Div_Base, {});
-sets.Div_Flash      = gFunc.Combine(sets.Haste_Base, {});
+sets.Divi_Nuke       = gFunc.Combine(sets.Divi_Base, {});
+sets.Divi_Flash      = gFunc.Combine(sets.Haste_Base, {});
 
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
@@ -122,9 +118,9 @@ local Settings = {
     TP_Mode = 1,
     DT_Mode = 1,
     OV_Mode = 1,
-    Idle_WP = 1, 
+    Idle_WP = 1,
     CC_Mode = false,
-    MG_Mode = false,
+    MG_Mode = true,
     LockAll = false,
     Fish = false,
     Sync_Mode = false
@@ -259,9 +255,9 @@ profile.HandleCommand = function(args)
     elseif(args[1] == 'MG_Mode') then
         Settings.MG_Mode = not Settings.MG_Mode;
         if(Settings.MG_Mode) then
-            gFunc.Message("Mage Mode is ON");
+            gFunc.Message("Melee Mode is ON");
         else
-            gFunc.Message("Mage Mode is OFF");
+            gFunc.Message("Melee Mode is OFF");
         end
     elseif (args[1] == 'TP_Mode') then
         Settings.TP_Mode = Settings.TP_Mode +1;
@@ -319,13 +315,9 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.HMP_Weapon);
         end
     else
-        if(Settings.Sync_Mode) then
-            gFunc.EquipSet(sets.TP_Priority);
-        else
-            gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
-            if (Settings.MG_Mode) then
-                gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
-            end
+        gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
+        if (Settings.MG_Mode) then
+            gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     end
     gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
@@ -333,12 +325,11 @@ end
 
 profile.HandleAbility = function()
     local action = gData.GetAction();
-    local petAction = gData.GetPetAction();
 
-    if (petAction ~= nil) then
-        gFunc.EquipSet(sets.BreathWeapon);
-    elseif(JATable:contains(action.Name)) then
+    if(JATable:contains(action.Name)) then
         gFunc.EquipSet('JA_' .. JATable[action.Name]);
+    else
+        gFunc.EquipSet(sets.Hate_Base);
     end
 end
 
@@ -378,20 +369,20 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Dark_Base)
         end
     elseif (action.Type == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Nin_Base);
+        gFunc.EquipSet(sets.Ninj_Base);
     elseif (action.Type == 'Summoning') then
         -- Why?
     elseif (action.Type == 'Blue Magic') then
-        gFunc.EquipSet(sets.Blu_Base);
+        gFunc.EquipSet(sets.Blue_Base);
     elseif (action.Type == 'Bard Song') then
         gFunc.EquipSet(sets.Song_Base);
     else
         -- How?
     end
-    if (CC_Mode) then
+    if (Settings.CC_Mode) then
         gFunc.EquipSet(sets.HP_Up_Base)
     end
-    if (MG_Mode) then
+    if (Settings.MG_Mode) then
         gcinclude.EquipStaff();
     end
     gcinclude.EquipObi(action);

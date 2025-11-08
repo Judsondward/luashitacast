@@ -66,8 +66,7 @@ local sets = {
         Legs    = 'Republic Subligar'
     },
 
-    PCast_Base      = {},
-    SIRD_Base       = {
+    PCast_Base      = {
         Waist   = 'Heko Obi +1'
     },
 
@@ -78,6 +77,9 @@ local sets = {
     Heal_Base       = {
         Neck    = 'Justice Badge'
     },
+    Ele_Base = {},
+    Enfe_Base = {},
+    Dark_Base = {},
 };
 profile.Sets = sets;
 gcinclude = gFunc.LoadFile('common\\gcinclude.lua');
@@ -124,14 +126,22 @@ sets.OV_RThunder    = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RDark       = gFunc.Combine(sets.OV_RBase, {});
 
 sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {});
-sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+});
+sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+});
 sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Low_PDT, {});
+sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Low_MDT, {});
 sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_PDT    = gFunc.Combine(sets.TP_High_Off, {});
-sets.TP_High_MDT    = gFunc.Combine(sets.TP_High_Off, {});
+sets.TP_High_PDT    = gFunc.Combine(sets.TP_Mid_PDT, {});
+sets.TP_High_MDT    = gFunc.Combine(sets.TP_Mid_MDT, {});
 
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
@@ -148,7 +158,7 @@ local Settings = {
     OV_Mode = 1,
     Idle_WP = 4,
     CC_Mode = false,
-    ML_Mode = true,
+    MG_Mode = false,
     LockAll = false,
     Fish = false,
     Sync_Mode = false
@@ -206,29 +216,6 @@ local WSTable = T{
     ['Moonlight'] = 'ClubSkill'
 };
 
-local EleStaffTable = {
-    ['Earth']   = 'Earth Staff',
-    ['Wind']    = 'Wind Staff',
-    ['Water']   = 'Water Staff',
-    ['Fire']    = 'Fire Staff',
-    ['Ice']     = 'Ice Staff',
-    ['Thunder'] = 'Thunder Staff',
-    ['Light']   = 'Light Staff',
-    ['Dark']    = 'Dark Staff'
-};
-
-local EleObiTable = {
-    ['Earth']   = 'Dorin Obi',
-    ['Wind']    = 'Furin Obi',
-    ['Water']   = 'Suirin Obi',
-    ['Fire']    = 'Karin Obi',
-    ['Ice']     = 'Hyorin Obi',
-    ['Thunder'] = 'Rairin Obi',
-    ['Light']   = 'Korin Obi',
-    ['Dark']    = 'Anrin Obi'
-};
-
-
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
@@ -238,7 +225,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 7');
 
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd MG_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /fshmode /lac fwd Fish');
     AshitaCore:GetChatManager():QueueCommand(-1, '/alias /sync /lac fwd Sync_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
@@ -294,12 +281,12 @@ profile.HandleCommand = function(args)
         else
             AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
         end
-    elseif(args[1] == 'ML_Mode') then
-        Settings.ML_Mode = not Settings.ML_Mode;
-        if(Settings.ML_Mode) then
-            gFunc.Message("Melee Mode is ON");
+    elseif(args[1] == 'MG_Mode') then
+        Settings.MG_Mode = not Settings.MG_Mode;
+        if(Settings.MG_Mode) then
+            gFunc.Message("Mage Mode is ON");
         else
-            gFunc.Message("Melee Mode is OFF");
+            gFunc.Message("Mage Mode is OFF");
         end
     elseif (args[1] == 'TP_Mode') then
         Settings.TP_Mode = Settings.TP_Mode +1;
@@ -351,12 +338,12 @@ profile.HandleDefault = function()
         end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
-        if (not Settings.ML_Mode) then
+        if (Settings.MG_Mode) then
             gFunc.Equip('main', "Dark Staff");
         end
     else
         gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
-        if (not Settings.ML_Mode) then
+        if (Settings.MG_Mode) then
             gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     end
@@ -390,40 +377,53 @@ profile.HandlePrecast = function()
 end
 
 profile.HandleMidcast = function()
-    local envVar = gData.GetEnvironment();
     local action = gData.GetAction();
-    if(action.Skill == 'Healing Magic') then
-        if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-            gFunc.EquipSet('HP_Up_' .. cureCheatTable[action.Name]);
-        else
-            gFunc.EquipSet(sets.Heal_Base);
-            if(not ML_Mode) then
-                gFunc.Equip('main', EleStaffTable[action.Element]);
+
+    if (action.Type == 'White Magic') then
+        if (action.Skill == 'Healing Magic') then
+            if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
+                gFunc.EquipSet('HP_Up_' .. cureCheatTable[action.Name]);
+            else
+                gFunc.EquipSet(sets.Heal_Base);
             end
         end
-    elseif(action.Skill == 'Divine Magic') then
-        if(action.Name == 'Flash') then
-            gFunc.EquipSet(sets.Div_Flash);
-        elseif string.match(action.Name, 'Banish') or string.match(acton.Name, 'Holy') then
-            gFunc.EquipSet(sets.Div_Nuke);
-        else
-            -- Enlight
-            gFunc.EquipSet(sets.Div_Base);
+        elseif (action.Skill == 'Enfeebling Magic') then
+            gFunc.EquipSet(sets.Enfe_MND);
+        elseif (action.Skill == 'Enhancing Magic') then
+            gFunc.EquipSet(sets.Enha_MND)
+        elseif (action.Skill == 'Divine Magic') then
+            if(action.Name == 'Flash') then
+                gFunc.EquipSet(sets.Divi_Flash)
+            elseif string.match(action.Name, 'Banish') or (action.Name == 'Holy') then
+                gFunc.EquipSet(sets.Divi_Nuke)
+            else
+                -- Enlight
+                gFunc.EquipSet(sets.Divi_Base)
+            end
         end
-    elseif(action.Skill == 'Enhancing Magic') then
-        gFunc.EquipSet(sets.Enh_Base);
-    elseif(action.Skill == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Nin_Base);
-    elseif(action.Skill == 'Blue Magic') then
-        gFunc.Message('Friday Finally Arrived, fix your shit');
-    else
+    elseif (action.Type == 'Black Magic') then
+        if (action.Skill == 'Elemental Magic') then
+            gFunc.EquipSet(sets.Enha_Base)
+        elseif (action.Skill == 'Enfeebling Magic') then
+            gFunc.EquipSet(sets.Enfe_INT)
+        elseif (action.Skill == 'Enhancing Magic') then
+            gFunc.EquipSet(sets.Enha_INT)
+        elseif (action.Skill == 'Dark Magic') then
+            gFunc.EquipSet(sets.Dark_Base)
+        end
+    elseif (action.Type == 'Ninjutsu') then
         gFunc.EquipSet(sets.Haste_Base);
+    elseif (action.Type == 'Summoning') then
+        -- Why?
+    elseif (action.Type == 'Blue Magic') then
+    elseif (action.Type == 'Bard Song') then
+    else
+        -- How?
     end
-    if(envVar.DayElement == action.Element) or (envVar.WeatherElement == action.Element) then
-        -- equip an obi
-        gFunc.Equip('Waist', EleObiTable[action.Element]);
-        -- Checked after conditionals to enforce
+    if (MG_Mode) then
+        gcinclude.EquipStaff();
     end
+    gcinclude.EquipObi(action);
 end
 
 profile.HandlePreshot = function()

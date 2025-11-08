@@ -103,16 +103,25 @@ sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {
     Legs = 'Republic Subligar'
 });
 sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
-        Hands   = 'Eisenhentzes',
-        Legs    = 'Eisendiechlings',
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+    Hands   = 'Eisenhentzes',
+    Legs    = 'Eisendiechlings',
 });
-sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+    Hands   = 'Eisenhentzes',
+    Legs    = 'Eisendiechlings',
+});
 sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Mid_Off, {});
+sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Low_PDT, {});
+sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Low_MDT, {});
 sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
-sets.TP_High_PDT    = gFunc.Combine(sets.TP_High_Off, {});
-sets.TP_High_MDT    = gFunc.Combine(sets.TP_High_Off, {});
+sets.TP_High_PDT    = gFunc.Combine(sets.TP_Mid_PDT, {});
+sets.TP_High_MDT    = gFunc.Combine(sets.TP_Mid_MDT, {});
 
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
@@ -175,7 +184,7 @@ local OVModeTable = {
     [6]  = 'RDark',
     [7]  = 'REarth',
     [8]  = 'RWind',
-    [9] = 'RWater'
+    [9]  = 'RWater'
 };
 
 local WSTable = T{

@@ -14,6 +14,8 @@ local sets = {
         Legs    = 'Freesword\'s Slops',
         Feet    = 'Solea'
     },
+    HMP_Weapon = {},
+    Idle_WP_Staff = {},
     Rest_Base = {},
     PCast_Base = {},
     Haste_Base = {},
@@ -33,6 +35,9 @@ local sets = {
     Enfe_Base = {},
     Divi_Base = {},
     Dark_Base = {},
+    Blue_Base = {},
+    Ninj_Base = {},
+    Song_Base = {}
 };
 
 sets.Enfe_MND = gFunc.Combine(sets.Enfe_Base, {
@@ -63,12 +68,11 @@ gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 --profile.Packer = {};
 
 local Settings = {
-    ML_Mode = false
+    MG_Mode = true
 };
 
 local WSTable = {
-    ['Ukko\'s Fury'] = 'UFury',
-    ['Burning Blade'] = 'BBlade'
+    ['Burning Blade'] = 'BBlade',
 };
 
 profile.OnLoad = function()
@@ -78,7 +82,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd ML_Mode');
+    AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd MG_Mode');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 5');
 end
@@ -92,12 +96,12 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
-    if(args[1] == 'ML_Mode') then
-        Settings.ML_Mode = not Settings.ML_Mode;
-        if(Settings.ML_Mode) then
-            gFunc.Message("Melee Mode is ON");
+    if(args[1] == 'MG_Mode') then
+        Settings.MG_Mode = not Settings.MG_Mode;
+        if(Settings.MG_Mode) then
+            gFunc.Message("Mage Mode is ON");
         else
-            gFunc.Message("Melee Mode is OFF");
+            gFunc.Message("Mage Mode is OFF");
         end
     end
 end
@@ -109,13 +113,13 @@ profile.HandleDefault = function()
         gFunc.EquipSet(sets.TP_Base);
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
-        if (ML_Mode) then
-            --gFunc.Equip('Main', 'Dark Staff');
+        if (Settings.MG_Mode) then
+            gFunc.EquipSet(sets.HMP_Weapon);
         end
     else
         gFunc.EquipSet(sets.Idle_Base);
-        if (ML_Mode) then
-            --gFunc.Equip('Main', 'Earth Staff');
+        if (Settings.MG_Mode) then
+            gFunc.Equip(sets.Idle_WP_Staff);
         end
     end
     gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
@@ -157,15 +161,17 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Dark_Base)
         end
     elseif (action.Type == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Haste_Base);
+        gFunc.EquipSet(sets.Ninj_Base);
     elseif (action.Type == 'Summoning') then
         -- Why?
     elseif (action.Type == 'Blue Magic') then
+        gFunc.EquipSet(sets.Blue_Base);
     elseif (action.Type == 'Bard Song') then
+        gFunc.EquipSet(sets.Song_Base);
     else
         -- How?
     end
-    if (ML_Mode) then
+    if (MG_Mode) then
         gcinclude.EquipStaff();
     end
     gcinclude.EquipObi(action);
