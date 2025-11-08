@@ -15,7 +15,9 @@ local sets = {
         Feet    = 'Solea'
     },
     HMP_Weapon = {},
-    Idle_WP_Staff = {},
+    Idle_WP_Staff = {
+        Main = 'Earth Staff'
+    },
     Rest_Base = {},
     PCast_Base = {},
     Haste_Base = {},
@@ -68,7 +70,7 @@ gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 --profile.Packer = {};
 
 local Settings = {
-    MG_Mode = true
+    MG_Mode = false
 };
 
 local WSTable = {
@@ -82,7 +84,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 5');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd MG_Mode');
+    --AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd MG_Mode');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 5');
 end
@@ -90,7 +92,7 @@ end
 profile.OnUnload = function()
     gcinclude.Unload();
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/alias delete /mage');
+    --AshitaCore:GetChatManager():QueueCommand(1, '/alias delete /mage');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyle off');
 end
@@ -119,7 +121,7 @@ profile.HandleDefault = function()
     else
         gFunc.EquipSet(sets.Idle_Base);
         if (Settings.MG_Mode) then
-            gFunc.Equip(sets.Idle_WP_Staff);
+            --gFunc.Equip(sets.Idle_WP_Staff);
         end
     end
     gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))

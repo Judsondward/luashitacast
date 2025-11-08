@@ -197,17 +197,6 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /fshmode /lac fwd Fish');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /wep /lac fwd Idle_WP');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /mage /lac fwd ML_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias /sync /lac fwd Sync_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind !l /lac fwd LockAll');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F7 /lac fwd OV_Off');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F10 /lac fwd DT_Mode');
-
     AshitaCore:GetChatManager():QueueCommand(100, '/macro book 1');
     AshitaCore:GetChatManager():QueueCommand(100, '/macro set 1');
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 1');
@@ -215,16 +204,6 @@ end
 
 profile.OnUnload = function()
     gcinclude.Unload();
-
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /fshmode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /wep');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /mage');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/alias delete /sync');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind !l');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F7');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F10');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyle off');
 end

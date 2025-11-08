@@ -14,13 +14,22 @@ local sets = {
         Legs    = 'Freesword\'s Slops',
         Feet    = 'Solea'
     },
+    HMP_Weapon = {},
+    Idle_WP_Staff = {
+        Main = 'Earth Staff'
+    },
     Rest_Base = {},
     PCast_Base = {},
     Haste_Base = {},
 
-    WS_Base = {},
-
-    TP_Priority = {},
+    WS_Base = {
+        Ring1 = {'Courage Ring'},
+        Ring2 = {'Courage Ring'}
+    },
+    TP_Base = {
+        Ring1 = 'Bastokan Ring',
+        Ring2 = 'Courage Ring'
+    },
 
     Heal_Base = {},
     Elem_Base = {},
@@ -28,6 +37,9 @@ local sets = {
     Enfe_Base = {},
     Divi_Base = {},
     Dark_Base = {},
+    Blue_Base = {},
+    Ninj_Base = {},
+    Song_Base = {}
 };
 
 sets.Enfe_MND = gFunc.Combine(sets.Enfe_Base, {
@@ -47,16 +59,23 @@ sets.Enha_INT = gFunc.Combine(sets.Enha_Base, {
     Ring2 = 'Eremite\'s Ring',
 });
 
+sets.wS_BBlade = gFunc.Combine(sets.WS_Base,{
+    Ring1 = 'Eremite\'s Ring',
+    Ring2 = 'Eremite\'s Ring',
+});
+
 profile.Sets = sets;
 gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
 --profile.Packer = {};
 
 local Settings = {
-    ML_Mode = false
+    MG_Mode = false
 };
 
-local WSTable = {};
+local WSTable = {
+    ['Burning Blade'] = 'BBlade',
+};
 
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
@@ -65,7 +84,7 @@ profile.OnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 4');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd ML_Mode');
+    --AshitaCore:GetChatManager():QueueCommand(1, '/alias /mage /lac fwd MG_Mode');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyleset 4');
 end
@@ -73,18 +92,18 @@ end
 profile.OnUnload = function()
     gcinclude.Unload();
 
-    AshitaCore:GetChatManager():QueueCommand(1, '/alias delete /mage');
+    --AshitaCore:GetChatManager():QueueCommand(1, '/alias delete /mage');
 
     AshitaCore:GetChatManager():QueueCommand(500, '/lockstyle off');
 end
 
 profile.HandleCommand = function(args)
-    if(args[1] == 'ML_Mode') then
-        Settings.ML_Mode = not Settings.ML_Mode;
-        if(Settings.ML_Mode) then
-            gFunc.Message("Melee Mode is ON");
+    if(args[1] == 'MG_Mode') then
+        Settings.MG_Mode = not Settings.MG_Mode;
+        if(Settings.MG_Mode) then
+            gFunc.Message("Mage Mode is ON");
         else
-            gFunc.Message("Melee Mode is OFF");
+            gFunc.Message("Mage Mode is OFF");
         end
     end
 end
@@ -93,16 +112,16 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
     if(player.Status == 'Engaged') then
-        gFunc.EquipSet(sets.TP_Priority);
+        gFunc.EquipSet(sets.TP_Base);
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
-        if (ML_Mode) then
-            --gFunc.Equip('Main', 'Dark Staff');
+        if (Settings.MG_Mode) then
+            gFunc.EquipSet(sets.HMP_Weapon);
         end
     else
         gFunc.EquipSet(sets.Idle_Base);
-        if (ML_Mode) then
-            --gFunc.Equip('Main', 'Earth Staff');
+        if (Settings.MG_Mode) then
+            --gFunc.Equip(sets.Idle_WP_Staff);
         end
     end
     gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
@@ -144,15 +163,17 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Dark_Base)
         end
     elseif (action.Type == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Haste_Base);
+        gFunc.EquipSet(sets.Ninj_Base);
     elseif (action.Type == 'Summoning') then
         -- Why?
     elseif (action.Type == 'Blue Magic') then
+        gFunc.EquipSet(sets.Blue_Base);
     elseif (action.Type == 'Bard Song') then
+        gFunc.EquipSet(sets.Song_Base);
     else
         -- How?
     end
-    if (ML_Mode) then
+    if (MG_Mode) then
         gcinclude.EquipStaff();
     end
     gcinclude.EquipObi(action);
@@ -166,9 +187,11 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    if WSTable.Contains(action.Name) then
-        gFunc.EquipSet('WS_' + WSTable[action.Name]);
+    if(WSTable[action.Name] ~= nil) then
+        -- I've made a set for it.
+        gFunc.EquipSet('WS_' .. WSTable[action.Name]);
     else
+        -- I didn't. Equip STR
         gFunc.EquipSet(sets.WS_Base);
     end
 end

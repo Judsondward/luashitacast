@@ -2,7 +2,7 @@
     ToDo:
         Populate Gear
 
-        Move Staff and Day/Weather Logic to gcinclude.
+        Verify Breath Syntax
 ]]
 local profile = {};
 local gcinclude = gFunc.LoadFile('common/gcinclude.lua');
@@ -23,11 +23,10 @@ local sets = {
     Idle_WP_GAxe    = {},
     Idle_WP_Scythe  = {},
     Idle_WP_Pole    = {},
-    Idle_WP_Katana  = {},
-    Idle_WP_GKatana = {},
     Idle_WP_Club    = {},
     Idle_WP_Staff   = {},
     
+    BreathWeapon    = {},
 
     HMP_Weapon      = {},
     Rest_Base       = {},
@@ -62,19 +61,15 @@ local sets = {
     -- Basic Magic Sets.
     PCast_Base      = {},
 
-    Div_Base        = {},
-    Enh_Base        = {},
-    Heal_Base       = {},
-
-    Ele_Base        = {},
-    Enfe_Base       = {},
-    Dark_Base       = {},
-
-    Blu_Base        = {},
-
-    Nin_Base        = {},
-
-    Song_Base       = {}
+    Heal_Base = {},
+    Elem_Base = {},
+    Enha_Base = {},
+    Enfe_Base = {},
+    Divi_Base = {},
+    Dark_Base = {},
+    Blue_Base = {},
+    Ninj_Base = {},
+    Song_Base = {}
 };
 
 profile.Sets = sets;
@@ -107,9 +102,6 @@ sets.Enfe_MND       = gFunc.Combine(sets.Enfe_Base, {});
 sets.Enfe_INT       = gFunc.Combine(sets.Enfe_Base, {});
 sets.Enha_MND       = gFunc.Combine(sets.Enha_Base, {});
 sets.Enha_INT       = gFunc.Combine(sets.Enha_Base, {});
-
-sets.Div_Nuke       = gFunc.Combine(sets.Div_Base, {});
-sets.Div_Flash      = gFunc.Combine(sets.Haste_Base, {});
 
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
@@ -149,10 +141,8 @@ local IdleWPTable = {
     [6] = 'GAxe',
     [7] = 'Scythe',
     [8] = 'Pole',
-    [9] = 'Katana',
-    [10] = 'GKatana',
-    [11] = 'Club',
-    [12] = 'Staff'
+    [9] = 'Club',
+    [10] = 'Staff'
 };
 
 local DTModeTable = {
@@ -163,21 +153,14 @@ local DTModeTable = {
 
 local OVModeTable = {
     [1]  = 'Off',
-    [2]  = 'Shield',
-    [3]  = 'RFire',
-    [4]  = 'RIce',
-    [5]  = 'RThunder',
-    [6]  = 'RLight',
-    [7]  = 'RDark',
-    [8]  = 'REarth',
-    [9]  = 'RWind',
-    [10] = 'RWater'
-};
-
-local cureCheatTable = T{
-    ['Cure II']  = 'C2',
-    ['Cure III'] = 'C3',
-    ['Cure IV']  = 'C4'
+    [2]  = 'RFire',
+    [3]  = 'RIce',
+    [4]  = 'RThunder',
+    [5]  = 'RLight',
+    [6]  = 'RDark',
+    [7]  = 'REarth',
+    [8]  = 'RWind',
+    [9]  = 'RWater'
 };
 
 local WSTable = T{
@@ -378,20 +361,20 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Dark_Base)
         end
     elseif (action.Type == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Nin_Base);
+        gFunc.EquipSet(sets.Ninj_Base);
     elseif (action.Type == 'Summoning') then
         -- Why?
     elseif (action.Type == 'Blue Magic') then
-        gFunc.EquipSet(sets.Blu_Base);
+        gFunc.EquipSet(sets.Blue_Base);
     elseif (action.Type == 'Bard Song') then
         gFunc.EquipSet(sets.Song_Base);
     else
         -- How?
     end
-    if (CC_Mode) then
+    if (Settings.CC_Mode) then
         gFunc.EquipSet(sets.HP_Up_Base)
     end
-    if (MG_Mode) then
+    if (Settings.MG_Mode) then
         gcinclude.EquipStaff();
     end
     gcinclude.EquipObi(action);
@@ -405,7 +388,7 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    if(Sync_Mode) then
+    if(Settings.Sync_Mode) then
         gFunc.EquipSet(sets.WS_Priority);
     elseif(WSTable[action.Name] ~= nil) then
         -- I've made a set for it.
