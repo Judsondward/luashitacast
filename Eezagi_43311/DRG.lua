@@ -36,7 +36,7 @@ local sets = {
     TP_Base         = {},
     TP_Priority     = {  --  Using for Idle and TP until Level 30+
         Head    = {'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
-        Neck    = {'Tiger Stole', 'Dog Collar'},
+        Neck    = {'Tiger Stole', 'Dog collar'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
         Body    = {'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
@@ -115,11 +115,12 @@ local Settings = {
     DT_Mode = 1,
     OV_Mode = 1,
     Idle_WP = 1, 
+    CurrentLevel = 0,
     CC_Mode = false,
     MG_Mode = false,
     LockAll = false,
     Fish = false,
-    Sync_Mode = false
+    Sync_Mode = true
 };
 
 local JATable = T{
@@ -175,36 +176,14 @@ profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 1');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 15');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
 
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias /wep /lac fwd Idle_WP');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias /mage /lac fwd MG_Mode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias /fshmode /lac fwd Fish');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias /sync /lac fwd Sync_Mode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind !l /lac fwd LockAll');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind F7 /lac fwd OV_Off');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind F8 /lac fwd OV_Mode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind F9 /lac fwd TP_Mode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind F10 /lac fwd DT_Mode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/bind ^c /lac fwd CC_Mode');
-
-    AshitaCore:GetChatManager():QueueCommand(2000, '/lockstyleset 7');
+    AshitaCore:GetChatManager():QueueCommand(2000, '/lockstyleset 15');
 end
 
 profile.OnUnload = function()
     gcinclude.Unload();
-
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias delete /wep');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias delete /mage');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias delete /fshmode');
-    AshitaCore:GetChatManager():QueueCommand(500, '/alias delete /sync');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind !l');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind F7');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind F8');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind F9');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind F10');
-    AshitaCore:GetChatManager():QueueCommand(500, '/unbind ^c');
 
     AshitaCore:GetChatManager():QueueCommand(2000, '/lockstyle off');
 end
@@ -288,11 +267,17 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    if (myLevel ~= Settings.CurrentLevel) then
+        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        Settings.CurrentLevel = myLevel;
+    end
+
     if (Settings.Fish) then
         gFunc.EquipSet(sets.Fish);
     elseif (player.Status == 'Engaged') then
         if (Settings.Sync_Mode) then
-            gFunc.EquipSet(sets.TP_Priority);
+            gFunc.EquipSet(sets.TP);
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
         end
@@ -303,7 +288,7 @@ profile.HandleDefault = function()
         end
     else
         if(Settings.Sync_Mode) then
-            gFunc.EquipSet(sets.TP_Priority);
+            gFunc.EquipSet(sets.TP);
         else
             gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
             if (Settings.MG_Mode) then

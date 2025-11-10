@@ -1,5 +1,11 @@
 local profile = {};
 local sets = {
+    Fish            = {
+        Body    = 'Fsh. Tunica',
+        Hands   = 'Fsh. Gloves',
+        Legs    = 'Fisherman\'s Hose',
+        Feet    = 'Fisherman\'s Boots'
+    },
     Idle_Base = {
         --Head    = '',
         Neck    = 'Justice Badge',
@@ -70,12 +76,73 @@ gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 --profile.Packer = {};
 
 local Settings = {
-    MG_Mode = false
+    TP_Mode = 1,
+    DT_Mode = 1,
+    OV_Mode = 1,
+    Idle_WP = 1,
+    CC_Mode = false,
+    MG_Mode = true,
+    LockAll = false,
+    Fish = false,
+    Sync_Mode = false
 };
 
-local WSTable = {
-    ['Burning Blade'] = 'BBlade',
+local JATable = T{
+    ['Provoke'] = 'Provoke',
 };
+
+local TPModeTable = {
+    [1] = 'Low',
+    [2] = 'Mid',
+    [3] = 'High'
+};
+
+local IdleWPTable = {
+    [1] = 'H2H',
+    [2] = 'Dagger',
+    [3] = 'Sword',
+    [4] = 'GSword',
+    [5] = 'Axe',
+    [6] = 'GAxe',
+    [7] = 'Scythe',
+    [8] = 'Pole',
+    [9] = 'Katana',
+    [10] = 'GKatana',
+    [11] = 'Club',
+    [12] = 'Staff'
+};
+
+local DTModeTable = {
+    [1] = 'Off',
+    [2] = 'PDT',
+    [3] = 'MDT',
+};
+
+local OVModeTable = {
+    [1]  = 'Off',
+    [2]  = 'Shield',
+    [3]  = 'RFire',
+    [4]  = 'RIce',
+    [5]  = 'RThunder',
+    [6]  = 'RLight',
+    [7]  = 'RDark',
+    [8]  = 'REarth',
+    [9]  = 'RWind',
+    [10] = 'RWater'
+};
+
+local cureCheatTable = T{
+    ['Cure II']  = 'C2',
+    ['Cure III'] = 'C3',
+    ['Cure IV']  = 'C4'
+};
+
+local WSTable = T{
+    ['Savage Blade'] = 'SavageBlade',
+    ['Starlight'] = 'ClubSkill',
+    ['Moonlight'] = 'ClubSkill'
+};
+
 
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
@@ -98,21 +165,93 @@ profile.OnUnload = function()
 end
 
 profile.HandleCommand = function(args)
-    if(args[1] == 'MG_Mode') then
+    if(args[1] == 'CC_Mode') then
+        Settings.CC_Mode = not Settings.CC_Mode;
+        if(Settings.CC_Mode) then
+            gFunc.Message("Cure Cheat Mode is ON");
+        else
+            gFunc.Message("Cure Cheat Mode is OFF");
+        end
+    elseif(args[1] == 'Fish') then
+        Settings.Fish = not Settings.Fish;
+        if(Settings.Fish) then
+            gFunc.Message("Fishing");
+        else
+            gFunc.Message("Not Fishing");
+        end
+    elseif(args[1] == 'Sync_Mode') then
+        Settings.Sync_Mode = not Settings.Sync_Mode;
+        if(Settings.Sync_Mode) then
+            gFunc.Message("Sync Mode is ON");
+        else
+            gFunc.Message("Sync Mode is OFF");
+        end
+    elseif(args[1] == 'LockAll') then
+        Settings.LockAll = not Settings.LockAll;
+        if(Settings.LockAll) then
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac disable');
+        else
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        end
+    elseif(args[1] == 'MG_Mode') then
         Settings.MG_Mode = not Settings.MG_Mode;
         if(Settings.MG_Mode) then
-            gFunc.Message("Mage Mode is ON");
+            gFunc.Message("Melee Mode is ON");
         else
-            gFunc.Message("Mage Mode is OFF");
+            gFunc.Message("Melee Mode is OFF");
         end
+    elseif (args[1] == 'TP_Mode') then
+        Settings.TP_Mode = Settings.TP_Mode +1;
+        if (Settings.TP_Mode > #TPModeTable) then
+            Settings.TP_Mode = 1;
+        end
+        gFunc.Message('TP_Mode: ' .. TPModeTable[Settings.TP_Mode] .. ' Accuracy');
+    elseif (args[1] == 'Idle_WP') then
+        Settings.Idle_WP = Settings.Idle_WP +1;
+        if (Settings.Idle_WP > #IdleWPTable) then
+            Settings.Idle_WP = 1;
+        end
+        gFunc.Message('Idle Weapon: ' .. IdleWPTable[Settings.Idle_WP]);
+    elseif (args[1] == 'DT_Mode') then
+        Settings.DT_Mode = Settings.DT_Mode +1;
+        if (Settings.DT_Mode > #DTModeTable) then
+            Settings.DT_Mode = 1;
+        end
+        gFunc.Message('DT_Mode: ' .. DTModeTable[Settings.DT_Mode]);
+    elseif (args[1] == 'OV_Mode') then
+        Settings.OV_Mode = Settings.OV_Mode +1;
+        if (Settings.OV_Mode > 1) and (Settings.OV_Mode <= #OVModeTable) then
+            --AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+            gFunc.ForceEquipSet('OV_' .. OVModeTable[Settings.OV_Mode]);
+            AshitaCore:GetChatManager():QueueCommand(2, '/lac disable');
+            gFunc.Message('Gear Locked! Override Mode: ' .. OVModeTable[Settings.OV_Mode]);
+        elseif (Settings.OV_Mode > #OVModeTable) then
+            Settings.OV_Mode = 1;
+            AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+            gFunc.Message('Gear Unlocked! Override Mode: ' .. OVModeTable[Settings.OV_Mode]);
+        end
+    elseif (args[1] == 'OV_Off') then
+        Settings.OV_Mode = 1;
+        AshitaCore:GetChatManager():QueueCommand(-1, '/lac enable');
+        gFunc.Message('Gear Unlocked! Override Mode: ' .. OVModeTable[Settings.OV_Mode]);
+    else
+        gFunc.Message('Argument Required');
     end
 end
 
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
-    if(player.Status == 'Engaged') then
-        gFunc.EquipSet(sets.TP_Base);
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    if (myLevel ~= Settings.CurrentLevel) then
+        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        Settings.CurrentLevel = myLevel;
+    end
+
+    if (Settings.Fish) then
+        gFunc.EquipSet(sets.Fish);
+    elseif(player.Status == 'Engaged') then
+        gFunc.EquipSet(sets.TP);
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
         if (Settings.MG_Mode) then

@@ -111,6 +111,12 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    if (myLevel ~= Settings.CurrentLevel) then
+        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        Settings.CurrentLevel = myLevel;
+    end
+
     if(player.Status == 'Engaged') then
         gFunc.EquipSet(sets.TP_Base);
     elseif (player.Status == 'Resting') then

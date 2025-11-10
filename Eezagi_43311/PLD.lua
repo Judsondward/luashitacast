@@ -94,7 +94,7 @@ sets.HP_Down_C2     = gFunc.Combine(sets.PCast_Base, {
     --[[Head    = 'Empress Hairpin',    --[[ -15 HP ]]
     -- Astral Rings are 60k/ea. For -50 Total
 });
-sets.HP_Up_C2       = gFunc.Combine(sets.SIRD_Base, {
+sets.HP_Up_C2       = gFunc.Combine(sets.Heal_Base, {
     --Total = ~73. Can't Use Custom Tunic until 33
     Head    = 'Horror Head',        --[[ +1 Enmity, No HP]]
     Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
@@ -148,7 +148,7 @@ sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
 
 sets.Div_Nuke       = gFunc.Combine(sets.Div_Base, {});
 sets.Div_Flash      = gFunc.Combine(sets.Haste_Base, {});
-sets.Nin_Utsu       = gFunc.Combine(sets.SIRD_Base, {});
+sets.Nin_Utsu       = gFunc.Combine(sets.PCast_Base, {});
 
 --profile.Packer = {};
 
@@ -309,7 +309,7 @@ profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
     if (player.Status == 'Engaged') then
-        if (Sync_Mode) then
+        if (Settings.Sync_Mode) then
             gFunc.EquipSet(sets.TP_Priority);
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
@@ -364,7 +364,6 @@ profile.HandleMidcast = function()
             else
                 gFunc.EquipSet(sets.Heal_Base);
             end
-        end
         elseif (action.Skill == 'Enfeebling Magic') then
             gFunc.EquipSet(sets.Enfe_MND);
         elseif (action.Skill == 'Enhancing Magic') then
@@ -398,7 +397,7 @@ profile.HandleMidcast = function()
     else
         -- How?
     end
-    if (MG_Mode) then
+    if (Settings.MG_Mode) then
         gcinclude.EquipStaff();
     end
     gcinclude.EquipObi(action);
