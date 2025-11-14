@@ -61,11 +61,15 @@ local EleStaffTable = {
     ['Dark']    = dark_staff
 };
 
+local ElementalDebuffs = T{'Shock', 'Rasp', 'Drown', 'Choke', 'Frost', 'Burn'};
+
 function gcinclude.EquipStaff()
     local action = gData.GetAction()
     local environment = gData.GetEnvironment()
     local player = gData.GetPlayer()
 
+    -- Broken logic I need to review
+    -- and not ElementalDebuffs:contains(action.Name)
     if (action.Skill ~= 'Enhancing Magic' and not ElementalDebuffs:contains(action.Name) and not string.match(action.Name, 'Utsusemi')) then
         local staff = EleStaffTable[action.Element]
         if staff ~= '' then
