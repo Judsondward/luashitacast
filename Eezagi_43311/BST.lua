@@ -5,122 +5,104 @@
         Move Staff and Day/Weather Logic to gcinclude.
 ]]
 local profile = {};
-gcinclude = gFunc.LoadFile('common/gcinclude.lua');
+local gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 local sets = {
+    Fish            = {
+        Body    = 'Fsh. Tunica',
+        Hands   = 'Fsh. Gloves',
+        Legs    = 'Fisherman\'s Hose',
+        Feet    = 'Fisherman\'s Boots'
+    },
 
-    Idle_Base        = {
-        Head    = 'Eisenschaller',
-        Neck    = 'Tiger Stole',
-        Ear1    = 'Beetle Earring +1',
-        Ear2    = 'Beetle Earring +1',
-        Body    = 'Eisenbrust',
-        Hands   = 'Eisenhentzes',
-        Ring1   = 'Bastokan Ring',
-        Ring2   = 'Courage Ring',
+    Idle_Base       = {
+        Head    = 'Bone Mask +1',
+        Neck    = 'Bird Whistle',
+        Ear1    = 'Bone Earring +1',
+        Ear2    = 'Bone Earring +1',
+        Body    = 'Bone Harness +1',
+        Hands   = 'Lgn. Mittens',
+        Ring1   = 'Balance Ring',
+        Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
-        Legs    = 'Eisendiechlings',
-        Feet    = 'Eisenschuhs'
+        Legs    = 'Brass Subligar',
+        Feet    = 'Bone Leggings +1'
     },
-    Idle_WP_Sword  = {
-        Main    = 'Centurion\'s Sword',
-        Sub     = 'Kite shield'
-    },
-    Idle_WP_Club   = {
-        Main    = 'Decurion\'s Hammer',
-        Sub     = 'Kite shield'
-    },
-    Idle_WP_Staff   = {
-        Main    = 'Earth Staff'
-    },
-    Fish            = {
-        Body = 'Fsh. Tunica',
-        Hands = 'Fsh. Gloves',
-        Legs = 'Fisherman\'s Hose',
-        Feet = 'Fisherman\'s Boots'
+    Idle_WP_H2H     = {},
+    Idle_WP_Dagger  = {},
+    Idle_WP_Sword   = {},
+    Idle_WP_GSword  = {},
+    Idle_WP_Axe     = {},
+    Idle_WP_GAxe    = {},
+    Idle_WP_Scythe  = {},
+    Idle_WP_Pole    = {},
+    Idle_WP_Katana  = {},
+    Idle_WP_GKatana = {},
+    Idle_WP_Club    = {},
+    Idle_WP_Staff   = {},
+    
+    Charm_Staff     = {},
+    Charm_Base      = {
+        Head    = 'Noble\'s Ribbon',
+        Neck    = 'Bird Whistle',
+        Ring1   = 'Hope Ring',
+        Ring2   = 'Hope Ring'
     },
 
+    HMP_Weapon      = {},
     Rest_Base       = {},
-
     Haste_Base      = {},
+    Hate_Base       = {},
 
+    TP_Base         = {},
     TP_Priority     = {
-        Head    = {'Eisenschaller', 'Beetle Mask +1', 'Bone Mask +1'},
-        Neck    = {'Tiger Stole', 'Dog Collar'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1'},
-        Body    = {'Eisenbrust', 'Beetle Harness +1', 'Bone Harness +1'},
-        Hands   = {'Eisenhentzes', 'Lgn. Mittens'},
-        Ring1   = {'Bastokan Ring'},
-        Ring2   = {'Courage Ring'},
-        Back    = {'Dhalmel Mantle +1'},
-        Waist   = {'Brave Belt', 'Leather Belt'},
-        Legs    = {'Eisendiechlings', 'Republic Subligar', 'Lgn. Subligar'},
-        Feet    = {'Eisenschuhs', 'Beetle Leggings +1', 'Bone Leggings +1'}
-    },
-    Hate_Base       = {
-        Head    = 'Horror Head',
-        Back    = 'Mercen. Mantle'
+        Head    = {'Beetle Mask +1','Bone Mask +1', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace','Bird Whistle'},
+        Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earring'},
+        Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earring'},
+        Body    = {'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
+        Hands   = {'Lgn. Mittens'},
+        Ring1   = {'Balance Ring'},
+        Ring2   = {'Balance Ring'},
+        Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
+        Waist   = {'Brave Belt','Leather Belt'},
+        Legs    = {'Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
+        Feet    = {'Beetle Leggings +1', 'Bone Leggings +1', 'Lgn. Leggings'}
     },
 
     OV_Shield       = {},
     OV_RBase        = {},
 
-    WS_Base         = {
-        Neck    = 'Spike Necklace',
-        Hands   = 'Custom M Gloves',
-        Ring1   = 'Courage Ring',
-        Legs    = 'Republic Subligar'
-    },
+    WS_Base         = {},
+    WS_Priority     = {},
 
-    PCast_Base      = {
-        Waist   = 'Heko Obi +1'
-    },
+    HP_Down_Base    = {},
+    HP_Up_Base      = {},
 
-    Div_Base        = {
-        Neck    = 'Justice Badge'
-    },
-    Enh_Base        = {},
+    -- Basic Magic Sets.
+    PCast_Base      = {},
+
     Heal_Base       = {
-        Neck    = 'Justice Badge'
+        Neck    = 'Justice Badge',
+        Ring1   = 'Saintly Ring',
+        Ring2   = 'Saintly Ring'
     },
-    Ele_Base = {},
+    Elem_Base = {},
+    Enha_Base = {},
     Enfe_Base = {},
+    Divi_Base = {},
     Dark_Base = {},
+    Blue_Base = {},
+    Ninj_Base = {},
+    Song_Base = {}
 };
+
 profile.Sets = sets;
 
 -- Combine Block
 sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
-
--- 90 HP Delta
-sets.HP_Down_C2     = gFunc.Combine(sets.PCast_Base, {
-    --[[Head    = 'Empress Hairpin',    --[[ -15 HP ]]
-    -- Astral Rings are 60k/ea. For -50 Total
-});
-sets.HP_Up_C2       = gFunc.Combine(sets.Heal_Base, {
-    --Total = ~73. Can't Use Custom Tunic until 33
-    Head    = 'Horror Head',        --[[ +1 Enmity, No HP ]]
-    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
-    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
-    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
-    Body    = 'Custom Tunic',       --[[ +32 HP ]]
-    Hands   = 'Custom M Gloves',    --[[ +12 HP ]]  --[[ Gigas Bracelets could give another 3 for cheap, but -inv ]]
-    --Ring1   = Mythril Ring = 4, Mythril Ring +1 = 5, Bomb Ring = 15
-    --Ring2   =
-    Back    = 'Mercenary Mantle',   --[[ +1 Enmity, No HP]]
-    --Waist   =
-    --Legs    = N/A
-    Feet    = 'Custom M Boots'      --[[ +4 HP ]]
-});
--- 190 HP Delta
-sets.HP_Down_C3     = gFunc.Combine(sets.HP_Down_C2, {});
-sets.HP_Up_C3       = gFunc.Combine(sets.HP_Up_C2, {});
--- 390 HP Delta
-sets.HP_Down_C4     = gFunc.Combine(sets.HP_Down_C3, {});
-sets.HP_Up_C4       = gFunc.Combine(sets.HP_Up_C3, {});
 
 sets.OV_REarth      = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RWind       = gFunc.Combine(sets.OV_RBase, {});
@@ -131,17 +113,9 @@ sets.OV_RLight      = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RThunder    = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RDark       = gFunc.Combine(sets.OV_RBase, {});
 
-sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {});
-sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
-    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
-    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
-    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
-});
-sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {
-    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
-    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
-    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
-});
+sets.TP_Low_Off     = gFunc.Combine(sets.TP_Base, {});
+sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {});
+sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
 sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Low_PDT, {});
 sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Low_MDT, {});
@@ -149,12 +123,20 @@ sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
 sets.TP_High_PDT    = gFunc.Combine(sets.TP_Mid_PDT, {});
 sets.TP_High_MDT    = gFunc.Combine(sets.TP_Mid_MDT, {});
 
+sets.Enfe_MND       = gFunc.Combine(sets.Enfe_Base, {});
+sets.Enfe_INT       = gFunc.Combine(sets.Enfe_Base, {});
+sets.Enha_MND       = gFunc.Combine(sets.Enha_Base, {});
+sets.Enha_INT       = gFunc.Combine(sets.Enha_Base, {});
+
+sets.Divi_Nuke       = gFunc.Combine(sets.Divi_Base, {});
+sets.Divi_Flash      = gFunc.Combine(sets.Haste_Base, {});
+
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
 
-sets.Div_Nuke       = gFunc.Combine(sets.Div_Base, {});
-sets.Div_Flash      = gFunc.Combine(sets.Haste_Base, {});
-sets.Nin_Utsu       = gFunc.Combine(sets.PCast_Base, {});
+sets.JA_Provoke     = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Charm       = gFunc.Combine(sets.Charm_Base, {});
+sets.JA_Reward      = gFunc.Combine(sets.Heal_Base, {});
 
 --profile.Packer = {};
 
@@ -162,21 +144,17 @@ local Settings = {
     TP_Mode = 1,
     DT_Mode = 1,
     OV_Mode = 1,
-    Idle_WP = 2,
+    Idle_WP = 1,
     CC_Mode = false,
-    MG_Mode = false,
+    MG_Mode = true,
     LockAll = false,
     Fish = false,
     Sync_Mode = false
 };
 
 local JATable = T{
-    ['Holy Circle'] = 'HolyCircle',
-    ['Shield Bash'] = 'Shield Bash',
-    ['Sentinel'] = 'Sentinel',
-    ['Cover'] = 'Cover',
-    ['Chivalry'] = 'Chivalry',
-    ['Rampart'] = 'Rampart'
+    ['Provoke'] = 'Provoke',
+    ['Charm'] = 'Charm'
 };
 
 local TPModeTable = {
@@ -186,9 +164,18 @@ local TPModeTable = {
 };
 
 local IdleWPTable = {
-    [1] = 'Sword',
-    [2] = 'Club',
-    [3] = 'Staff'
+    [1] = 'H2H',
+    [2] = 'Dagger',
+    [3] = 'Sword',
+    [4] = 'GSword',
+    [5] = 'Axe',
+    [6] = 'GAxe',
+    [7] = 'Scythe',
+    [8] = 'Pole',
+    [9] = 'Katana',
+    [10] = 'GKatana',
+    [11] = 'Club',
+    [12] = 'Staff'
 };
 
 local DTModeTable = {
@@ -222,20 +209,25 @@ local WSTable = T{
     ['Moonlight'] = 'ClubSkill'
 };
 
+
+-- Create a function for all the binds and possibly the macro book and lockstyles
 profile.OnLoad = function()
     gSettings.AllowAddSet = false;
     gcinclude.Initialize();
 
-    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 7');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/macro book 9');
     AshitaCore:GetChatManager():QueueCommand(-1, '/macro set 1');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyleset 7');
+
+    --AshitaCore:GetChatManager():QueueCommand(2000, '/lockstyleset 7');
 end
 
 profile.OnUnload = function()
     gcinclude.Unload();
-    AshitaCore:GetChatManager():QueueCommand(-1, '/lockstyle off');
+
+    --AshitaCore:GetChatManager():QueueCommand(2000, '/lockstyle off');
 end
 
+-- Didn't like the varhelper route. Possible to create a function to handle all this.
 profile.HandleCommand = function(args)
     if(args[1] == 'CC_Mode') then
         Settings.CC_Mode = not Settings.CC_Mode;
@@ -268,9 +260,9 @@ profile.HandleCommand = function(args)
     elseif(args[1] == 'MG_Mode') then
         Settings.MG_Mode = not Settings.MG_Mode;
         if(Settings.MG_Mode) then
-            gFunc.Message("Mage Mode is ON");
+            gFunc.Message("Melee Mode is ON");
         else
-            gFunc.Message("Mage Mode is OFF");
+            gFunc.Message("Melee Mode is OFF");
         end
     elseif (args[1] == 'TP_Mode') then
         Settings.TP_Mode = Settings.TP_Mode +1;
@@ -314,18 +306,27 @@ end
 profile.HandleDefault = function()
     local player = gData.GetPlayer();
 
+    local myLevel = AshitaCore:GetMemoryManager():GetPlayer():GetMainJobLevel();
+    if (myLevel ~= Settings.CurrentLevel) then
+        gFunc.EvaluateLevels(profile.Sets, myLevel);
+        Settings.CurrentLevel = myLevel;
+    end
+
     if (Settings.Fish) then
         gFunc.EquipSet(sets.Fish);
     elseif (player.Status == 'Engaged') then
         if (Settings.Sync_Mode) then
-            gFunc.EquipSet(sets.TP_Priority);
+            gFunc.EquipSet(sets.TP);
         else
             gFunc.EquipSet('TP_' .. TPModeTable[Settings.TP_Mode] .. '_' .. DTModeTable[Settings.DT_Mode]);
+        end
+        if (Settings.MG_Mode) then
+            gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
     elseif (player.Status == 'Resting') then
         gFunc.EquipSet(sets.Rest_Base);
         if (Settings.MG_Mode) then
-            gFunc.Equip('main', "Dark Staff");
+            gFunc.EquipSet(sets.HMP_Weapon);
         end
     else
         gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
@@ -341,6 +342,9 @@ profile.HandleAbility = function()
 
     if(JATable:contains(action.Name)) then
         gFunc.EquipSet('JA_' .. JATable[action.Name]);
+        if (Settings.MG_Mode) and (action.Name == 'Charm') then
+            gFunc.EquipSet(sets.Charm_Staff);
+        end
     else
         gFunc.EquipSet(sets.Hate_Base);
     end
@@ -351,12 +355,8 @@ end
 
 profile.HandlePrecast = function()
     local action = gData.GetAction();
-    if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-        if(cureCheatTable:contains(action.Name)) then
-            gFunc.EquipSet('HP_Down_' .. cureCheatTable[action.Name]);
-        else
-            gFunc.EquipSet(sets.PCast_Base);
-        end
+    if(Settings.CC_Mode) then
+        gFunc.EquipSet(sets.HP_Down_Base);
     else
         gFunc.EquipSet(sets.PCast_Base);
     end
@@ -367,24 +367,13 @@ profile.HandleMidcast = function()
 
     if (action.Type == 'White Magic') then
         if (action.Skill == 'Healing Magic') then
-            if string.match(action.Name, 'Cure') and (Settings.CC_Mode) then
-                gFunc.EquipSet('HP_Up_' .. cureCheatTable[action.Name]);
-            else
-                gFunc.EquipSet(sets.Heal_Base);
-            end
+            gFunc.EquipSet(sets.Heal_Base);
         elseif (action.Skill == 'Enfeebling Magic') then
             gFunc.EquipSet(sets.Enfe_MND);
         elseif (action.Skill == 'Enhancing Magic') then
             gFunc.EquipSet(sets.Enha_MND)
         elseif (action.Skill == 'Divine Magic') then
-            if(action.Name == 'Flash') then
-                gFunc.EquipSet(sets.Divi_Flash)
-            elseif string.match(action.Name, 'Banish') or (action.Name == 'Holy') then
-                gFunc.EquipSet(sets.Divi_Nuke)
-            else
-                -- Enlight
-                gFunc.EquipSet(sets.Divi_Base)
-            end
+            gFunc.EquipSet(sets.Divi_Base)
         end
     elseif (action.Type == 'Black Magic') then
         if (action.Skill == 'Elemental Magic') then
@@ -397,13 +386,18 @@ profile.HandleMidcast = function()
             gFunc.EquipSet(sets.Dark_Base)
         end
     elseif (action.Type == 'Ninjutsu') then
-        gFunc.EquipSet(sets.Haste_Base);
+        gFunc.EquipSet(sets.Ninj_Base);
     elseif (action.Type == 'Summoning') then
         -- Why?
     elseif (action.Type == 'Blue Magic') then
+        gFunc.EquipSet(sets.Blue_Base);
     elseif (action.Type == 'Bard Song') then
+        gFunc.EquipSet(sets.Song_Base);
     else
         -- How?
+    end
+    if (Settings.CC_Mode) then
+        gFunc.EquipSet(sets.HP_Up_Base)
     end
     if (Settings.MG_Mode) then
         gcinclude.EquipStaff();
@@ -419,7 +413,9 @@ end
 
 profile.HandleWeaponskill = function()
     local action = gData.GetAction();
-    if(WSTable[action.Name] ~= nil) then
+    if(Sync_Mode) then
+        gFunc.EquipSet(sets.WS_Priority);
+    elseif(WSTable[action.Name] ~= nil) then
         -- I've made a set for it.
         gFunc.EquipSet('WS_' .. WSTable[action.Name]);
     else
