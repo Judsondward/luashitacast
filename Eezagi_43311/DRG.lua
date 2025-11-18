@@ -10,11 +10,25 @@ local sets = {
     Fish            = {
         Body    = 'Fsh. Tunica',
         Hands   = 'Fsh. Gloves',
+        Waist   = 'Fisherman\'s Belt',
         Legs    = 'Fisherman\'s Hose',
         Feet    = 'Fisherman\'s Boots'
     },
 
-    Idle_Base       = {},
+    Idle_Base       = {
+        Head    = 'Centurion\'s Visor',
+        Neck    = 'Spike Necklace',
+        Ear1    = 'Beetle Earring +1',
+        Ear2    = 'Beetle Earring +1',
+        Body    = 'Ctr. Scale Mail',
+        Hands   = 'Custom M Gloves',
+        Ring1   = 'Bastokan Ring',
+        Ring2   = 'Balance Ring',
+        Back    = 'Dhalmel Mantle +1',
+        Waist   = 'Brave Belt',
+        Legs    = 'Republic Subligar',
+        Feet    = 'Ctr. Greaves'
+    },
     Idle_WP_H2H     = {},
     Idle_WP_Dagger  = {},
     Idle_WP_Sword   = {},
@@ -22,7 +36,9 @@ local sets = {
     Idle_WP_Axe     = {},
     Idle_WP_GAxe    = {},
     Idle_WP_Scythe  = {},
-    Idle_WP_Pole    = {},
+    Idle_WP_Pole    = {
+        Main    = 'Ryl.Sqr. Halberd'
+    },
     Idle_WP_Club    = {},
     Idle_WP_Staff   = {},
     
@@ -35,41 +51,60 @@ local sets = {
 
     TP_Base         = {},
     TP_Priority     = {  --  Using for Idle and TP until Level 30+
-        Head    = {'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
-        Neck    = {'Tiger Stole', 'Dog collar'},
+        Head    = {'Centurion\'s Visor', 'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace', 'Dog collar'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
-        Body    = {'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
-        Hands   = {'Lgn. Mittens'},
+        Body    = {'Ctr. Scale Mail', 'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
+        Hands   = {'Custom M Gloves', 'Lgn. Mittens'},
         Ring1   = {'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Balance Ring'},
         Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
         Waist   = {'Brave Belt', 'Leather Belt'},
         Legs    = {'Republic Subligar', 'Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
+        Feet    = {'Ctr. Greaves', 'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
     },
 
     OV_Shield       = {},
     OV_RBase        = {},
 
-    WS_Base         = {},
+    WS_Base         = {
+        Neck    = 'Spike Necklace',
+        Hands   = 'Custom M Gloves',
+        Ring1   = 'Courage Ring',
+        Ring2   = 'Courage Ring'
+    },
     WS_Priority     = {},
 
     HP_Down_Base    = {},
-    HP_Up_Base      = {},
+    HP_Up_Base      = {
+        Neck    =   'Bloodbead Amulet',
+        Ear1    =   'Shield Earring',
+        Ear2    =   'Shield Earring',
+        Body    =   'Custom M Tunic',
+        Hands   =   'Custom M Gloves',
+        Ring1   =   'Bastokan Ring'
+    },
 
     -- Basic Magic Sets.
     PCast_Base      = {},
 
-    Heal_Base = {},
-    Elem_Base = {},
-    Enha_Base = {},
-    Enfe_Base = {},
-    Divi_Base = {},
-    Dark_Base = {},
-    Blue_Base = {},
-    Ninj_Base = {},
-    Song_Base = {}
+    Heal_Base       = {
+        Neck    = 'Justice Badge',
+        Ring1   = 'Saintly Ring',
+        Ring2   = 'Saintly Ring'
+    },
+    Elem_Base       = {
+        Ring1   = 'Eremite\'s Ring',
+        Ring2   = 'Eremite\'s Ring'
+    },
+    Enha_Base       = {},
+    Enfe_Base       = {},
+    Divi_Base       = {},
+    Dark_Base       = {},
+    Blue_Base       = {},
+    Ninj_Base       = {},
+    Song_Base       = {}
 };
 
 profile.Sets = sets;
@@ -106,7 +141,9 @@ sets.Enha_INT       = gFunc.Combine(sets.Enha_Base, {});
 sets.WS_SavageBlade = gFunc.Combine(sets.WS_Base, {});
 sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
 
-sets.Provoke        = gFunc.Combine(sets.Hate_Base, {});
+sets.Provoke        = gFunc.Combine(sets.Hate_Base, {
+    Head    = 'Horror Head'
+});
 
 --profile.Packer = {};
 
@@ -120,7 +157,7 @@ local Settings = {
     MG_Mode = false,
     LockAll = false,
     Fish = false,
-    Sync_Mode = true
+    Sync_Mode = false
 };
 
 local JATable = T{
