@@ -3,7 +3,7 @@ local profile = {};
 
 local sets = {
 
-    FriendlessHo ={
+    Idle_NoPet ={
         Main    = 'Earth Staff', --Terra's Staff
         --Sub     = '',
         Ammo    = 'Hedgehog Bomb',
@@ -354,7 +354,7 @@ profile.HandleDefault = function()
                 gFunc.Equip('Ear1', 'Gamma Earring');
             end
         else
-            gFunc.EquipSet(sets.FriendlessHo);
+            gFunc.EquipSet(sets.Idle_NoPet);
         end
     end
     gFunc.EquipSet(gcinclude.BuildLockableSet(gData.GetEquipment()))
