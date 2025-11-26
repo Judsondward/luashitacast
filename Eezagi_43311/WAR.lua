@@ -1,13 +1,15 @@
 --[[
     ToDo:
-        Populate Gear
-
-        Move Staff and Day/Weather Logic to gcinclude.
+        Gorget Logic in gcInclude.
+        WS Logic and set population.
 ]]
 local profile = {};
+gcinclude = gFunc.LoadFile('common/gcinclude.lua');
+
 local sets = {
 
     Idle_Base        = {
+        --Ammo    = 'Balm Sachet',          -- BiS until Tiphia Sting since I don't have Easter Ammos, Pain to get
         Head    = 'Eisenschaller',
         Neck    = 'Tiger Stole',
         Ear1    = 'Beetle Earring +1',
@@ -15,7 +17,7 @@ local sets = {
         Body    = 'Eisenbrust',
         Hands   = 'Eisenhentzes',
         Ring1   = 'Bastokan Ring',
-        Ring2   = 'Courage Ring',
+        Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
         Legs    = 'Eisendiechlings',
@@ -46,19 +48,34 @@ local sets = {
 
     Haste_Base      = {},
 
+    TP_Base         = {
+        Head    = 'Eisenschaller',
+        Neck    = 'Tiger Stole',
+        Ear1    = 'Beetle Earring +1',
+        Ear2    = 'Beetle Earring +1',
+        Body    = 'Eisenbrust',
+        Hands   = 'Custom M Gloves',        -- Cannot equip Battle Gloves
+        Ring1   = 'Balance Ring',
+        Ring2   = 'Balance Ring',
+        Back    = 'Dhalmel Mantle +1',
+        Waist   = 'Brave Belt',
+        Legs    = 'Republic Subligar',
+        Feet    = 'Eisenschuhs'
+    },
+
     TP_Priority     = {
-        Head    = {'Eisenschaller', 'Beetle Mask +1', 'Bone Mask +1'},
-        Neck    = {'Tiger Stole', 'Dog Collar'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1'},
-        Body    = {'Eisenbrust', 'Beetle Harness +1', 'Bone Harness +1'},
-        Hands   = {'Eisenhentzes', 'Lgn. Mittens'},
-        Ring1   = {'Bastokan Ring'},
-        Ring2   = {'Courage Ring'},
-        Back    = {'Dhalmel Mantle +1'},
+        Head    = {'Centurion\'s Visor', 'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace', 'Dog collar'},
+        Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
+        Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
+        Body    = {'Ctr. Scale Mail', 'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
+        Hands   = {'Custom M Gloves', 'Lgn. Mittens'},
+        Ring1   = {'Balance Ring', 'Bastokan Ring'},
+        Ring2   = {'Balance Ring'},
+        Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
         Waist   = {'Brave Belt', 'Leather Belt'},
-        Legs    = {'Eisendiechlings', 'Republic Subligar', 'Lgn. Subligar'},
-        Feet    = {'Eisenschuhs', 'Beetle Leggings +1', 'Bone Leggings +1'}
+        Legs    = {'Republic Subligar', 'Lgn. Subligar', 'Brass Subligar'},
+        Feet    = {'Ctr. Greaves', 'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
     },
     Hate_Base       = {
         Head    = 'Horror Head',
@@ -70,6 +87,7 @@ local sets = {
         Neck    = 'Spike Necklace',
         Hands   = 'Custom M Gloves',
         Ring1   = 'Courage Ring',
+        Ring2   = 'Courage Ring',
         Legs    = 'Republic Subligar'
     },
 
@@ -79,13 +97,12 @@ local sets = {
     },
 };
 profile.Sets = sets;
-gcinclude = gFunc.LoadFile('common/gcinclude.lua');
 
 -- Combine Block
 sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {
-        Hands   = 'Eisenhentzes',
-        Legs    = 'Eisendiechlings',
+    Hands   = 'Eisenhentzes',
+    Legs    = 'Eisendiechlings',
 });
 sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
 
@@ -98,9 +115,9 @@ sets.OV_RLight      = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RThunder    = gFunc.Combine(sets.OV_RBase, {});
 sets.OV_RDark       = gFunc.Combine(sets.OV_RBase, {});
 
-sets.TP_Low_Off     = gFunc.Combine(sets.Idle_Base, {
-    Hands = 'Lgn. Mittens',
-    Legs = 'Republic Subligar'
+sets.TP_Low_Off     = gFunc.Combine(sets.TP_Base, {
+    Hands   = 'Lgn. Mittens',
+    Legs    = 'Republic Subligar'
 });
 sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
     Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
@@ -116,9 +133,18 @@ sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {
     Hands   = 'Eisenhentzes',
     Legs    = 'Eisendiechlings',
 });
-sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {});
-sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Low_PDT, {});
-sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Low_MDT, {});
+sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves'
+});
+sets.TP_Mid_PDT     = gFunc.Combine(sets.TP_Low_PDT, {
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves'
+});
+sets.TP_Mid_MDT     = gFunc.Combine(sets.TP_Low_MDT, {
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves'
+});
 sets.TP_High_Off    = gFunc.Combine(sets.TP_Mid_Off, {});
 sets.TP_High_PDT    = gFunc.Combine(sets.TP_Mid_PDT, {});
 sets.TP_High_MDT    = gFunc.Combine(sets.TP_Mid_MDT, {});
@@ -129,10 +155,10 @@ sets.WS_ClubSkill   = gFunc.Combine(sets.WS_Base, {});
 sets.Nin_Utsu       = gFunc.Combine(sets.SIRD_Base, {});
 
 sets.JA_Provoke     = gFunc.Combine(sets.Hate_Base, {});
-sets.JA_Berserk     = gFunc.Combine(sets.Hate_Base, {});
-sets.JA_Defender    = gFunc.Combine(sets.Hate_Base, {});
-sets.JA_Warcry      = gFunc.Combine(sets.Hate_Base, {});
-sets.JA_Aggressor   = gFunc.Combine(sets.Hate_Base, {});
+sets.JA_Berserk     = {};
+sets.JA_Defender    = {};
+sets.JA_Warcry      = {};
+sets.JA_Aggressor   = {};
 
 --profile.Packer = {};
 

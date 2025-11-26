@@ -21,7 +21,7 @@ local sets = {
         Ear1    = 'Beetle Earring +1',
         Ear2    = 'Beetle Earring +1',
         Body    = 'Ctr. Scale Mail',
-        Hands   = 'Custom M Gloves',
+        Hands   = 'Battle Gloves',
         Ring1   = 'Bastokan Ring',
         Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
@@ -56,7 +56,7 @@ local sets = {
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
         Body    = {'Ctr. Scale Mail', 'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
-        Hands   = {'Custom M Gloves', 'Lgn. Mittens'},
+        Hands   = {'Battle Gloves'},
         Ring1   = {'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Balance Ring'},
         Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
@@ -157,7 +157,7 @@ local Settings = {
     MG_Mode = false,
     LockAll = false,
     Fish = false,
-    Sync_Mode = false
+    Sync_Mode = true
 };
 
 local JATable = T{

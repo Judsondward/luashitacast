@@ -20,7 +20,7 @@ function gcinclude.Initialize()
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F8 /lac fwd OV_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F9 /lac fwd TP_Mode');
     AshitaCore:GetChatManager():QueueCommand(-1, '/bind F10 /lac fwd DT_Mode');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/bind ^c /lac fwd CC_Mode');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/bind F12 /lac fwd CC_Mode');
 end
 
 function gcinclude.Unload()
@@ -34,7 +34,7 @@ function gcinclude.Unload()
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F8');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F9');
     AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F10');
-    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind ^c');
+    AshitaCore:GetChatManager():QueueCommand(-1, '/unbind F12');
 end
 
 -- [[ Elemental Staff Logic ]]

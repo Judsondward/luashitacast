@@ -10,13 +10,13 @@ local sets = {
 
     Idle_Base        = {
         Head    = 'Eisenschaller',
-        Neck    = 'Tiger Stole',
+        Neck    = 'Spike Necklace',
         Ear1    = 'Beetle Earring +1',
         Ear2    = 'Beetle Earring +1',
         Body    = 'Eisenbrust',
         Hands   = 'Eisenhentzes',
         Ring1   = 'Bastokan Ring',
-        Ring2   = 'Courage Ring',
+        Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
         Legs    = 'Eisendiechlings',
@@ -46,13 +46,13 @@ local sets = {
 
     TP_Priority     = {
         Head    = {'Eisenschaller', 'Beetle Mask +1', 'Bone Mask +1'},
-        Neck    = {'Tiger Stole', 'Dog Collar'},
+        Neck    = {'Spike Necklace', 'Dog Collar'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1'},
         Body    = {'Eisenbrust', 'Beetle Harness +1', 'Bone Harness +1'},
         Hands   = {'Eisenhentzes', 'Lgn. Mittens'},
         Ring1   = {'Bastokan Ring'},
-        Ring2   = {'Courage Ring'},
+        Ring2   = {'Balance Ring'},
         Back    = {'Dhalmel Mantle +1'},
         Waist   = {'Brave Belt', 'Leather Belt'},
         Legs    = {'Eisendiechlings', 'Republic Subligar', 'Lgn. Subligar'},
@@ -70,6 +70,7 @@ local sets = {
         Neck    = 'Spike Necklace',
         Hands   = 'Custom M Gloves',
         Ring1   = 'Courage Ring',
+        Ring2   = 'Courage Ring',
         Legs    = 'Republic Subligar'
     },
 
@@ -95,7 +96,7 @@ sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
 
--- 90 HP Delta
+
 sets.HP_Down_C2     = gFunc.Combine(sets.PCast_Base, {
     --[[Head    = 'Empress Hairpin',    --[[ -15 HP ]]
     -- Astral Rings are 60k/ea. For -50 Total
@@ -115,6 +116,8 @@ sets.HP_Up_C2       = gFunc.Combine(sets.Heal_Base, {
     --Legs    = N/A
     Feet    = 'Custom M Boots'      --[[ +4 HP ]]
 });
+
+-- 90 HP Delta
 -- 190 HP Delta
 sets.HP_Down_C3     = gFunc.Combine(sets.HP_Down_C2, {});
 sets.HP_Up_C3       = gFunc.Combine(sets.HP_Up_C2, {});
@@ -211,6 +214,7 @@ local OVModeTable = {
 };
 
 local cureCheatTable = T{
+    ['Cure'] = 'C1',
     ['Cure II']  = 'C2',
     ['Cure III'] = 'C3',
     ['Cure IV']  = 'C4'

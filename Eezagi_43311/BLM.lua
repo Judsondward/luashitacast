@@ -3,6 +3,7 @@ local sets = {
     Fish            = {
         Body    = 'Fsh. Tunica',
         Hands   = 'Fsh. Gloves',
+        Waist   = 'Fisherman\'s Belt',
         Legs    = 'Fisherman\'s Hose',
         Feet    = 'Fisherman\'s Boots'
     },

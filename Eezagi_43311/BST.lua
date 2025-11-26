@@ -15,18 +15,18 @@ local sets = {
     },
 
     Idle_Base       = {
-        Head    = 'Bone Mask +1',
-        Neck    = 'Bird Whistle',
-        Ear1    = 'Bone Earring +1',
-        Ear2    = 'Bone Earring +1',
-        Body    = 'Bone Harness +1',
-        Hands   = 'Lgn. Mittens',
-        Ring1   = 'Balance Ring',
+        Head    = 'Centurion\'s Visor'
+        Neck    = 'Spike Necklace',
+        Ear1    = 'Beetle Earring +1',
+        Ear2    = 'Beetle Earring +1',
+        Body    = 'Ctr. Scale Mail',
+        Hands   = 'Battle Gloves',
+        Ring1   = 'Bastokan Ring',
         Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
-        Legs    = 'Brass Subligar',
-        Feet    = 'Bone Leggings +1'
+        Legs    = 'Republic Subligar',
+        Feet    = 'Ctr. Greaves',
     },
     Idle_WP_H2H     = {},
     Idle_WP_Dagger  = {},
@@ -56,18 +56,18 @@ local sets = {
 
     TP_Base         = {},
     TP_Priority     = {
-        Head    = {'Beetle Mask +1','Bone Mask +1', 'Legionnaire\'s Cap'},
-        Neck    = {'Spike Necklace','Bird Whistle'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earring'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earring'},
-        Body    = {'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
-        Hands   = {'Lgn. Mittens'},
-        Ring1   = {'Balance Ring'},
+        Head    = {'Centurion\'s Visor', 'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace', 'Dog collar'},
+        Ear1    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
+        Ear2    = {'Beetle Earring +1', 'Bone Earring +1', 'Opal Earring'},
+        Body    = {'Ctr. Scale Mail', 'Beetle Harness +1', 'Bone Harness +1', 'Lgn. Harness'},
+        Hands   = {'Battle Gloves'},
+        Ring1   = {'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Balance Ring'},
         Back    = {'Dhalmel Mantle +1', 'Rabbit Mantle'},
-        Waist   = {'Brave Belt','Leather Belt'},
-        Legs    = {'Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Beetle Leggings +1', 'Bone Leggings +1', 'Lgn. Leggings'}
+        Waist   = {'Brave Belt', 'Leather Belt'},
+        Legs    = {'Republic Subligar', 'Lgn. Subligar', 'Brass Subligar'},
+        Feet    = {'Ctr. Greaves', 'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
     },
 
     OV_Shield       = {},
@@ -149,7 +149,7 @@ local Settings = {
     MG_Mode = true,
     LockAll = false,
     Fish = false,
-    Sync_Mode = false
+    Sync_Mode = true
 };
 
 local JATable = T{
@@ -329,7 +329,11 @@ profile.HandleDefault = function()
             gFunc.EquipSet(sets.HMP_Weapon);
         end
     else
-        gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
+        if (Settings.Sync_Mode) then
+            gFunc.EquipSet(sets.TP);
+        else
+            gFunc.EquipSet('Idle_' .. DTModeTable[Settings.DT_Mode]);
+        end
         if (Settings.MG_Mode) then
             gFunc.EquipSet('Idle_WP_'  .. IdleWPTable[Settings.Idle_WP]);
         end
