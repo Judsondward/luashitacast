@@ -10,25 +10,25 @@ local sets = {
 
     Idle_Base        = {
         --Ammo    = 'Balm Sachet',          -- BiS until Tiphia Sting since I don't have Easter Ammos, Pain to get
-        Head    = 'Eisenschaller',
+        Head    = 'Centurion\'s Visor',
         Neck    = 'Tiger Stole',
         Ear1    = 'Beetle Earring +1',
         Ear2    = 'Beetle Earring +1',
-        Body    = 'Eisenbrust',
-        Hands   = 'Eisenhentzes',
+        Body    = 'Ctr. Scale Mail',
+        Hands   = 'Custom M Gloves',
         Ring1   = 'Bastokan Ring',
         Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
-        Legs    = 'Eisendiechlings',
-        Feet    = 'Eisenschuhs'
+        Legs    = 'Republic Subligar',
+        Feet    = 'Ctr. Greaves',
     },
     Idle_WP_Sword  = {
         Main    = 'Centurion\'s Sword',
         Sub     = 'Kite shield'
     },
     Idle_WP_CLub   = {
-        Main    = 'Decurion\'s Hammer',
+        Main    = 'Republic Hammer',
         Sub     = 'Kite shield'
     },
     Idle_WP_Staff   = {
@@ -49,18 +49,18 @@ local sets = {
     Haste_Base      = {},
 
     TP_Base         = {
-        Head    = 'Eisenschaller',
+        Head    = 'Centurion\'s Visor',
         Neck    = 'Tiger Stole',
         Ear1    = 'Beetle Earring +1',
         Ear2    = 'Beetle Earring +1',
-        Body    = 'Eisenbrust',
+        Body    = 'Ctr. Scale Mail',
         Hands   = 'Custom M Gloves',        -- Cannot equip Battle Gloves
         Ring1   = 'Balance Ring',
         Ring2   = 'Balance Ring',
         Back    = 'Dhalmel Mantle +1',
         Waist   = 'Brave Belt',
         Legs    = 'Republic Subligar',
-        Feet    = 'Eisenschuhs'
+        Feet    = 'Ctr. Greaves',
     },
 
     TP_Priority     = {
@@ -92,18 +92,13 @@ local sets = {
     },
 
     PCast_Base      = {},
-    SIRD_Base       = {
-        Waist = 'Heko Obi +1'
-    },
+    SIRD_Base       = {},
 };
 profile.Sets = sets;
 
 -- Combine Block
 sets.Idle_Off       = gFunc.Combine(sets.Idle_Base, {});
-sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {
-    Hands   = 'Eisenhentzes',
-    Legs    = 'Eisendiechlings',
-});
+sets.Idle_PDT       = gFunc.Combine(sets.Idle_Base, {});
 sets.Idle_MDT       = gFunc.Combine(sets.Idle_Base, {});
 
 sets.OV_REarth      = gFunc.Combine(sets.OV_RBase, {});
@@ -123,15 +118,11 @@ sets.TP_Low_PDT     = gFunc.Combine(sets.TP_Low_Off, {
     Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
     Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
     Ear2    = 'Shield Earring',     --[[ +10 HP ]]
-    Hands   = 'Eisenhentzes',
-    Legs    = 'Eisendiechlings',
 });
 sets.TP_Low_MDT     = gFunc.Combine(sets.TP_Low_Off, {
     Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
     Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
     Ear2    = 'Shield Earring',     --[[ +10 HP ]]
-    Hands   = 'Eisenhentzes',
-    Legs    = 'Eisendiechlings',
 });
 sets.TP_Mid_Off     = gFunc.Combine(sets.TP_Low_Off, {
     Neck    = 'Spike Necklace',

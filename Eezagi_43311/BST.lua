@@ -15,7 +15,7 @@ local sets = {
     },
 
     Idle_Base       = {
-        Head    = 'Centurion\'s Visor'
+        Head    = 'Centurion\'s Visor',
         Neck    = 'Spike Necklace',
         Ear1    = 'Beetle Earring +1',
         Ear2    = 'Beetle Earring +1',
