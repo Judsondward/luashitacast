@@ -1,8 +1,4 @@
 --[[
-    ToDo:
-        Populate Gear
-
-        Move Staff and Day/Weather Logic to gcinclude.
 ]]
 local profile = {};
 local gcinclude = gFunc.LoadFile('common/gcinclude.lua');
@@ -10,6 +6,7 @@ local sets = {
     Fish            = {
         Body    = 'Fsh. Tunica',
         Hands   = 'Fsh. Gloves',
+        Waist   = 'Fisherman\'s Belt','
         Legs    = 'Fisherman\'s Hose',
         Feet    = 'Fisherman\'s Boots'
     },
