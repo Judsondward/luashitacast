@@ -3,9 +3,9 @@ local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
 gFunc.LoadFile('..\\common\\sticky.lua')
 
 local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
-local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
-local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9') -- remove ,'r' if wanna use a macro like /lac fwd cycle Accuracy
 local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
+local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9')
+local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
 layers.Sets.Idle = {
   --Ammo    = 'Balm Sachet',          -- BiS until Tiphia Sting since I don't have Easter Ammos, Pain to get
@@ -45,6 +45,7 @@ layers.Sets.Engaged = {
     Ear1    = 'Beetle Earring +1',
     Ear2    = 'Beetle Earring +1',
     Body    = 'Ctr. Scale Mail',
+    --Body    = 'Unicorn Harness'         -- Regen Body
     Hands   = 'Custom M Gloves',        -- Cannot equip Battle Gloves
     Ring1   = 'Balance Ring',
     Ring2   = 'Balance Ring',
@@ -54,25 +55,23 @@ layers.Sets.Engaged = {
     Feet    = 'Ctr. Greaves',
 }
 layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {
-    Neck = 'Spike Necklace',
-    Hands = 'Custom M Gloves'
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves'
 })
 layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {}) 
 
 --layers.Sets['Target Distance > 4.0'].Engaged = {Hands = "Dst. Mittens +1", Feet = "Dst. Leggings +1",}
 
-layers.Sets.Midshot = {
-    Head    = "Optical Hat",
-    Neck    = "Peacock Amulet",
-    Ear1    = "Brutal Earring",
-    Ear2    = "Hollow Earring",
-    Body    = "Kirin's Osode",
-    Ring1   = "Merman's Ring",
-    Ring2   = "Merman's Ring",
-    Back    = "Amemet Mantle +1",
-    Waist   = "Warwolf Belt",
-    Legs    = "Dusk Trousers",
-    Feet    = "Custom F Boots",
+layers.Sets.Midshot = {}
+
+layers.Sets.Midshot['Player Ammo == Bloody Bolt'] = {
+    Head    = 'Erd. Headband',          -- +1
+    --Neck    = 'Black Neckerchief',      -- +1, Need to do quest to kill silkworm NM
+    Ear1    = 'Morion Earring',         -- +1 (The +1 Earring has 1 more int but costs 450k/ea.)
+    Ear2    = 'Morion Earring',         -- +1
+    Ring1   = 'Eremite\'s ring',        -- +2 (Can Upgrade to the level 36 Int rings if this shows promise)
+    Ring2   = 'Eremite\'s ring',        -- +2
+    Feet    = 'Custom M Boots'          -- +3
 }
 
 layers.Sets.Weaponskill = {
@@ -160,7 +159,7 @@ layers.UserOnLoad = function()
 end
 
 layers.UserOnUnload = function()
-    AshitaCore:GetChatManager();QueueCommand(1, '/alias del /sai')
+    AshitaCore:GetChatManager():QueueCommand(1, '/alias del /sai')
 end
 
 return layers

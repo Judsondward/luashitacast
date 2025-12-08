@@ -55,7 +55,7 @@ layers.Sets.Resting = {
     --Body = 'Royal Cloak',
 }
 
-layers.Sets.Engaged_Priority = {
+layers.Sets.Engaged = {
     Head    = 'Eisenschaller',
     Neck    = 'Spike Necklace',
     Ear1    = 'Beetle Earring +1',
@@ -77,7 +77,7 @@ layers.Sets.Engaged_Priority = {
 --layers.Sets['Player Status Effect == sleep'].Engaged = layers.Sets['Player Status Effect == sleep'].Idle
 
 layers.Sets.Ability['Provoke'] = {
-    Head    = 'Horror Head'
+    Head    = 'Pumpkin Head II'
     --Head = 'Bahamut\'s Mask',
     --Legs = 'Valor Breeches',
     --Body = 'Valor Surcoat',
@@ -89,7 +89,7 @@ layers.Sets.Ability['Provoke'] = {
 }
 
 layers.Sets.Ability['Flash'] = {
-    Head    = 'Horror Head'
+    Head    = 'Pumpkin Head II'
     --Head = 'Bahamut\'s Mask',
     --Legs = 'Valor Breeches',
     --Body = 'Valor Surcoat',

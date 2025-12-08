@@ -2,11 +2,26 @@ layers = gFunc.LoadFile('layers\\layers.lua')
 local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
 gFunc.LoadFile('..\\common\\sticky.lua')
 
-local AccuracyMode = layers.CreateModeGroup('Accuracy', {'NormalAcc', 'MidAcc' 'HighAcc'}, 'r') -- remove ,'r' if wanna use a macro like /lac fwd cycle Accuracy
+local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
+local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
+local AccuracyMode = layers.CreateModeGroup('Accuracy', {'NormalAcc', 'MidAcc', 'HighAcc'}, 'f9') -- remove ,'r' if wanna use a macro like /lac fwd cycle Accuracy
 
 --[[
         Gear Sets
 --]]
+layers.Sets.Fish.Idle = {
+    Range   = 'Lu Shang\'s Rod',
+    Body    = 'Fsh. Tunica',
+    Hands   = 'Fsh. Gloves',
+    Waist   = 'Fisherman\'s Belt',
+    Legs    = 'Fisherman\'s Hose',
+    Feet    = 'Fisherman\'s Boots'
+}
+
+layers.Sets.Sai.Idle = {
+    Hands   = "Dream Mittens +1",
+    Feet    = "Dream Boots +1",
+}
 
 layers.Sets.Idle_Priority = {
         Head    = {'Centurion\'s Visor', 'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
@@ -23,7 +38,7 @@ layers.Sets.Idle_Priority = {
         Feet    = {'Ctr. Greaves', 'Btl. Leggings +1', 'Bone Leggins +1', 'Lgn. Leggings'}
 }
 
-layers.Sets['Nation'].Idle = { Body = "Ducal Aketon"}
+layers.Sets['Nation'].Idle = { Body = "Republic Aketon"}
 
 layers.Sets.Engaged_Priority = {
         Head    = {'Centurion\'s Visor', 'Beetle Mask +1', 'Bone Mask +1', 'Legionnaire\'s Cap'},
@@ -42,7 +57,7 @@ layers.Sets.Engaged_Priority = {
 
 layers.Sets.Precast = {
     --Ear1    = "Loquac. Earring",
-},
+}
 
 layers.Sets.Midcast = {
     --Waist   = "Swift Belt",
@@ -66,7 +81,7 @@ layers.Sets.HandleWeaponskill = {
 
 --Fillout your Macro Book and Set inside {Subjob={book,set}, lockstyle #}
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={4,1}}, 14)
+    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={9,1}}, 1)
 end,"Subjob profile management")
 
 --Precast Delay. Important for Interim Casts, etc
@@ -90,13 +105,13 @@ end, "Stealth Enhancement (oils & powders)")
 
 --Default to Party Chat on load
 layers.UserOnLoad = function()
-    bee_lac_utils.SetChatmode()
-    (function() AshitaCore:GetChatManager():QueueCommand(1, '/displayhead off'); end):once(3)-- delay in seconds
+    --bee_lac_utils.SetChatmode()
+    --(function() AshitaCore:GetChatManager():QueueCommand(1, '/displayhead off'); end):once(3)-- delay in seconds
 end
 
 layers.UserOnUnload = function()
     AshitaCore:GetChatManager():QueueCommand(1, '/displayhead on')
 end
 
-gFunc.LoadFile('..\\common\\helm_utils.lua')
+--gFunc.LoadFile('..\\common\\helm_utils.lua')
 return layers
