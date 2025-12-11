@@ -7,24 +7,23 @@ local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
 local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9')
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
-layers.Sets.Idle = {
-  --Ammo    = 'Balm Sachet',          -- BiS until Tiphia Sting since I don't have Easter Ammos, Pain to get
-    Head    = 'Centurion\'s Visor',
-    Neck    = 'Tiger Stole',
-    Ear1    = 'Beetle Earring +1',
-    Ear2    = 'Beetle Earring +1',
-    Body    = 'Ctr. Scale Mail',
-    Hands   = 'Custom M Gloves',
-    Ring1   = 'Bastokan Ring',
-    Ring2   = 'Balance Ring',
-    Back    = 'Dhalmel Mantle +1',
-    Waist   = 'Brave Belt',
-    Legs    = 'Republic Subligar',
-    Feet    = 'Ctr. Greaves',
+layers.Sets.Idle_Priority = {
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
+        Neck    = {'Spike Necklace'},
+        Ear1    = {'Beetle Earring +1'},
+        Ear2    = {'Beetle Earring +1'},
+        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
+        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
+        Ring1   = {'Bastokan Ring'},
+        Ring2   = {'Woodsman Ring', 'Balance Ring'},
+        Back    = {'Dhalmel Mantle +1'},
+        Waist   = {'Tilt Belt','Brave Belt'},
+        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
 layers.Sets.Fish.Idle = {
-    Range   = 'Lu Shang\'s Rod',
+    Range   = 'Lu Shang\'s F. Rod',
     Body    = 'Fsh. Tunica',
     Hands   = 'Fsh. Gloves',
     Waist   = 'Fisherman\'s Belt',
@@ -39,21 +38,21 @@ layers.Sets.Sai.Idle = {
 
 layers.Sets['Nation'].Idle = { Body = "Republic Aketon"}
 
-layers.Sets.Engaged = {
-    Head    = 'Centurion\'s Visor',
-    Neck    = 'Tiger Stole',
-    Ear1    = 'Beetle Earring +1',
-    Ear2    = 'Beetle Earring +1',
-    Body    = 'Ctr. Scale Mail',
-    --Body    = 'Unicorn Harness'         -- Regen Body
-    Hands   = 'Custom M Gloves',        -- Cannot equip Battle Gloves
-    Ring1   = 'Balance Ring',
-    Ring2   = 'Balance Ring',
-    Back    = 'Dhalmel Mantle +1',
-    Waist   = 'Tilt Belt',
-    Legs    = 'Republic Subligar',
-    Feet    = 'Ctr. Greaves',
+layers.Sets.Engaged_Priority = {
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
+        Neck    = {'Spike Necklace'},
+        Ear1    = {'Beetle Earring +1'},
+        Ear2    = {'Beetle Earring +1'},
+        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
+        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
+        Ring1   = {'Woodsman Ring', 'Balance Ring', 'Bastokan Ring'},
+        Ring2   = {'Woodsman Ring', 'Balance Ring'},
+        Back    = {'Dhalmel Mantle +1'},
+        Waist   = {'Tilt Belt','Brave Belt'},
+        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
+
 layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {
     Neck    = 'Spike Necklace',
     Hands   = 'Custom M Gloves'
