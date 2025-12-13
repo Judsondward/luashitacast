@@ -9,11 +9,11 @@ local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10
 
 layers.Sets.Idle_Priority = {
         Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
-        Neck    = {'Spike Necklace'},
+        Neck    = {'Tiger Stole'},
         Ear1    = {'Beetle Earring +1'},
         Ear2    = {'Beetle Earring +1'},
         Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
-        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
+        Hands   = {'Irn.Msk. Gauntlets','Custom M Gloves'},
         Ring1   = {'Bastokan Ring'},
         Ring2   = {'Woodsman Ring', 'Balance Ring'},
         Back    = {'Dhalmel Mantle +1'},
