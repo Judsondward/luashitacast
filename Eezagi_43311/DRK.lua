@@ -92,7 +92,7 @@ end, "Blink on JA use")
 
 --Fillout your Macro Book and Set inside {Subjob={book,set}, lockstyle #}
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={12,1},THF={12,1},RNG={12,1},SAM={12,1},WHM={12,1}, BLM={12,1}}, 1)
+    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={8,1},THF={8,1},RNG={8,1},SAM={8,1},WHM={8,1}, BLM={8,1}}, 1)
 end,"Subjob profile management")
 
 --Precast Delay. Important for Interim Casts, etc

@@ -81,7 +81,7 @@ layers.Sets.HandleWeaponskill = {
 
 --Fillout your Macro Book and Set inside {Subjob={book,set}, lockstyle #}
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={9,1}}, 1)
+    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={9,1}},{WHM={9,1}}, 1)
 end,"Subjob profile management")
 
 --Precast Delay. Important for Interim Casts, etc

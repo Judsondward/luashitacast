@@ -283,7 +283,7 @@ layers.RegisterCallback("PreHandleItem", function(item)
 end, "Stealth Enhancement (oils & powders)")
 
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({WAR={6,1},RDM={6,1},NIN={6,2,},SAM={6,1},BLM={6,1},WHM={6,1}}, 10)
+    bee_lac_utils.UpdateMacrosAndLockstyle({WAR={7,1},RDM={7,1},NIN={7,2,},SAM={7,1},BLM={7,1},WHM={7,1}}, 1)
 end,"Subjob profile management")
 
 layers.UserOnUnload = function()
