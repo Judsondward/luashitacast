@@ -3,7 +3,7 @@ local idleMode = layers.CreateModeGroup('Idle', {'Off', 'DT'}, '^F11')
 local EnmityMode = layers.CreateModeGroup('Enmity', {'Off', 'Enmity'}, '^F12')
 local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
 local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
-gFunc.LoadFile('C:\\Horizon\\HorizonXI\\Game\\config\\addons\\LuAshitacast\\Common\\sticky')
+gFunc.LoadFile('..\\common\\sticky.lua')
 
 
 -- Default Idle Set

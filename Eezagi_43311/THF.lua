@@ -8,8 +8,8 @@ local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'N
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
 layers.Sets.Idle_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Lgn. Beret'},
-        Neck    = {'Spike Necklace','Bloodbead Amulet'},
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
@@ -19,7 +19,7 @@ layers.Sets.Idle_Priority = {
         Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
         Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
         Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Lgn. Sabatons'}
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
 }
 
 layers.Sets.Fish.Idle = {
@@ -39,8 +39,8 @@ layers.Sets.Sai.Idle = {
 layers.Sets['Nation'].Idle = { Body = "Republic Aketon"}
 
 layers.Sets.Engaged_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Lgn. Beret'},
-        Neck    = {'Spike Necklace','Bloodbead Amulet'},
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
+        Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
@@ -50,7 +50,7 @@ layers.Sets.Engaged_Priority = {
         Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
         Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
         Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Lgn. Sabatons'}
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
 }
 
 layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {})
