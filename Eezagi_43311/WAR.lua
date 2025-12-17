@@ -53,11 +53,11 @@ layers.Sets.Engaged_Priority = {
         Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
-layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {
+layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged_Priority, {
     Neck    = 'Spike Necklace',
     Hands   = 'Custom M Gloves'
 })
-layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {}) 
+layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged_Priority, {}) 
 
 --layers.Sets['Target Distance > 4.0'].Engaged = {Hands = "Dst. Mittens +1", Feet = "Dst. Leggings +1",}
 
