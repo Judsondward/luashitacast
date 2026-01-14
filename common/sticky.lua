@@ -36,6 +36,8 @@ layers.AddChargedItem("Savage Top +1")
 layers.AddChargedItem("Elder Gilet +1")
 layers.AddChargedItem("Wonder Maillot +1")
 layers.AddChargedItem("Wonder Top +1")
+--layers.AddChargedItem("Dream Boots +1")
+--layers.AddChargedItem("Dream Mittens +1")
 
 --Add enchanted items here
 layers.AddEnchantedItem("Breath Mantle")

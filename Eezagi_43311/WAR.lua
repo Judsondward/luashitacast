@@ -2,8 +2,8 @@ layers = gFunc.LoadFile('layers\\layers.lua')
 local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
 gFunc.LoadFile('..\\common\\sticky.lua')
 
-local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
-local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
+local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, 'f7')
+local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, 'f8')
 local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9')
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 

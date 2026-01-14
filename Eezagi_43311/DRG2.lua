@@ -8,18 +8,18 @@ local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'N
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
 layers.Sets.Idle_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor','Beetle Mask +1','Bone Mask +1','Legionnaire\'s Cap'},
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
         Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
-        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Lgn. Mittens'},
-        Ring1   = {'Bastokan Ring'},
+        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Battle Gloves','Lgn. Mittens'},
+        Ring1   = {'Woodsman Ring', 'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Woodsman Ring', 'Balance Ring'},
         Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
-        Waist   = {'Tilt Belt','Brave Belt','Warrior\'s Belt','Leather Belt'},
+        Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
         Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Btl. Leggings +1','Bone Leggings +1','Lgn. Leggings'}
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
 }
 
 layers.Sets.Fish.Idle = {
@@ -39,18 +39,18 @@ layers.Sets.Sai.Idle = {
 layers.Sets['Nation'].Idle = { Body = "Republic Aketon"}
 
 layers.Sets.Engaged_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor','Beetle Mask +1','Bone Mask +1','Legionnaire\'s Cap'},
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
         Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
         Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
         Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
-        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Lgn. Mittens'},
+        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Battle Gloves','Lgn. Mittens'},
         Ring1   = {'Woodsman Ring', 'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Woodsman Ring', 'Balance Ring'},
         Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
-        Waist   = {'Tilt Belt','Brave Belt','Warrior\'s Belt','Leather Belt'},
+        Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
         Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Btl. Leggings +1','Bone Leggings +1','Lgn. Leggings'}
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
 }
 
 layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {})
@@ -92,7 +92,7 @@ end, "Blink on JA use")
 
 --Fillout your Macro Book and Set inside {Subjob={book,set}, lockstyle #}
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={13,1},THF={13,1},RNG={13,1},WAR={13,1},WHM={13,1}, BLM={13,1}}, 3)
+    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={14,1},THF={14,1},RNG={14,1},SAM={14,1},WHM={14,1}, BLM={14,1}}, 1)
 end,"Subjob profile management")
 
 --Precast Delay. Important for Interim Casts, etc

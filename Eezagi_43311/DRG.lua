@@ -2,8 +2,8 @@ layers = gFunc.LoadFile('layers\\layers.lua')
 local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
 gFunc.LoadFile('..\\common\\sticky.lua')
 
-local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
-local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
+local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, 'f7')
+local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, 'f8')
 local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9')
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
@@ -156,10 +156,12 @@ end, "Stealth Enhancement (oils & powders)")
 
 layers.UserOnLoad = function()
     AshitaCore:GetChatManager():QueueCommand(1, '/alias add /sai /lac fwd cycle Sai')
+    AshitaCore:GetChatManager():QueueCommand(1, '/alias add /fsh /lac fwd cycle Fish')
 end
 
 layers.UserOnUnload = function()
     AshitaCore:GetChatManager():QueueCommand(1, '/alias del /sai')
+    AshitaCore:GetChatManager():QueueCommand(1, '/alias del /fsh')
 end
 
 return layers
