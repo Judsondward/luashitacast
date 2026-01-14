@@ -8,18 +8,18 @@ local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'N
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
 layers.Sets.Idle_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
-        Neck    = {'Tiger Stole'},
-        Ear1    = {'Beetle Earring +1'},
-        Ear2    = {'Beetle Earring +1'},
-        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
-        Hands   = {'Irn.Msk. Gauntlets','Custom M Gloves'},
-        Ring1   = {'Bastokan Ring'},
-        Ring2   = {'Woodsman Ring', 'Balance Ring'},
-        Back    = {'Dhalmel Mantle +1'},
-        Waist   = {'Tilt Belt','Brave Belt'},
-        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
+    Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
+    Neck    = {'Spike Necklace'},
+    Ear1    = {'Beetle Earring +1'},
+    Ear2    = {'Beetle Earring +1'},
+    Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
+    Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
+    Ring1   = {'Bastokan Ring'},
+    Ring2   = {'Woodsman Ring', 'Balance Ring'},
+    Back    = {'Dhalmel Mantle +1'},
+    Waist   = {'Tilt Belt','Brave Belt'},
+    Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
+    Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
 layers.Sets.Fish.Idle = {
@@ -53,11 +53,11 @@ layers.Sets.Engaged_Priority = {
         Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
-layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged_Priority, {
+layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {
     Neck    = 'Spike Necklace',
     Hands   = 'Custom M Gloves'
 })
-layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged_Priority, {}) 
+layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {}) 
 
 --layers.Sets['Target Distance > 4.0'].Engaged = {Hands = "Dst. Mittens +1", Feet = "Dst. Leggings +1",}
 

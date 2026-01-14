@@ -3,7 +3,7 @@ local idleMode = layers.CreateModeGroup('Idle', {'Off', 'DT'}, '^F11')
 local EnmityMode = layers.CreateModeGroup('Enmity', {'Off', 'Enmity'}, '^F12')
 local idleMode = layers.CreateModeGroup('Fish', {'Off', 'Fish'}, '^F1')
 local bee_lac_utils = gFunc.LoadFile('..\\common\\bee_lac_utils.lua')
-gFunc.LoadFile('..\\common\\sticky.lua')
+gFunc.LoadFile('C:\\Horizon\\HorizonXI\\Game\\config\\addons\\LuAshitacast\\Common\\sticky')
 
 
 -- Default Idle Set
@@ -283,7 +283,7 @@ layers.RegisterCallback("PreHandleItem", function(item)
 end, "Stealth Enhancement (oils & powders)")
 
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({WAR={7,1},RDM={7,1},NIN={7,2,},SAM={7,1},BLM={7,1},WHM={7,1}}, 1)
+    bee_lac_utils.UpdateMacrosAndLockstyle({WAR={6,1},RDM={6,1},NIN={6,2,},SAM={6,1},BLM={6,1},WHM={6,1}}, 10)
 end,"Subjob profile management")
 
 layers.UserOnUnload = function()

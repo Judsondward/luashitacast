@@ -7,19 +7,20 @@ local Sai = layers.CreateModeGroup('Sai', {'Off', 'Sai'}, '^f2')
 local AccuracyMode = layers.CreateModeGroup('Accuracy', {'MidAcc', 'HighAcc', 'NormalAcc',}, 'f9')
 local DefenseMode = layers.CreateModeGroup('Defense', {'Off', 'PDT', 'MDT'},'f10')
 
+-- Single Quotes, Separated by commas. Highest level gear on the left.
 layers.Sets.Idle_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
-        Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
-        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
-        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Battle Gloves','Lgn. Mittens'},
-        Ring1   = {'Woodsman Ring', 'Balance Ring', 'Bastokan Ring'},
-        Ring2   = {'Woodsman Ring', 'Balance Ring'},
-        Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
-        Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
-        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
+    Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
+    Neck    = {'Spike Necklace'},
+    Ear1    = {'Spike Earring','Beetle Earring +1'},
+    Ear2    = {'Beetle Earring +1'},
+    Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
+    Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
+    Ring1   = {'Bastokan Ring'},
+    Ring2   = {'Woodsman Ring', 'Balance Ring'},
+    Back    = {'Dhalmel Mantle +1'},
+    Waist   = {'Tilt Belt','Brave Belt'},
+    Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
+    Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
 layers.Sets.Fish.Idle = {
@@ -39,42 +40,81 @@ layers.Sets.Sai.Idle = {
 layers.Sets['Nation'].Idle = { Body = "Republic Aketon"}
 
 layers.Sets.Engaged_Priority = {
-        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor', 'Legionnaire\'s Cap'},
-        Neck    = {'Spike Necklace','Bloodbead Amulet','Justice Badge'},
-        Ear1    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
-        Ear2    = {'Beetle Earring +1', 'Bone Earring +1','Opal Earrings'},
-        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail','Beetle Harness +1','Bone Harness +1','Lgn. Harness'},
-        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves','Battle Gloves','Lgn. Mittens'},
+        Head    = {'Irn.Msk. Armet', 'Centurion\'s Visor'},
+        Neck    = {'Spike Necklace'},
+        Ear1    = {'Beetle Earring +1'},
+        Ear2    = {'Beetle Earring +1'},
+        Body    = {'Ryl.Sqr. Chainmail', 'Ctr. Scale Mail'},
+        Hands   = {'Irn.Msk. Guantlets','Custom M Gloves'},
         Ring1   = {'Woodsman Ring', 'Balance Ring', 'Bastokan Ring'},
         Ring2   = {'Woodsman Ring', 'Balance Ring'},
-        Back    = {'Dhalmel Mantle +1','Rabbit Mantle'},
-        Waist   = {'Tilt Belt','Brave Belt','Leather Belt'},
-        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar','Lgn. Subligar', 'Brass Subligar'},
-        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves','Warrior\'s Belt','Lgn. Leggings'}
+        Back    = {'Dhalmel Mantle +1'},
+        Waist   = {'Tilt Belt','Brave Belt'},
+        Legs    = {'Ryl.Sqr. Breeches','Republic Subligar'},
+        Feet    = {'Irn.Msk. Sabatons','Ctr. Greaves'}
 }
 
-layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {})
+layers.Sets.MidAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves'
+})
 layers.Sets.HighAcc.Engaged = gFunc.Combine(layers.Sets.Engaged, {}) 
 
 --layers.Sets['Target Distance > 4.0'].Engaged = {Hands = "Dst. Mittens +1", Feet = "Dst. Leggings +1",}
 
 layers.Sets.Midshot = {}
 
-layers.Sets.Midshot = {}
+layers.Sets.Midshot['Player Ammo == Bloody Bolt'] = {
+    Head    = 'Erd. Headband',          -- +1
+    --Neck    = 'Black Neckerchief',      -- +1, Need to do quest to kill silkworm NM
+    Ear1    = 'Morion Earring',         -- +1 (The +1 Earring has 1 more int but costs 450k/ea.)
+    Ear2    = 'Morion Earring',         -- +1
+    Ring1   = 'Eremite\'s ring',        -- +2 (Can Upgrade to the level 36 Int rings if this shows promise)
+    Ring2   = 'Eremite\'s ring',        -- +2
+    Feet    = 'Custom M Boots'          -- +3
+}
 
-layers.Sets.Weaponskill = {}
+layers.Sets.Weaponskill = {
+    Neck    = 'Spike Necklace',
+    Hands   = 'Custom M Gloves',
+    Ring1   = 'Courage Ring',
+    Ring2   = 'Courage Ring',
+    Legs    = 'Republic Subligar'
+}
 
 --layers.Sets.Weaponskill['Decimation'] = gFunc.Combine(layers.Sets.Weaponskill, {Neck = "Breeze Gorget", Ear2 = "Merman's Earring", Legs = "Warrior's Cuisses",})
 --layers.Sets.Weaponskill['Steel Cyclone'] = gFunc.Combine(layers.Sets.Weaponskill, {Body = "Kirin's Osode", Ear2 = "Merman's Earring", Legs = "Warrior's Cuisses",})
 
-layers.Sets.Precast = {}
+layers.Sets.Precast = {
+    Waist = 'Heko Obi +1',
+}
 
 layers.Sets.Midcast = {}
 
-layers.Sets.PDT.Idle = {}
+layers.Sets.PDT.Idle = {
+    Head    = 'Eisenschaller',
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+    Body    = 'Eisenbrust',
+    Hands   = 'Eisenhentzes',
+    Ring1   = 'Bastokan Ring',
+    Legs    = 'Eisendiechlings',
+    Feet    = 'Eisenschuhs'
+}
 layers.Sets.PDT.Engaged = layers.Sets.PDT.Idle
 
-layers.Sets.MDT.Idle = {}
+layers.Sets.MDT.Idle = {
+    Head    = 'Eisenschaller',
+    Neck    = 'Bloodbead Amulet',   --[[ +15 HP ]]
+    Ear1    = 'Shield Earring',     --[[ +10 HP ]]  --[[ Ear1 = 'Bloodbead Earring'  --[[ +25 HP, 200k ]]
+    Ear2    = 'Shield Earring',     --[[ +10 HP ]]
+    Body    = 'Eisenbrust',
+    Hands   = 'Eisenhentzes',
+    Ring1   = 'Bastokan Ring',
+    Legs    = 'Eisendiechlings',
+    Feet    = 'Eisenschuhs'
+}
 layers.Sets.MDT.Engaged = layers.Sets.MDT.Idle
 
 --layers.Sets.Ability['Warcry'] = {Head = "Warrior's Mask"}
@@ -92,7 +132,7 @@ end, "Blink on JA use")
 
 --Fillout your Macro Book and Set inside {Subjob={book,set}, lockstyle #}
 layers.RegisterCallback("PostHandleIdle", function()
-    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={14,1},THF={14,1},RNG={14,1},SAM={14,1},WHM={14,1}, BLM={14,1}}, 1)
+    bee_lac_utils.UpdateMacrosAndLockstyle({NIN={1,1},THF={1,1},RNG={1,1},SAM={1,1},WHM={1,1}, BLM={1,1}}, 1)
 end,"Subjob profile management")
 
 --Precast Delay. Important for Interim Casts, etc
